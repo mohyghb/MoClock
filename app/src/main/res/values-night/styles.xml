@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <style name= "AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary_DarkMode</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark_DarkMode</item>
+        <item name="colorAccent">@color/colorAccent_DarkMode</item>
+
+<!--        <item name="android:colorBackground">@color/MoBlack</item>-->
+<!--        <item name="android:navigationBarColor">@color/MoBlack</item>-->
+
+
+        <item name="android:navigationBarColor">@color/MaterialDark</item>
+
+        <item name="imageButtonStyle">@style/MoImageButton_Style_Dark</item>
+
+        <item name="android:windowAnimationStyle">@style/WindowAnimationStyle</item>
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+
+
+
+<!--        <item name="android:background">@color/MoBlack</item>-->
+
+<!--        <item name="android:textViewStyle">@style/MoTextViewStyle_Dark</item>-->
+
+        <item name="materialCardViewStyle">@style/MoCardStyle_Dark</item>
+<!--        <item name="android:textColor">@color/colorPrimary_DarkMode</item>-->
+
+        <item name="android:statusBarColor">@color/MaterialDark</item>
+        <item name="android:listViewStyle">@style/MoListStyle_Dark</item>
+        <item name="android:windowLightStatusBar">false</item>
+<!--        <item name="android:windowDrawsSystemBarBackgrounds">true</item>-->
+
+
+
+
+    </style>
+
+
+<!--    <style name= "MoTextViewStyle_Dark" parent="Widget.AppCompat.TextView">-->
+
+<!--        <item name="android:background">@color/transparent</item>-->
+
+<!--    </style>-->
+    <style name="MoListStyle_Dark" parent="Widget.AppCompat.ListView">
+        <!-- Customize your theme here. -->
+        <item name="android:backgroundTint">@color/MaterialGrey</item>
+
+<!--        <item name="android:colorLongPressedHighlight">@color/MoWhite</item>-->
+<!--        <item name="android:colorAccent">@color/MoWhite</item>-->
+<!--        <item name="android:colorFocusedHighlight">@color/MoWhite</item>-->
+<!--        <item name="android:colorControlActivated">@color/MoWhite</item>-->
+<!--        <item name="android:tint">@color/MoWhite</item>-->
+<!--        <item name="android:colorControlHighlight">@color/MoWhite</item>-->
+
+
+
+    </style>
+
+
+    <style name="MoCardStyle_Dark" parent="Widget.MaterialComponents.CardView">
+        <!-- Customize your theme here. -->
+        <item name="android:backgroundTint">@color/MaterialGrey</item>
+        <item name="cardElevation">@dimen/card_elevation_night</item>
+        <!--        <item name="android:windowDrawsSystemBarBackgrounds">true</item>-->
+
+    </style>
+
+
+    <style name="MoPresetCardStyle" parent="Widget.MaterialComponents.CardView">
+        <item name="android:backgroundTint">@color/MaterialGrey</item>
+        <item name="cardElevation">@dimen/card_elevation_night</item>
+    </style>
+
+
+<!--    <style name="MoFABStyle" parent="Widget.MaterialComponents.FloatingActionButton">-->
+<!--        &lt;!&ndash; Customize your theme here. &ndash;&gt;-->
+<!--        <item name="fabSize">mini</item>-->
+<!--        <item name="backgroundTint">@color/MaterialGrey</item>-->
+<!--        <item name="tint">@color/colorPrimaryDark_DarkMode</item>-->
+<!--        &lt;!&ndash;        <item name="android:windowDrawsSystemBarBackgrounds">true</item>&ndash;&gt;-->
+
+<!--    </style>-->
+
+
+
+    <style name="MoImageButton_Style_Dark" parent="Widget.AppCompat.ImageButton">
+        <item name="android:tint">@color/colorPrimary_DarkMode</item>
+    </style>
+
+
+
+
+</resources>

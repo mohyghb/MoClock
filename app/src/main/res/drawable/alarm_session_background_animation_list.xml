@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:drawable="@drawable/background_animation_cyan_black"
+        android:duration="5000"/>
+
+    <item
+        android:drawable="@drawable/background_animation_darkgreen_black"
+        android:duration="5000"/>
+
+    <item
+        android:drawable="@drawable/background_animation_green_black"
+        android:duration="5000"/>
+
+    <item
+        android:drawable="@drawable/background_animation_left"
+        android:duration="5000"/>
+
+
+
+</animation-list>

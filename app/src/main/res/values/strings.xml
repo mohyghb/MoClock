@@ -1,0 +1,225 @@
+<resources>
+    <string name="app_name">Moclock</string>
+
+
+
+
+    <string name="tfe_od_app_name" translation_description="Object Detection demo app [CHAR_LIMIT=40]">TFL Detect</string>
+
+    <string name="tfe_od_camera_error" translation_description="Error regarding camera support[CHAR_LIMIT=40]">
+        This device doesn\'t support Camera2 API.</string>
+
+
+
+
+    <string name="sub_title_object_detection">Point your camera to the object above to cancel the alarm</string>
+    <string name="sub_title_tap_activity">Tap your finger on screen enough times to cancel the alarm.</string>
+
+    <string name="cancel">Cancel</string>
+    <string name="next_test">Next Test</string>
+    <string name="next_object">Another Object</string>
+
+    <string name="delete">Delete</string>
+    <string name="pause">Pause</string>
+    <string name="resume">Resume</string>
+    <string name="stop">Stop</string>
+    <string name="start">Start</string>
+    <string name="lap">Lap</string>
+
+    <string name="add_alarm">add alarm</string>
+    <string name="add_city">add time zone</string>
+    <string name="search_city_name">Search a timezone</string>
+
+    <string name="all">Select all</string>
+
+    <string name="setting">Settings</string>
+    <string name="about">About</string>
+    <string name="title_activity_mo_settings">Settings</string>
+
+    <string name="empty_alarms_hint">You currently have no alarms. Press Add Alarm to make a new alarm.</string>
+    <string name="empty_world_clock_hint">You currently have no world clocks. Press Add Time Zone to add a new time zone.</string>
+
+    <string name="error_already_added">You have already added this item.</string>
+
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+
+    <!--    preferences-->
+    <!-- smart shake alarm set Preferences -->
+    <string name="smart_alarm">smart_alarm_pref</string>
+    <string name="smart_alarm_shake_title">Smart Alarm Shake</string>
+    <string name="smart_alarm_shake_summary">Shake the device to set an alarm in alarm section.</string>
+
+
+    <string name="smart_alarm_list">smart_alarm_list_pref</string>
+    <string name="smart_alarm_shake_list_title">Choose a time</string>
+    <string name="smart_alarm_shake_list_summary">The time is relative to the time shake your device.
+        (e.g if you shake your device when it was 8:30, if you chose 20 minutes for example, it will set an alarm for 8:50) </string>
+    <string-array name="smart_alarm_shake_entries">
+        <item>5 minutes</item>
+        <item>10 minutes</item>
+        <item>15 minutes</item>
+        <item>20 minutes</item>
+        <item>One hour</item>
+        <item>Two hours</item>
+        <item>@string/custom</item>
+    </string-array>
+    <string-array name="smart_alarm_shake_values">
+        <item>5</item>
+        <item>10</item>
+        <item>15</item>
+        <item>20</item>
+        <item>60</item>
+        <item>120</item>
+        <item>@string/custom</item>
+    </string-array>
+    <string name="custom">Custom</string>
+
+
+    <string name="smart_alarm_button">smart_alarm_button_pref</string>
+    <string name="smart_alarm_shake_button_title">Custom Alarm</string>
+    <string name="smart_alarm_shake_button_summary">This alarm will be set when you use smart shake</string>
+
+
+    <string name="smart_timer">smart_timer_pref</string>
+    <string name="smart_timer_shake_title">Smart Timer Shake</string>
+    <string name="smart_timer_shake_summary">Shake the device to set the timer time in the timer section to a preset value</string>
+
+
+    <string name="smart_timer_text">smart_timer_text_pref</string>
+    <string name="smart_timer_shake_text_title">Enter a preset time</string>
+    <string name="smart_timer_shake_text_summary">Enter a value in minutes to be set as your timer next time you shake.</string>
+
+
+    <string name="always_on_dark">always_on_dark</string>
+    <string name="always_on_dark_title">Dark Mode</string>
+    <string name="always_on_dark_summary">The app is always displayed in dark mode. When off,
+        the app automatically changes to your default mode.</string>
+
+
+
+
+<!--    smart cancel-->
+    <string name="smart_alarm_cancel_switch">smart_alarm_cancel_switch_pref</string>
+    <string name="smart_alarm_cancel_switch_title">Smart Wake</string>
+    <string name="smart_alarm_cancel_switch_summary">The alarm makes sure that you will not over sleep.
+        This is done by different cancel mechanics that you can choose.</string>
+
+
+    <string name="smart_alarm_cancel">smart_alarm_cancel_pref</string>
+    <string name="smart_alarm_cancel_title">Choose waking option</string>
+    <string name="smart_alarm_cancel_summary">Object Detection asks you to point your camera to an specified object to cancel the alarm.
+    Multi-Tap makes you to tap the screen for a short period to cancel the alarm.</string>
+
+    <string-array name="smart_alarm_cancel_entries">
+        <item>Object Detection</item>
+        <item>Multi-Tap</item>
+        <item>Random</item>
+    </string-array>
+
+    <string-array name="smart_alarm_cancel_values">
+        <item>0</item>
+        <item>1</item>
+        <item>-2</item>
+    </string-array>
+
+
+
+
+    <string name="smart_alarm_no_choice">smart_alarm_no_choice_pref</string>
+    <string name="smart_alarm_no_choice_title">Allow one-way-cancel only</string>
+    <string name="smart_alarm_no_choice_description">When activated, you will not have the ability to skip or refresh your Smart Alarm Cancel when your alarm rings.
+        For example, the object detection will tell you to point your camera to Laptop, and you can not skip that object or skip the object detection completely.
+        This options makes sure that you can only cancel the alarm using one way. In case something goes wrong, the app will guide you how to cancel the alarm without doing the required task. </string>
+
+
+
+    <string name="shake_sensitivity">shake_sensitivity_pref</string>
+    <string name="shake_sensitivity_title">Shake Sensitivity</string>
+    <string name="shake_sensitivity_summary">Adjust the smart shake sensitivity</string>
+
+
+
+    <string name="smart_mute">smart_move_pref</string>
+    <string name="smart_mute_title">Smart Mute</string>
+    <string name="smart_mute_summary">When an alarm goes off, mutes the volume while the device is moving.
+        The volume will go back to normal if you do not cancel the alarm or let the device be immobile.</string>
+
+
+    <string name="smart_mute_delay">smart_move_delay_pref</string>
+    <string name="smart_mute_delay_title">Smart Mute Delay</string>
+    <string name="smart_mute_delay_summary">This makes sure that the clock rings for the amount of seconds specified before activating Smart Mute.</string>
+
+
+
+
+
+    <string name="volume_button">volume_button_pref</string>
+    <string name="volume_button_title">Volume Buttons</string>
+    <string name="volume_button_summary">What the volume buttons do while the alarm is ringing.
+    </string>
+
+
+
+
+    <string-array name="volume_buttons_entries">
+        <item>No Action</item>
+        <item>Snooze Alarm</item>
+        <item>Control Volume</item>
+    </string-array>
+
+    <string-array name="volume_buttons_values">
+        <item>-3</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+
+
+
+    <string name="smart_voice_cancel">smart_voice_cancel_pref</string>
+    <string name="smart_voice_cancel_title">Smart Voice Cancel (BETA)</string>
+    <string name="smart_voice_cancel_summary">Cancel your alarm by simply saying stop. Note that currently, this only works if your alarm is not ringing.
+        That means if your alarm does not have a music (by turning it off when making the alarm) or by using smart mute so the music stops playing as soon as you move the device.</string>
+
+
+
+    <string name="snooze_general">snooze_general_pref</string>
+    <string name="snooze_general_title">Snooze General</string>
+    <string name="snooze_general_summary">Turn on/off snooze setting for the alarms that you create.
+        Please note that you could still specify if you need snooze for an specific alarm or not</string>
+
+
+    <string name="vibration_general">vibration_general_pref</string>
+    <string name="vibration_general_title">Vibration General</string>
+    <string name="vibration_general_summary">Turn on/off vibration setting for the alarms that you create.
+        Please note that you could still specify if you need vibration for an specific alarm or not</string>
+
+    <string name="music_general">music_general_pref</string>
+    <string name="music_general_title">Music General</string>
+    <string name="music_general_summary">Turn on/off music setting for the alarms that you create.
+        Please note that you could still specify if you need music for an specific alarm or not</string>
+
+
+    <string name="show_suggestions">show_suggestions_pref</string>
+    <string name="show_suggestions_title">Smart Suggestions</string>
+    <string name="show_suggestions_summary">Enable/disable the smart suggestions when you are setting a new alarm</string>
+
+
+
+    <string name="alarm_music">alarm_music_pref</string>
+    <string name="alarm_music_title">Alarm Sound</string>
+    <string name="alarm_music_summary">Change the alarm sound that plays in the background when your alarm starts ringing</string>
+
+    <string name="timer_music">timer_music_pref</string>
+    <string name="timer_music_title">Timer Sound</string>
+    <string name="timer_music_summary">Change the timer sound that plays in the background when your timer starts ringing</string>
+
+
+</resources>

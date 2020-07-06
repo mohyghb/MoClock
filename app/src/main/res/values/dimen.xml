@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="card_corners_top">25dp</dimen>
+    <dimen name="card_corners">8dp</dimen>
+    <dimen name="card_content_padding">8dp</dimen>
+    <dimen name="card_elevation">2dp</dimen>
+    <dimen name="card_elevation_night">2dp</dimen>
+    <dimen name="elevation">2dp</dimen>
+    <dimen name="round_radius">100dp</dimen>
+    <dimen name= "big_elevation">5dp</dimen>
+    <dimen name= "medium_elevation">3dp</dimen>
+
+    <dimen name="tfe_bottom_sheet_corner_radius">15dp</dimen>
+    <dimen name="tfe_bottom_sheet_top_padding">8dp</dimen>
+
+
+
+    <integer name="translation_duration">400</integer>
+
+
+    <integer name="vert_translation_duration">400</integer>
+    <integer name="fade_duration">400</integer>
+    <integer name="move_duration">400</integer>
+    <integer name="resize_duration">400</integer>
+    <integer name="fade_move_duration">500</integer>
+
+    <item name="mo_fade_init_value" format="float" type="dimen">0.3</item>
+
+</resources>

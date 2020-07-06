@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+<!--    <gradient android:angle="270"-->
+
+<!--        android:startColor="@color/MaterialDark"-->
+<!--        android:centerColor="@color/MaterialDark"-->
+<!--        android:endColor="@color/colorPrimaryDark_DarkMode"/>-->
+
+<!--    <gradient android:angle="45"-->
+<!--        android:type="radial"-->
+<!--        android:gradientRadius="400dp"-->
+<!--        android:centerX="0.1"-->
+
+<!--        android:startColor="@color/MaterialDark"-->
+<!--        android:centerColor="@color/MaterialDark"-->
+<!--        android:endColor="@color/colorPrimaryDark_DarkMode"/>-->
+<!--    <gradient android:angle="360"-->
+<!--        android:type="linear"-->
+<!--        android:useLevel="false"-->
+
+<!--        android:startColor="@color/Not_Dark_Green"-->
+<!--        android:endColor="@color/Dark_Green"/>-->
+
+
+<!--    <gradient-->
+
+<!--        android:startColor="@color/Not_Dark_Green"-->
+<!--        android:centerColor="@color/Dark_Green"-->
+<!--        android:type="sweep"/>-->
+
+    <gradient android:angle="45"
+
+        android:startColor="@color/MoBlack"
+        android:centerColor="@color/Dark_Green"
+        android:type="sweep"/>
+
+<!--    <gradient android:angle="45"-->
+<!--        android:type="radial"-->
+<!--        android:gradientRadius="350dp"-->
+<!--        android:centerX="0.4"-->
+<!--        android:centerY="0.0"-->
+
+<!--        android:startColor="@color/Not_Dark_Green"-->
+<!--        android:endColor="@color/Dark_Green"/>-->
+
+<!--    <gradient android:angle="45"-->
+<!--        android:type="radial"-->
+<!--        android:gradientRadius="400dp"-->
+<!--        android:centerX="0.3"-->
+<!--        android:centerY="0.2"-->
+
+<!--        android:startColor="@color/Not_Dark_Green"-->
+<!--        android:centerColor="@color/Not_Dark_Green"-->
+<!--        android:endColor="@color/Dark_Green"/>-->
+
+</shape>

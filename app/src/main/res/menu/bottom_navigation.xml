@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/Alarm_Section"
+        android:icon="@drawable/ic_access_alarms_black_24dp"
+        android:title="Alarm" />
+
+    <item
+        android:id="@+id/WorldClock_Section"
+        android:icon="@drawable/ic_globe_24dp"
+        android:title="World Clock" />
+
+    <item
+        android:id="@+id/StopWatch_Section"
+        android:icon="@drawable/ic_timer_black_24dp"
+        android:title="Stopwatch" />
+    <item
+        android:id="@+id/Timer_Section"
+        android:icon="@drawable/timer_icon_bottom_navigation"
+        android:title="Timer" />
+</menu>

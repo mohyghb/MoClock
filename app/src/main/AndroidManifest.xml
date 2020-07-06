@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="Mo.moclock">
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+
+        android:theme="@style/AppTheme">
+        <activity android:name=".MoTapActivity"></activity>
+        <activity android:name=".MoObjectDetectorActivity" />
+        <activity
+            android:name=".MoSettingsActivity"
+            android:label="@string/title_activity_mo_settings" />
+        <activity android:name=".MoAddWorldClockActivity" />
+        <activity
+            android:name=".MoClock.MoAlarmSession.MoAlarmSessionActivity"
+            android:excludeFromRecents="true"
+            android:showForAllUsers="true"
+            android:showOnLockScreen="true"
+            />
+        <activity android:name=".MoCreateAlarmActivity"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".MoClock.MoAlarmActivity" />
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <receiver
+            android:name=".MoClock.MoAlarmReceiver"
+            android:enabled="true"
+            android:exported="false" />
+        <receiver
+            android:name=".MoClock.MoAlarmBoot.AlarmBootReceiver"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".MoClock.MoAlarmBoot.AlarmBootService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+        <service
+            android:name=".MoClock.MoTimer.MoTimer"
+            android:enabled="true"
+            android:exported="true" />
+
+        <receiver android:name=".MoClock.MoTimer.MoTimerNotificationBroadCast" />
+        <receiver android:name=".MoClock.MoAlarmSession.MoAlarmSessionBroadCast" />
+
+        <service android:name=".MoClock.MoStopWatch.MoStopWatchService" />
+        <service android:name=".MoClock.MoAlarmSession.MoNotificationAlarmSession" />
+        <service android:name=".MoClock.MoAlarmSession.MoNotificationTimerSession" />
+
+        <receiver android:name=".MoClock.MoStopWatch.MoStopWatchBroadcastReceiver" />
+
+        <activity
+            android:name=".Tensorflow.DetectorActivity"
+            android:label="@string/tfe_od_app_name"
+            android:screenOrientation="portrait" />
+    </application>
+
+</manifest>

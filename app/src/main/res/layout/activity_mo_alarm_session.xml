@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/alarm_session_cons_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/alarm_session_background_animation_list"
+    tools:context=".MoClock.MoAlarmSession.MoAlarmSessionActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="1"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextClock
+            android:id="@+id/text_clock"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.55"
+            android:fontFamily="sans-serif-thin"
+            android:foregroundGravity="center"
+            android:format12Hour="k:mm:ss"
+            android:gravity="center"
+            android:textColor="@color/MoWhite"
+            android:textSize="70sp" />
+
+        <TextView
+            android:id="@+id/title_alarm"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.45"
+            android:fontFamily="sans-serif-thin"
+            android:foregroundGravity="center"
+            android:gravity="center"
+            android:text="Alarm"
+            android:textAlignment="center"
+            android:textColor="@color/MoWhite"
+            android:textSize="30sp" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout10"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/snooze_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-light"
+            android:text="Snooze"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary_DarkMode"
+            android:textSize="16sp"
+            app:cornerRadius="100dp" />
+
+        <TextView
+            android:id="@+id/stop_alarm"
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-light"
+            android:text="Stop"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary_DarkMode"
+            android:textSize="16sp"
+            app:cornerRadius="100dp" />
+
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

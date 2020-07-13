@@ -4,7 +4,7 @@ import java.util.Calendar;
 
 public class MoTimeDifference {
 
-    private static final String NO_DIFF = "Right Now";
+    private static final String NO_DIFF = "";
 
     private int hourDiff;
     private int minuteDiff;

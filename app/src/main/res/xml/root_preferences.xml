@@ -50,12 +50,8 @@
             app:pref_summaryHasTime="Selected time: %s"
             app:allowDividerBelow="true"/>
 
-        <Preference
-            app:key="@string/alarm_music"
-            app:title="@string/alarm_music_title"
-            app:summary="@string/alarm_music_summary"
-            app:iconSpaceReserved="false"
-            />
+
+
 
 
         <SwitchPreference
@@ -82,6 +78,20 @@
             app:iconSpaceReserved="false"
             />
 
+
+        <Preference
+            app:key="@string/alarm_music"
+            app:title="@string/alarm_music_title"
+            app:summary="@string/alarm_music_summary"
+            app:iconSpaceReserved="false"
+            />
+
+        <Preference
+            app:key="@string/alarm_music_clear"
+            app:title="@string/alarm_music_clear_title"
+            app:summary="@string/alarm_music_clear_summary"
+            app:iconSpaceReserved="false"
+            />
     </PreferenceCategory>
 
     <PreferenceCategory app:title="Timer" app:iconSpaceReserved="false">
@@ -108,6 +118,13 @@
             app:key="@string/timer_music"
             app:title="@string/timer_music_title"
             app:summary="@string/timer_music_summary"
+            app:iconSpaceReserved="false"
+            />
+
+        <Preference
+            app:key="@string/timer_music_clear"
+            app:title="@string/timer_music_clear_title"
+            app:summary="@string/timer_music_clear_summary"
             app:iconSpaceReserved="false"
             />
 
@@ -193,6 +210,13 @@
             app:iconSpaceReserved="false"
             />
 
+        <Preference
+            app:key="@string/clear_suggestions"
+            app:title="@string/clear_suggestions_title"
+            app:summary="@string/clear_suggestions_summary"
+            app:iconSpaceReserved="false"
+            />
+
 
 
     </PreferenceCategory>
@@ -229,6 +253,14 @@
             android:summary="@string/shake_sensitivity_summary"
             app:seekBarIncrement="10"
             app:showSeekBarValue="true"
+            />
+
+
+        <Preference
+            app:key="@string/reset_settings"
+            app:title="@string/reset_settings_title"
+            app:summary="@string/reset_settings_summary"
+            app:iconSpaceReserved="false"
             />
 
 

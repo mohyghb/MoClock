@@ -23,7 +23,7 @@ import Mo.moclock.MoClock.MoAlarmSession.MoInitAlarmSession;
 import Mo.moclock.MoDate.MoTimeUtils;
 import Mo.moclock.MoIO.MoLoadable;
 import Mo.moclock.MoIO.MoSavable;
-import Mo.moclock.MoNotification.MoNotification;
+import Mo.moclock.MoNotification.MoNotificationChannel;
 import Mo.moclock.MoReadWrite.MoReadWrite;
 import Mo.moclock.MoReadWrite.MoSave;
 import Mo.moclock.MoRunnable.MoRunnable;
@@ -127,7 +127,7 @@ public class MoTimer extends Service implements MoSavable, MoLoadable, MoSave {
 
     @Override
     public void onCreate() {
-        MoNotification.createNotificationChannel(NAME,DESCRIPTION,this,CHANNEL_ID);
+        MoNotificationChannel.createNotificationChannel(NAME,DESCRIPTION,this,CHANNEL_ID);
         startForeground(FORE_GROUND_SERVICE_ID, notification(this,false));
         super.onCreate();
 

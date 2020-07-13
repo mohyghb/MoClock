@@ -211,15 +211,35 @@
     <string name="show_suggestions_title">Smart Suggestions</string>
     <string name="show_suggestions_summary">Enable/disable the smart suggestions when you are setting a new alarm</string>
 
+    <string name="clear_suggestions">clear_suggestions_pref</string>
+    <string name="clear_suggestions_title">Reset smart suggestions</string>
+    <string name="clear_suggestions_summary">Clears all the data that has been gathered from smart suggestions.
+        By clearing this data, your suggestions will not be accurate for a while until we gather enough data</string>
 
 
     <string name="alarm_music">alarm_music_pref</string>
-    <string name="alarm_music_title">Alarm Sound</string>
+    <string name="alarm_music_title">Alarm Music</string>
     <string name="alarm_music_summary">Change the alarm sound that plays in the background when your alarm starts ringing</string>
+
+    <string name="alarm_music_clear">alarm_music_clear_pref</string>
+    <string name="alarm_music_clear_title">Reset alarm music</string>
+    <string name="alarm_music_clear_summary">Reset the alarm music to the device original music</string>
+    <string name="alarm_music_clear_toast">Alarm music was successfully reset!</string>
 
     <string name="timer_music">timer_music_pref</string>
     <string name="timer_music_title">Timer Sound</string>
     <string name="timer_music_summary">Change the timer sound that plays in the background when your timer starts ringing</string>
 
+
+    <string name="timer_music_clear">timer_music_clear_pref</string>
+    <string name="timer_music_clear_title">Reset timer music</string>
+    <string name="timer_music_clear_summary">Reset the timer music to the device original music</string>
+    <string name="timer_music_clear_toast">Timer music was successfully reset!</string>
+
+
+
+    <string name="reset_settings">reset_settings_pref</string>
+    <string name="reset_settings_title">Reset settings</string>
+    <string name="reset_settings_summary">Resets the entire setting back to original</string>
 
 </resources>

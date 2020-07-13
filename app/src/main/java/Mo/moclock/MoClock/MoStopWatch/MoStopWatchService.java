@@ -16,7 +16,7 @@ import androidx.core.app.NotificationCompat;
 import java.util.TimerTask;
 
 import Mo.moclock.MoDate.MoTimeUtils;
-import Mo.moclock.MoNotification.MoNotification;
+import Mo.moclock.MoNotification.MoNotificationChannel;
 import Mo.moclock.R;
 
 public class MoStopWatchService extends Service {
@@ -41,7 +41,7 @@ public class MoStopWatchService extends Service {
 
     @Override
     public void onCreate() {
-        MoNotification.createNotificationChannel(NAME,DESCRIPTION,this,CHANNEL_ID);
+        MoNotificationChannel.createNotificationChannel(NAME,DESCRIPTION,this,CHANNEL_ID);
         startForeground(FORE_GROUND_SERVICE_ID, notification(this,false));
         super.onCreate();
     }

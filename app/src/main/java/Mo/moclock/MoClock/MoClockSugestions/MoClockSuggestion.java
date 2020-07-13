@@ -67,7 +67,12 @@ public class MoClockSuggestion implements MoSavable, MoLoadable {
         float diff = this.creationMilli.isInTimeRange(this.setFor,MAX_DIFF_SET_TIME);
         if(diff > 0){
             // then it is within the range of setting the difference
-            return new MoTimeDifference(this.creationMilli,this.setFor).getReadableDiff() + " from now";
+            String s = new MoTimeDifference(this.creationMilli,this.setFor).getReadableDiff();
+            if(!s.isEmpty()){
+                return s + " from now";
+            }else{
+                return this.setFor.getReadableTime();
+            }
         }else{
             return this.setFor.getReadableTime();
         }

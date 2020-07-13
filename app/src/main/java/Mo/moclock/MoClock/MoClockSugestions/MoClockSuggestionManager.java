@@ -45,6 +45,11 @@ public class MoClockSuggestionManager {
         save(context);
     }
 
+    public static void reset(Context context){
+        suggestions.clear();
+        save(context);
+    }
+
 
     public static void save(Context context){
         MoReadWrite.saveFile(FILE_NAME, MoFile.getData(SEP_KEY,suggestions),context);

@@ -18,7 +18,7 @@ import androidx.core.app.NotificationCompat;
 import Mo.moclock.MoDate.MoTimeUtils;
 import Mo.moclock.MoMusic.MoMusicPlayer;
 import Mo.moclock.MoMusic.MoVolume;
-import Mo.moclock.MoNotification.MoNotification;
+import Mo.moclock.MoNotification.MoNotificationChannel;
 import Mo.moclock.MoUri.MoUri;
 import Mo.moclock.R;
 
@@ -28,8 +28,8 @@ public class MoNotificationTimerSession extends Service {
 
     public final static String CHANNEL_ID_TIMER = "tscid";
 
-    public final static String NAME = "Timer";
-    public final static String DESCRIPTION = "Timer Session";
+    public final static String NAME = "Timer Alarm";
+    public final static String DESCRIPTION = "Fires a pop up for timer when it finishes";
 
     public final static int REQUEST_CODE = 130;
     public final static int FORE_GROUND_SERVICE_ID = 10081;
@@ -77,7 +77,7 @@ public class MoNotificationTimerSession extends Service {
         }else{
             imp = NotificationCompat.PRIORITY_HIGH;
         }
-        MoNotification.createNotificationChannel(NAME,DESCRIPTION,this,CHANNEL_ID_TIMER,imp,getAlarmUri());
+        MoNotificationChannel.createNotificationChannel(NAME,DESCRIPTION,this,CHANNEL_ID_TIMER,imp);
         startForeground(FORE_GROUND_SERVICE_ID, notification(this,false));
         super.onCreate();
     }
@@ -174,6 +174,7 @@ public class MoNotificationTimerSession extends Service {
                     .setContent(notificationLayout)
                     .setStyle(new NotificationCompat.DecoratedCustomViewStyle())
                     .setColorized(true)
+                    .setOnlyAlertOnce(true)
                     .addAction(R.drawable.ic_add_black_24,
                             STOP_ACTION
                             ,getAction(context,STOP_ACTION_ID))
@@ -184,6 +185,7 @@ public class MoNotificationTimerSession extends Service {
                     .setPriority(importance)
                     .setFullScreenIntent(fullScreenPendingIntent,true)
                     .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                    .setSound(null)
                     .build();
 
             return customNotification;

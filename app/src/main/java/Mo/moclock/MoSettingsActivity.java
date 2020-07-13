@@ -1,8 +1,11 @@
 package Mo.moclock;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -34,8 +37,11 @@ import com.takisoft.preferencex.PreferenceFragmentCompat;
 
 import java.util.Objects;
 
+import Mo.moclock.MoClock.MoClockSugestions.MoClockSuggestionManager;
 import Mo.moclock.MoIntents.MoIntents;
 import Mo.moclock.MoMusic.MoMusicPlayer;
+import Mo.moclock.MoPreference.MoPreference;
+import Mo.moclock.MoPreference.MoPreferenceManager;
 
 import static android.Manifest.permission.CAMERA;
 import static android.Manifest.permission.RECORD_AUDIO;
@@ -67,6 +73,7 @@ public class MoSettingsActivity extends AppCompatActivity {
         }
         init();
     }
+
 
     private void init(){
         this.back = findViewById(R.id.setting_back_button);
@@ -100,10 +107,18 @@ public class MoSettingsActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
+    /**
+     * update the music uri for either timer or alarm
+     * and also update the summary of the preference to
+     * the location of the music
+     * @param type
+     * @param uri
+     */
     private void updateMusicPath(int type,Uri uri){
         if(uri!=null){
             settingsFragment.editor.putString(getString(type),getRealPathFromURI(this,uri));
             settingsFragment.editor.commit();
+            settingsFragment.onSharedPreferenceChanged(settingsFragment.sharedPreferences,getString(type));
         }
     }
 
@@ -147,7 +162,8 @@ public class MoSettingsActivity extends AppCompatActivity {
 
     }
 
-    public static class SettingsFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
+    public static class SettingsFragment extends PreferenceFragmentCompat implements
+            SharedPreferences.OnSharedPreferenceChangeListener {
 
 
 
@@ -159,8 +175,13 @@ public class MoSettingsActivity extends AppCompatActivity {
 
         SharedPreferences sharedPreferences;
         SharedPreferences.Editor editor;
-        Preference alarmSoundButton;
-        Preference timerSoundButton;
+        MoPreferenceManager preferenceManager;
+        MoPreference alarmSoundButton;
+        Preference clearAlarmSoundButton;
+        MoPreference timerSoundButton;
+        Preference clearTimerSoundButton;
+        Preference clearSmartSuggestionsButton;
+        Preference resetSettingsButton;
         Activity a;
 
         public SettingsFragment(Activity a){
@@ -188,34 +209,123 @@ public class MoSettingsActivity extends AppCompatActivity {
         @Override
         public void onActivityCreated(@Nullable Bundle savedInstanceState) {
             super.onActivityCreated(savedInstanceState);
+            this.a = getActivity();
             init();
         }
 
 
+        @SuppressLint("CommitPrefEdits")
         private void init(){
             sharedPreferences = getPreferenceScreen().getSharedPreferences();
             editor = sharedPreferences.edit();
-            alarmSoundButton = findPreference(a.getString(R.string.alarm_music));
-            if (alarmSoundButton != null) {
-                alarmSoundButton.setOnPreferenceClickListener(preference -> {
-                    if(getReadExternalStoragePermission()){
-                        MoIntents.openMusicPicker(a,ALARM_MUSIC_CHANGE);
-                    }
+            initSetAlarmMusic();
+            initSetTimerMusic();
+            initClearAlarmMusic();
+            initClearTimerMusic();
+            initClearSuggestions();
+            initResetSettings();
+            initPrefManager();
+
+            onSelectItemSmartAlarmShake(sharedPreferences,getString(R.string.smart_alarm_list));
+        }
+
+
+        private void initPrefManager(){
+            this.preferenceManager = new MoPreferenceManager()
+                    .add(this.alarmSoundButton)
+                    .add(this.timerSoundButton);
+        }
+
+        private void initResetSettings() {
+            this.resetSettingsButton = findPreference(getString(R.string.reset_settings));
+            if (this.resetSettingsButton != null) {
+                this.resetSettingsButton.setOnPreferenceClickListener(preference -> {
+
+                    new AlertDialog.Builder(a).setPositiveButton("Yes", (dialogInterface, i) -> {
+                        resetWholeSettings();
+                        dialogInterface.dismiss();
+                        Toast.makeText(a,"Reset was successful!",Toast.LENGTH_SHORT).show();
+                    }).setMessage("Do you want to reset the settings?")
+                            .setNegativeButton("No", (dialogInterface, i) -> {
+                               dialogInterface.dismiss();
+                            }).setTitle("Reset Settings").show();
+                    return false;
+                });
+            }
+        }
+
+        /**
+         * resets the entire setting
+         */
+        private void resetWholeSettings(){
+            editor.clear().apply();
+            // recreating it to see the effects
+            a.recreate();
+        }
+
+
+        private void initClearSuggestions() {
+            this.clearSmartSuggestionsButton = findPreference(getString(R.string.clear_suggestions));
+            if (this.clearSmartSuggestionsButton != null) {
+
+                this.clearSmartSuggestionsButton.setOnPreferenceClickListener(preference -> {
+                    new AlertDialog.Builder(a).setPositiveButton("Yes", (dialogInterface, i) -> {
+                        MoClockSuggestionManager.reset(a);
+                        dialogInterface.dismiss();
+                        Toast.makeText(a,"Smart suggestion data was erased!",Toast.LENGTH_SHORT).show();
+                    }).setMessage("Do you want to clear Smart Suggestions Data?")
+                            .setNegativeButton("No", (dialogInterface, i) -> {
+                                dialogInterface.dismiss();
+                            }).setTitle("Clear Smart Suggestions").show();
 
                     return false;
                 });
             }
-            timerSoundButton = findPreference(a.getString(R.string.timer_music));
-            if (timerSoundButton != null) {
-                timerSoundButton.setOnPreferenceClickListener(preference -> {
-                    if(getReadExternalStoragePermission()) {
-                        MoIntents.openMusicPicker(a, TIMER_MUSIC_CHANGE);
-                    }
+        }
+
+        private void initClearAlarmMusic() {
+            this.clearAlarmSoundButton = findPreference(a.getString(R.string.alarm_music_clear));
+            if (this.clearAlarmSoundButton != null) {
+                this.clearAlarmSoundButton.setOnPreferenceClickListener(preference -> {
+                    editor.putString(getString(R.string.alarm_music),"").apply();
+                    Toast.makeText(a,getString(R.string.alarm_music_clear_toast),Toast.LENGTH_SHORT).show();
                     return false;
                 });
             }
-            onSelectItemSmartAlarmShake(sharedPreferences,getString(R.string.smart_alarm_list));
         }
+
+        private void initClearTimerMusic() {
+            this.clearTimerSoundButton = findPreference(a.getString(R.string.timer_music_clear));
+            if (this.clearTimerSoundButton != null) {
+                this.clearTimerSoundButton.setOnPreferenceClickListener(preference -> {
+                    editor.putString(getString(R.string.timer_music),"").apply();
+                    Toast.makeText(a,getString(R.string.timer_music_clear_toast),Toast.LENGTH_SHORT).show();
+                    return false;
+                });
+            }
+        }
+
+        private void initSetAlarmMusic() {
+            alarmSoundButton = new MoPreference(findPreference(a.getString(R.string.alarm_music))).setOnPreferenceClickListener(preference -> {
+                if(getReadExternalStoragePermission()){
+                    MoIntents.openMusicPicker(a,ALARM_MUSIC_CHANGE);
+                }
+                return false;
+            }).setNormalSummary(getString(R.string.alarm_music_summary)).setUpdateSummary(true);
+        }
+
+        private void initSetTimerMusic() {
+            timerSoundButton = new MoPreference(findPreference(a.getString(R.string.timer_music))).setOnPreferenceClickListener(preference -> {
+                if(getReadExternalStoragePermission()) {
+                    MoIntents.openMusicPicker(a, TIMER_MUSIC_CHANGE);
+                }
+                return false;
+            }).setNormalSummary(getString(R.string.timer_music_summary))
+            .setUpdateSummary(true);
+        }
+
+
+
 
         @Override
         public void onResume() {
@@ -251,6 +361,7 @@ public class MoSettingsActivity extends AppCompatActivity {
                 getCameraPermission();
             }
 
+            this.preferenceManager.update(sharedPreferences,s);
         }
 
         // get recording permission

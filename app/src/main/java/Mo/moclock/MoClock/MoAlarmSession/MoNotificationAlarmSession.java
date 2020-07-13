@@ -21,7 +21,7 @@ import androidx.preference.PreferenceManager;
 import Mo.moclock.MoDate.MoDate;
 import Mo.moclock.MoMusic.MoMusicPlayer;
 import Mo.moclock.MoMusic.MoVolume;
-import Mo.moclock.MoNotification.MoNotification;
+import Mo.moclock.MoNotification.MoNotificationChannel;
 import Mo.moclock.MoUri.MoUri;
 import Mo.moclock.MoVibration.MoVibration;
 import Mo.moclock.R;
@@ -77,7 +77,7 @@ public class MoNotificationAlarmSession extends Service {
         } else {
             imp = NotificationCompat.PRIORITY_HIGH;
         }
-        MoNotification.createNotificationChannel(NAME, DESCRIPTION, this, CHANNEL_ID_ALARM, imp, getAlarmUri());
+        MoNotificationChannel.createNotificationChannel(NAME, DESCRIPTION, this, CHANNEL_ID_ALARM, imp);
         startForeground(FORE_GROUND_SERVICE_ID, notification(this, false));
         super.onCreate();
     }
@@ -143,6 +143,7 @@ public class MoNotificationAlarmSession extends Service {
                 .setFullScreenIntent(fullScreenPendingIntent, true)
                 .setContentIntent(fullScreenPendingIntent)
                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                .setOnlyAlertOnce(true)
                 .build();
         SharedPreferences s = PreferenceManager.getDefaultSharedPreferences(context);
         boolean addSnooze = moInformation.getClock().getSnooze().isActive();

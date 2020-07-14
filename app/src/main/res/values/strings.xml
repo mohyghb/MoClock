@@ -97,10 +97,26 @@
     <string name="smart_timer_shake_text_summary">Enter a value in minutes to be set as your timer next time you shake.</string>
 
 
-    <string name="always_on_dark">always_on_dark</string>
-    <string name="always_on_dark_title">Dark Mode</string>
-    <string name="always_on_dark_summary">The app is always displayed in dark mode. When off,
-        the app automatically changes to your default mode.</string>
+<!--    <string name="always_on_dark">always_on_dark</string>-->
+<!--    <string name="always_on_dark_title">Dark Mode</string>-->
+<!--    <string name="always_on_dark_summary">The app is always displayed in dark mode. When off,-->
+<!--        the app automatically changes to your default mode.</string>-->
+
+    <!--changing the theme-->
+    <string name="theme_version">theme_version_pref</string>
+    <string name="theme_version_title">Theme</string>
+    <string name="theme_version_summary">Change the theme of this app by choosing between dark,
+        light, or follow the system options</string>
+    <string-array name="theme_version_entries">
+        <item>Light</item>
+        <item>Dark</item>
+        <item>Follow system</item>
+    </string-array>
+    <string-array name="theme_version_values">
+        <item>0</item>
+        <item>1</item>
+        <item>-1</item>
+    </string-array>
 
 
 

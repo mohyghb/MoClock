@@ -25,6 +25,8 @@ import Mo.moclock.MoClock.MoWorldClock.MoWorldClock;
 import Mo.moclock.MoMusic.MoMusicPlayer;
 import Mo.moclock.MoSection.MoSectionManager;
 import Mo.moclock.MoSensor.MoShakeListener;
+import Mo.moclock.MoSharedPref.MoSharedPref;
+import Mo.moclock.MoTheme.MoTheme;
 import Mo.moclock.MoUri.MoUri;
 
 
@@ -59,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void init(){
+        MoSharedPref.loadAll(this);
         MoAnimation.initAllAnimations(this);
         this.moStopWatchManager.setStopWatch_linear_layout(findViewById(R.id.linear_stopwatch_layout));
         this.moWorldClockSectionManager.world_clock_linear_layout = findViewById(R.id.world_clock_layout);
@@ -71,20 +74,12 @@ public class MainActivity extends AppCompatActivity {
         this.initSmartShakeListeners();
         moTimerSectionManager.closeTimerService();
         // adding all the animations to a sparse array
-        checkForAlwaysOnDarkMode();
+        MoTheme.updateTheme(this);
     }
 
 
 
-    private void checkForAlwaysOnDarkMode(){
-        SharedPreferences s = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean active = s.getBoolean(getString(R.string.always_on_dark),false);
-        if(active){
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        }else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
-        }
-    }
+
 
 
     private void initSmartShakeListeners(){

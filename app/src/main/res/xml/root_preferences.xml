@@ -225,13 +225,13 @@
 
     <PreferenceCategory app:title="General" app:iconSpaceReserved="false">
 
-        <SwitchPreference
-            app:key="@string/always_on_dark"
-            app:title="@string/always_on_dark_title"
-            app:summary="@string/always_on_dark_summary"
-            app:defaultValue="false"
-            app:iconSpaceReserved="false"
-            />
+        <ListPreference
+            app:key="@string/theme_version"
+            app:title="@string/theme_version_title"
+            app:summary="@string/theme_version_summary"
+            app:entries="@array/theme_version_entries"
+            app:entryValues="@array/theme_version_values"
+            app:iconSpaceReserved="false"/>
 
         <ListPreference
             android:key="@string/volume_button"

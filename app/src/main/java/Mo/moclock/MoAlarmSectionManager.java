@@ -68,17 +68,7 @@ public class MoAlarmSectionManager {
     }
 
     void initAlarmSection() {
-        this.title = activity.findViewById(R.id.title_alarm_app_name);
-        this.subTitle = activity.findViewById(R.id.alarm_sub_title);
-        this.floatingActionButton = activity.findViewById(R.id.alarm_empty_list_view);
-        this.addAlarmButton = activity.findViewById(R.id.add_alarm_button);
-        this.settings = activity.findViewById(R.id.settings_alarm);
-        this.delete = activity.findViewById(R.id.delete_alarm_button);
-        this.selectAll = activity.findViewById(R.id.select_all_alarms);
-        this.linearDeleteMode = activity.findViewById(R.id.linear_delete_mode_layout);
-        this.alarm_linear_layout = activity.findViewById(R.id.linear_alarm_layout);
-        this.cancelDeleteButton = activity.findViewById(R.id.cancel_delete_mode);
-        this.bottomNavigation = activity.findViewById(R.id.bottom_navigation);
+        initViews();
         this.selectAll.setOnCheckedChangeListener((compoundButton, b) -> {
             if(!compoundButton.isPressed()){
                 return;
@@ -128,8 +118,33 @@ public class MoAlarmSectionManager {
                         activity.findViewById(R.id.linear_empty_alarm_layout)},
                 this.addAlarmButton,activity.findViewById(R.id.card_alarm_list_view));
         this.floatingActionButton.setOnClickListener(this::showSuggestionPopUp);
-        this.suggestions = MoClockSuggestionManager.getSuggestions(activity);
+        initClockSuggestions();
+
         setSubtitle();
+    }
+
+    private void initClockSuggestions(){
+        new Thread(){
+            @Override
+            public void run() {
+                super.run();
+                suggestions = MoClockSuggestionManager.getSuggestions(activity);
+            }
+        }.start();
+    }
+
+    private void initViews() {
+        this.title = activity.findViewById(R.id.title_alarm_app_name);
+        this.subTitle = activity.findViewById(R.id.alarm_sub_title);
+        this.floatingActionButton = activity.findViewById(R.id.alarm_empty_list_view);
+        this.addAlarmButton = activity.findViewById(R.id.add_alarm_button);
+        this.settings = activity.findViewById(R.id.settings_alarm);
+        this.delete = activity.findViewById(R.id.delete_alarm_button);
+        this.selectAll = activity.findViewById(R.id.select_all_alarms);
+        this.linearDeleteMode = activity.findViewById(R.id.linear_delete_mode_layout);
+        this.alarm_linear_layout = activity.findViewById(R.id.linear_alarm_layout);
+        this.cancelDeleteButton = activity.findViewById(R.id.cancel_delete_mode);
+        this.bottomNavigation = activity.findViewById(R.id.bottom_navigation);
     }
 
     /**

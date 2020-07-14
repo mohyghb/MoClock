@@ -37,11 +37,14 @@ import com.takisoft.preferencex.PreferenceFragmentCompat;
 
 import java.util.Objects;
 
+import Mo.moclock.MoClock.MoClockSugestions.MoClockSuggestion;
 import Mo.moclock.MoClock.MoClockSugestions.MoClockSuggestionManager;
 import Mo.moclock.MoIntents.MoIntents;
 import Mo.moclock.MoMusic.MoMusicPlayer;
 import Mo.moclock.MoPreference.MoPreference;
 import Mo.moclock.MoPreference.MoPreferenceManager;
+import Mo.moclock.MoSharedPref.MoSharedPref;
+import Mo.moclock.MoTheme.MoTheme;
 
 import static android.Manifest.permission.CAMERA;
 import static android.Manifest.permission.RECORD_AUDIO;
@@ -264,16 +267,17 @@ public class MoSettingsActivity extends AppCompatActivity {
         }
 
 
+        @SuppressLint("DefaultLocale")
         private void initClearSuggestions() {
             this.clearSmartSuggestionsButton = findPreference(getString(R.string.clear_suggestions));
             if (this.clearSmartSuggestionsButton != null) {
-
                 this.clearSmartSuggestionsButton.setOnPreferenceClickListener(preference -> {
                     new AlertDialog.Builder(a).setPositiveButton("Yes", (dialogInterface, i) -> {
                         MoClockSuggestionManager.reset(a);
                         dialogInterface.dismiss();
                         Toast.makeText(a,"Smart suggestion data was erased!",Toast.LENGTH_SHORT).show();
-                    }).setMessage("Do you want to clear Smart Suggestions Data?")
+                    }).setMessage(String.format("We currently have made %d improvements to smart suggestion. " +
+                            "Do you want to clear Smart Suggestions Data?", MoClockSuggestionManager.size()))
                             .setNegativeButton("No", (dialogInterface, i) -> {
                                 dialogInterface.dismiss();
                             }).setTitle("Clear Smart Suggestions").show();
@@ -342,25 +346,20 @@ public class MoSettingsActivity extends AppCompatActivity {
 
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
+            MoSharedPref.loadAll(a);
             if(s.equals(getString(R.string.smart_alarm_list))){
                 // we choose an item from the list of smart alarm shake
                 onSelectItemSmartAlarmShake(sharedPreferences,s);
             }else if(s.equals(getString(R.string.smart_timer_text))){
                 // only 4 digits allowed
                 onSelectTimerText(sharedPreferences,s);
-            }else if(s.equals(getString(R.string.always_on_dark))){
-                boolean active = sharedPreferences.getBoolean(s,false);
-                if(active){
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                }else{
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
-                }
+            }else if(s.equals(getString(R.string.theme_version))){
+                MoTheme.updateTheme(a);
             }else if (s.equals(getString(R.string.smart_voice_cancel))){
                 getVoiceRecordingPermission();
             }else if(s.equals(getString(R.string.smart_alarm_cancel_switch))){
                 getCameraPermission();
             }
-
             this.preferenceManager.update(sharedPreferences,s);
         }
 

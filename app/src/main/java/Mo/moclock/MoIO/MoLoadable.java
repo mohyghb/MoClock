@@ -7,7 +7,7 @@ public interface MoLoadable {
     /**
      * loads a savable object into its class
      */
-    void load(String data,Context context);
+    void load(String data, Context context);
 
 
 }

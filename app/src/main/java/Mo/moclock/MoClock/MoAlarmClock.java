@@ -26,7 +26,8 @@ import Mo.moclock.MoInflatorView.MoViewDisplayable;
 import Mo.moclock.MoIO.MoFile;
 import Mo.moclock.MoIO.MoSavable;
 import Mo.moclock.MoInflatorView.MoInflaterView;
-import Mo.moclock.MoSnooze.MoSnooze;
+import Mo.moclock.MoClock.MoSnooze.MoSnooze;
+import Mo.moclock.MoLog.MoLog;
 import Mo.moclock.MoUI.MoTextInput;
 import Mo.moclock.MoVibration.MoVibration;
 import Mo.moclock.MoVibration.MoVibrationTypes;
@@ -68,7 +69,7 @@ public class MoAlarmClock implements MoSavable, MoViewDisplayable, MoLoadable {
     public MoAlarmClock(){
         this.title = "";
         this.vibration = new MoVibration(MoVibrationTypes.BASIC,false);
-        this.snooze = new MoSnooze(5,3,true);
+        this.snooze = new MoSnooze();
         this.repeating = new MoRepeating();
         this.dateTime = new MoDate();
         this.id = new MoId();
@@ -176,8 +177,8 @@ public class MoAlarmClock implements MoSavable, MoViewDisplayable, MoLoadable {
         this.isActive = true;
         //this is to make sure if the alarm has repeating, the repeating wont take over
         this.dateTime = new MoDate();
-        addDateField(Calendar.MINUTE,5);
-        Toast.makeText(context,"Alarm snoozed for " + 5 + " minutes from now",Toast.LENGTH_LONG).show();
+        this.snooze.applySnooze(this.dateTime,context);
+
     }
 
     public MoId getMoId(){
@@ -203,7 +204,7 @@ public class MoAlarmClock implements MoSavable, MoViewDisplayable, MoLoadable {
      */
     @Override
     public String getData() {
-        return MoFile.getData(SEP_KEY,id.getData(),title,vibration,
+        return MoFile.getData(id.getData(),title,vibration,
                 snooze.getData(),repeating,dateTime.getData(),isActive,pathToMusic);
     }
 
@@ -216,15 +217,11 @@ public class MoAlarmClock implements MoSavable, MoViewDisplayable, MoLoadable {
      */
     @Override
     public View display(Object... args) {
-
-
-
         // we assume that the first element that is passed is the context
         Context c = (Context) args[0];
         // and assume that the second element is array adapter
         this.arrayAdapter = (MoAlarmListView) args[1];
         Boolean doDeleteAnimation = (Boolean) args[2];
-
 
         clockLayoutView = MoInflaterView.inflate(R.layout.card_view_alarm,c);
         assert clockLayoutView != null;
@@ -232,39 +229,19 @@ public class MoAlarmClock implements MoSavable, MoViewDisplayable, MoLoadable {
         divider.setVisibility(View.INVISIBLE);
 
 
-        titleTextView = clockLayoutView.findViewById(R.id.alarm_title_textView);
-        if(this.title.isEmpty()){
-            titleTextView.setVisibility(View.GONE);
-        }
-        titleTextView.setText(this.title);
-        time = clockLayoutView.findViewById(R.id.alarm_time_textView);
-        time.setText(this.dateTime.getReadableTime());
-        date = clockLayoutView.findViewById(R.id.alarm_date_TextView);
-        date.setText(this.dateTime.getReadableDate());
-        repeatingDays = clockLayoutView.findViewById(R.id.repeatingDaysTextView);
-        if(!this.repeating.isEmpty()){
-            repeatingDays.setText(this.repeating.readableFormat());
-        } else {
-            repeatingDays.setVisibility(View.GONE);
-        }
+        initTexts();
+        initCheckBox();
+        initSwitches(c);
+        initCardView(c);
+        updateUIState(c,doDeleteAnimation);
 
 
-        checkBox = clockLayoutView.findViewById(R.id.delete_alarm_check_box);
-        checkBox.setOnCheckedChangeListener((compoundButton, b) -> {
-            if(!compoundButton.isPressed()){
-                return;
-            }
-            onSelect(checkBox);
-        });
+        return clockLayoutView;
+        // turn on or off
 
+    }
 
-
-        active = clockLayoutView.findViewById(R.id.is_active_switch);
-        active.setChecked(this.isActive);
-        active.setOnCheckedChangeListener((compoundButton, b) -> onSwitchChanged(c, active));
-
-
-
+    private void initCardView(Context c) {
         cardView = clockLayoutView.findViewById(R.id.alarm_card_view);
         cardView.setOnClickListener(view -> {
             if(!isInDeleteMode){
@@ -285,17 +262,40 @@ public class MoAlarmClock implements MoSavable, MoViewDisplayable, MoLoadable {
             }
             return true;
         });
+    }
 
+    private void initSwitches(Context c) {
+        active = clockLayoutView.findViewById(R.id.is_active_switch);
+        active.setChecked(this.isActive);
+        active.setOnCheckedChangeListener((compoundButton, b) -> onSwitchChanged(c, active));
+    }
 
-        updateUIState(c,doDeleteAnimation);
+    private void initTexts() {
+        titleTextView = clockLayoutView.findViewById(R.id.alarm_title_textView);
+        if(this.title.isEmpty()){
+            titleTextView.setVisibility(View.GONE);
+        }
+        titleTextView.setText(this.title);
+        time = clockLayoutView.findViewById(R.id.alarm_time_textView);
+        time.setText(this.dateTime.getReadableTime());
+        date = clockLayoutView.findViewById(R.id.alarm_date_TextView);
+        date.setText(this.dateTime.getReadableDate());
+        repeatingDays = clockLayoutView.findViewById(R.id.repeatingDaysTextView);
+        if(!this.repeating.isEmpty()){
+            repeatingDays.setText(this.repeating.readableFormat());
+        } else {
+            repeatingDays.setVisibility(View.GONE);
+        }
+    }
 
-
-
-
-
-        return clockLayoutView;
-        // turn on or off
-
+    private void initCheckBox() {
+        checkBox = clockLayoutView.findViewById(R.id.delete_alarm_check_box);
+        checkBox.setOnCheckedChangeListener((compoundButton, b) -> {
+            if(!compoundButton.isPressed()){
+                return;
+            }
+            onSelect(checkBox);
+        });
     }
 
     /**
@@ -377,7 +377,7 @@ public class MoAlarmClock implements MoSavable, MoViewDisplayable, MoLoadable {
             // work on which day is the next
             // and set the date based on that
         }
-        MoAlarmClockManager.getInstance().save(context);
+        MoAlarmClockManager.getInstance().saveActivate(context);
     }
 
 
@@ -396,7 +396,7 @@ public class MoAlarmClock implements MoSavable, MoViewDisplayable, MoLoadable {
      */
     @Override
     public void load(String data, Context context) {
-        String[] components = MoFile.loadable(SEP_KEY,data);
+        String[] components = MoFile.loadable(data);
         this.id.load(components[0],context);
         this.title = components[1];
         this.vibration.load(components[2],context);

@@ -352,6 +352,9 @@ public class MoTimer extends Service implements MoSavable, MoLoadable, MoSave {
         return this.isPaused? "Resume":"Pause";
     }
 
+    public boolean showingResume(){
+        return this.isPaused;
+    }
 
 
     public void startService(Context context){

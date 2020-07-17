@@ -15,6 +15,7 @@
     <dimen name="tfe_bottom_sheet_top_padding">8dp</dimen>
 
 
+    <dimen name="mo_app_bar_height">300dp</dimen>
 
     <integer name="translation_duration">400</integer>
 

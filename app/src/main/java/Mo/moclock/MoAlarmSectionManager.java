@@ -68,6 +68,7 @@ public class MoAlarmSectionManager {
     }
 
     void initAlarmSection() {
+        initRefreshScreen();
         initViews();
         this.selectAll.setOnCheckedChangeListener((compoundButton, b) -> {
             if(!compoundButton.isPressed()){
@@ -121,6 +122,10 @@ public class MoAlarmSectionManager {
         initClockSuggestions();
 
         setSubtitle();
+    }
+
+    private void initRefreshScreen() {
+        MoAlarmClockManager.refreshScreen = () -> alarmClockArrayAdapter.notifyDataSetChanged();
     }
 
     private void initClockSuggestions(){

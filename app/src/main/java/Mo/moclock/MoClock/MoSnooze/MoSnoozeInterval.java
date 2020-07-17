@@ -1,4 +1,4 @@
-package Mo.moclock.MoSnooze;
+package Mo.moclock.MoClock.MoSnooze;
 
 import android.content.Context;
 
@@ -9,11 +9,12 @@ import Mo.moclock.MoIO.MoSavable;
 public class MoSnoozeInterval implements MoSavable, MoLoadable {
 
 
-    private final String SEP_KEY="&ksifj&";
 
 
-    private int waitTime;
-    private int repeats;
+
+    // number of minutes to set the
+    int waitTime;
+    int repeats;
 
     public MoSnoozeInterval(int wt, int r){
         this.repeats = r;
@@ -42,7 +43,7 @@ public class MoSnoozeInterval implements MoSavable, MoLoadable {
      */
     @Override
     public String getData() {
-        return MoFile.getData(SEP_KEY,waitTime,repeats);
+        return MoFile.getData(waitTime,repeats);
     }
 
     /**
@@ -53,7 +54,7 @@ public class MoSnoozeInterval implements MoSavable, MoLoadable {
      */
     @Override
     public void load(String data, Context context) {
-        String[] comps = MoFile.loadable(SEP_KEY,data);
+        String[] comps = MoFile.loadable(data);
         this.waitTime = Integer.parseInt(comps[0]);
         this.repeats= Integer.parseInt(comps[1]);
     }

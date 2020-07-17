@@ -65,7 +65,7 @@ public class MoTime implements MoSavable, MoLoadable {
      */
     @Override
     public void load(String data, Context context) {
-        String[] com = MoFile.loadable(SEP_KEY,data);
+        String[] com = MoFile.loadable(data);
         this.hour = Integer.parseInt(com[0]);
         this.minute = Integer.parseInt(com[1]);
         this.second = Integer.parseInt(com[2]);
@@ -77,6 +77,6 @@ public class MoTime implements MoSavable, MoLoadable {
      */
     @Override
     public String getData() {
-        return MoFile.getData(SEP_KEY,hour,minute,second);
+        return MoFile.getData(hour,minute,second);
     }
 }

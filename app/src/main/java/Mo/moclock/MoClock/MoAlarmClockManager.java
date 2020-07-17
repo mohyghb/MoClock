@@ -22,7 +22,8 @@ import Mo.moclock.MoIO.MoLoadable;
 import Mo.moclock.MoIO.MoSavable;
 import Mo.moclock.MoId.MoId;
 import Mo.moclock.MoReadWrite.MoReadWrite;
-import Mo.moclock.MoSnooze.MoSnooze;
+import Mo.moclock.MoClock.MoSnooze.MoSnooze;
+import Mo.moclock.MoRunnable.MoRunnableUtils;
 import Mo.moclock.MoVibration.MoVibration;
 import Mo.moclock.MoVibration.MoVibrationTypes;
 
@@ -35,6 +36,7 @@ public class MoAlarmClockManager implements Iterable<MoAlarmClock>, MoSavable, M
 
     private List<MoAlarmClock> clockList;
     private HashSet<Integer> reservedIds;
+    public static Runnable refreshScreen;
     private int nextId;
 
 
@@ -60,6 +62,7 @@ public class MoAlarmClockManager implements Iterable<MoAlarmClock>, MoSavable, M
     public void onDestroy() {
         ourInstance = null;
         ourInstance = new MoAlarmClockManager();
+        refreshScreen = null;
     }
 
     public ArrayList<MoAlarmClock> getAlarms(){
@@ -86,8 +89,7 @@ public class MoAlarmClockManager implements Iterable<MoAlarmClock>, MoSavable, M
                     c.getDate().getReadableDifference(Calendar.getInstance()),Toast.LENGTH_LONG).show();
         }
         MoClockSuggestionManager.add(c,context);
-        this.save(context);
-        this.activateNextAlarm(context);
+        saveActivate(context);
     }
 
 
@@ -107,7 +109,7 @@ public class MoAlarmClockManager implements Iterable<MoAlarmClock>, MoSavable, M
         c.setTitle(title);
         c.setDateTime(date);
         c.setActive(true);
-        c.setSnooze(new MoSnooze(5,3, snooze));
+        c.setSnooze(new MoSnooze(context, snooze));
         c.setVibration(new MoVibration(MoVibrationTypes.BASIC,vibration));
         c.setPathToMusic(music);
         c.setRepeating(new MoRepeating());
@@ -144,26 +146,37 @@ public class MoAlarmClockManager implements Iterable<MoAlarmClock>, MoSavable, M
         activateNextAlarm(context);
     }
 
+    // saves and activates the next alarm
+    // and refreshes the screen if it is not null
+    public void saveActivateRefresh(Context context){
+        save(context);
+        activateNextAlarm(context);
+        MoRunnableUtils.runIfNotNull(refreshScreen);
+    }
+
+    /**
+     * snoozes the alarm based on the
+     * amount that is passed to it or by
+     * the snooze specification made on the
+     * creation of clock
+     * @param id
+     * @param minutes
+     * @param context
+     */
     public void snoozeAlarm(int id,int minutes,Context context) {
         try {
+            // finding the clock
             MoAlarmClock c = getAlarm(id);
-            removeAlarm(c.getMoId(),context);
+            // snoozing it
             c.snooze(context);
-            addAlarmNoToast(c,context);
+            // adding it to suggestions
+            MoClockSuggestionManager.add(c,context);
+            // saving and activating the next alarm
+            saveActivateRefresh(context);
         } catch (MoEmptyAlarmException e) {
+            Toast.makeText(context,"Failed to snooze",Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
-
-//        for(MoAlarmClock a: clockList) {
-//            if(a.getId() == id) {
-//                a.addDateField(Calendar.MINUTE,minutes);
-//                a.setActive(true);
-//                break;
-//            }
-//        }
-//        Toast.makeText(context,"Alarm snoozed for " + minutes + " minutes from now",Toast.LENGTH_LONG).show();
-//        this.save(context);
-//        this.activateNextAlarm(context);
     }
 
 
@@ -241,8 +254,20 @@ public class MoAlarmClockManager implements Iterable<MoAlarmClock>, MoSavable, M
         this.loadIfNotLoaded(context);
         this.cancelAlarm(this.clockList.get(index),context);
         this.clockList.remove(index);
-        MoReadWrite.saveFile(FILE_NAME_ALARMS,this.getData(),context);
-        this.activateNextAlarm(context);
+        saveActivate(context);
+    }
+
+    /**
+     * removes an alarm based on the index inside the array
+     * @param index
+     */
+    public void removeAlarm(int index,Context context,boolean save){
+        this.loadIfNotLoaded(context);
+        this.cancelAlarm(this.clockList.get(index),context);
+        this.clockList.remove(index);
+        if(save){
+            saveActivate(context);
+        }
     }
 
     /**
@@ -253,9 +278,10 @@ public class MoAlarmClockManager implements Iterable<MoAlarmClock>, MoSavable, M
     public void removeSelectedAlarms(Context context){
         for(int i = this.clockList.size()-1; i>=0 ; i--){
             if(this.clockList.get(i).isSelected()){
-                removeAlarm(i,context);
+                removeAlarm(i,context,false);
             }
         }
+        saveActivate(context);
     }
 
 
@@ -336,8 +362,7 @@ public class MoAlarmClockManager implements Iterable<MoAlarmClock>, MoSavable, M
     public void cancelAlarm(int id, Context context) throws MoEmptyAlarmException{
         loadIfNotLoaded(context);
         this.cancelAlarm(this.getAlarm(id),context);
-        save(context);
-        activateNextAlarm(context);
+        saveActivate(context);
     }
 
 
@@ -365,7 +390,7 @@ public class MoAlarmClockManager implements Iterable<MoAlarmClock>, MoSavable, M
      */
     @Override
     public String getData() {
-        return MoFile.getDataSavable(SEP_KEY, this.clockList);
+        return MoFile.getData(this.clockList);
     }
 
     /**
@@ -374,7 +399,7 @@ public class MoAlarmClockManager implements Iterable<MoAlarmClock>, MoSavable, M
     @Override
     public void load(String data, Context context) {
         this.clockList.clear();
-        String[] alarms = MoFile.loadable(SEP_KEY,MoReadWrite.readFile(FILE_NAME_ALARMS,context));
+        String[] alarms = MoFile.loadable(MoReadWrite.readFile(FILE_NAME_ALARMS,context));
         for(String a: alarms){
             if(!a.isEmpty()){
                 MoAlarmClock c = new MoAlarmClock();

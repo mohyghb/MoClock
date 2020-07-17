@@ -87,7 +87,7 @@ public class MoClockSuggestion implements MoSavable, MoLoadable {
      */
     @Override
     public void load(String data, Context context) {
-        String[] com = MoFile.loadable(SEP_KEY,data);
+        String[] com = MoFile.loadable(data);
         this.creationMilli.load(com[0],context);
         this.setFor.load(com[1],context);
     }
@@ -98,7 +98,7 @@ public class MoClockSuggestion implements MoSavable, MoLoadable {
      */
     @Override
     public String getData() {
-        return MoFile.getData(SEP_KEY,creationMilli.getData(), setFor.getData());
+        return MoFile.getData(creationMilli.getData(), setFor.getData());
     }
 
 

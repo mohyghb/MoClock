@@ -72,7 +72,7 @@ public class MoTimerPreset implements MoSavable, MoLoadable, MoViewDisplayable {
      */
     @Override
     public void load(String data, Context context) {
-        String[] parts = MoFile.loadable(SEP_KEY,data);
+        String[] parts = MoFile.loadable(data);
         this.name = parts[0];
         this.milliseconds = Long.parseLong(parts[1]);
     }
@@ -83,7 +83,7 @@ public class MoTimerPreset implements MoSavable, MoLoadable, MoViewDisplayable {
      */
     @Override
     public String getData() {
-        return MoFile.getData(SEP_KEY,this.name,this.milliseconds);
+        return MoFile.getData(this.name,this.milliseconds);
     }
 
     /**

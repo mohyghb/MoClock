@@ -126,7 +126,7 @@ public class MoWorldClockManager implements MoSave, MoSavable, MoLoadable {
     @Override
     public void load(String data, Context context) {
         worldClocks.clear();
-        String[] components = MoReadWrite.readFile(FILE_NAME,context).split(SEP_KEY);
+        String[] components = MoFile.loadable(MoReadWrite.readFile(FILE_NAME,context));
         for(String s: components){
             if(!s.isEmpty()){
                 MoWorldClock c = new MoWorldClock();
@@ -149,13 +149,6 @@ public class MoWorldClockManager implements MoSave, MoSavable, MoLoadable {
      */
     @Override
     public String getData() {
-        StringBuilder stringBuilder = new StringBuilder();
-        for(int i = 0; i < worldClocks.size();i++){
-            stringBuilder.append(worldClocks.get(i).getData());
-            if(i < worldClocks.size() - 1){
-                stringBuilder.append(SEP_KEY);
-            }
-        }
-        return stringBuilder.toString();
+        return MoFile.getData(worldClocks);
     }
 }

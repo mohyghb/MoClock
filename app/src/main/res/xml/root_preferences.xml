@@ -62,6 +62,24 @@
             app:iconSpaceReserved="false"
             />
 
+        <ListPreference
+            app:key="@string/snooze_time"
+            app:title="@string/snooze_time_title"
+            app:summary="@string/snooze_time_summary"
+            app:entries="@array/snooze_time_entries"
+            app:entryValues="@array/snooze_time_values"
+            android:defaultValue="5 minutes"
+            app:iconSpaceReserved="false"/>
+
+        <ListPreference
+            app:key="@string/snooze_repeat"
+            app:title="@string/snooze_repeat_title"
+            app:summary="@string/snooze_repeat_summary"
+            app:entries="@array/snooze_repeat_entries"
+            app:entryValues="@array/snooze_repeat_values"
+            android:defaultValue="3 times"
+            app:iconSpaceReserved="false"/>
+
         <SwitchPreference
             app:key="@string/vibration_general"
             app:title="@string/vibration_general_title"

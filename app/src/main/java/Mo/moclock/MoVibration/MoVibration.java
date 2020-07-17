@@ -91,7 +91,7 @@ public class MoVibration implements MoLoadable {
     @NonNull
     @Override
     public String toString() {
-        return MoFile.getData(SEP_KEY,this.type,this.isActive);
+        return MoFile.getData(this.type,this.isActive);
     }
 
 
@@ -103,7 +103,7 @@ public class MoVibration implements MoLoadable {
      */
     @Override
     public void load(String data, Context context) {
-        String[] comps = MoFile.loadable(SEP_KEY,data);
+        String[] comps = MoFile.loadable(data);
         this.isActive = Boolean.parseBoolean(comps[1]);
         /// change type to integer
     }

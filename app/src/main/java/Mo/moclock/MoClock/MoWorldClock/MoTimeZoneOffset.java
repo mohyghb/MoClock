@@ -128,7 +128,7 @@ public class MoTimeZoneOffset implements MoSavable, MoLoadable {
      */
     @Override
     public void load(String data, Context context) {
-        String[] parts = MoFile.loadable(SEP_KEY,data);
+        String[] parts = MoFile.loadable(data);
         this.nameCity = parts[0];
         this.timeZone = parts[1];
         this.pureTimeZone = parts[2];
@@ -145,7 +145,7 @@ public class MoTimeZoneOffset implements MoSavable, MoLoadable {
      */
     @Override
     public String getData() {
-        return MoFile.getData(SEP_KEY,this.nameCity,this.timeZone,
+        return MoFile.getData(this.nameCity,this.timeZone,
                 this.pureTimeZone,this.pureHourOffset,this.pureMinuteOffset,this.isAdd,this.parse);
     }
 

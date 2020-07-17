@@ -134,7 +134,8 @@ public class MoTimerSectionManager {
         this.pauseTimer.setOnClickListener((v) -> {
             if(MoTimer.universalTimer != null && MoTimer.universalTimer.isCreated()) {
                 MoTimer.universalTimer.pause(false);
-                this.pauseTimer.setText(MoTimer.universalTimer.getPauseButtonText());
+                updatePauseButton(this.pauseTimer, MoTimer.universalTimer.getPauseButtonText());
+
             }
         });
 
@@ -175,6 +176,12 @@ public class MoTimerSectionManager {
         turnDelete(false);
 
 
+    }
+
+    private void updatePauseButton(TextView pauseTimer, String pauseButtonText) {
+        pauseTimer.setText(pauseButtonText);
+        this.pauseTimer.setBackgroundColor(MoTimer.universalTimer.showingResume()?
+                mainActivity.getColor(R.color.resumeButton):mainActivity.getColor(R.color.colorPrimary));
     }
 
     private void initRecyclerView() {
@@ -302,7 +309,7 @@ public class MoTimerSectionManager {
                         new Button[]{this.startTimer, this.cancelTimer, this.pauseTimer},
                         this.hourTimer, this.minuteTimer, this.secondTimer);
                 MoTimer.universalTimer.startTimer();
-                this.pauseTimer.setText(MoTimer.universalTimer.getPauseButtonText());
+                updatePauseButton(this.pauseTimer, MoTimer.universalTimer.getPauseButtonText());
                 changeButtonLayout(false, true, true);
             }
 
@@ -341,7 +348,7 @@ public class MoTimerSectionManager {
             //mainActivity.changeLayout(false, false, true, true);
             changeButtonLayout(false, true, true);
 
-            this.pauseTimer.setText(MoTimer.universalTimer.getPauseButtonText());
+            updatePauseButton(this.pauseTimer, MoTimer.universalTimer.getPauseButtonText());
         }else {
             MoTimer.universalTimer.update();
            // changeButtonLayout(true, false, false);
@@ -359,7 +366,7 @@ public class MoTimerSectionManager {
         }else{
             turnDelete(true);
         }
-        counterPreset.setText(String.format("%d Selected",size));
+        updatePauseButton(counterPreset, String.format("%d Selected",size));
     }
 
 

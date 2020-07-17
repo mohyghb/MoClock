@@ -8,7 +8,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -27,7 +26,7 @@ import Mo.moclock.MoClock.MoAlarmClock;
 import Mo.moclock.MoClock.MoAlarmClockManager;
 import Mo.moclock.MoClock.MoRepeating;
 import Mo.moclock.MoDate.MoDate;
-import Mo.moclock.MoSnooze.MoSnooze;
+import Mo.moclock.MoClock.MoSnooze.MoSnooze;
 import Mo.moclock.MoVibration.MoVibration;
 import Mo.moclock.MoVibration.MoVibrationTypes;
 
@@ -311,7 +310,7 @@ public class MoCreateAlarmActivity extends AppCompatActivity {
         c.setTitle(this.alarmName.getText().toString());
         c.setDateTime(this.myCalendar);
         c.setActive(true);
-        c.setSnooze(new MoSnooze(5,3, this.snooze.isChecked()));
+        c.setSnooze(new MoSnooze(this, this.snooze.isChecked()));
         c.setVibration(new MoVibration(MoVibrationTypes.BASIC,this.vibration.isChecked()));
         c.setPathToMusic(this.music.isChecked());
         c.setRepeating(new MoRepeating(this.getPositionChips()));

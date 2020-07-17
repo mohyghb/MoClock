@@ -142,7 +142,7 @@ public class MoDate implements MoSavable, MoLoadable {
      */
     @Override
     public void load(String data, Context context) {
-        String[] comps = MoFile.loadable(SEP_KEY,data);
+        String[] comps = MoFile.loadable(data);
         this.calendar.set(Calendar.YEAR,Integer.parseInt(comps[0]));
         this.calendar.set(Calendar.MONTH,Integer.parseInt(comps[1]));
         this.calendar.set(Calendar.DATE,Integer.parseInt(comps[2]));
@@ -156,7 +156,7 @@ public class MoDate implements MoSavable, MoLoadable {
      */
     @Override
     public String getData() {
-        return MoFile.getData(SEP_KEY,this.calendar.get(Calendar.YEAR),
+        return MoFile.getData(this.calendar.get(Calendar.YEAR),
                 this.calendar.get(Calendar.MONTH),
                 this.calendar.get(Calendar.DAY_OF_MONTH),
                 this.calendar.get(Calendar.HOUR_OF_DAY),

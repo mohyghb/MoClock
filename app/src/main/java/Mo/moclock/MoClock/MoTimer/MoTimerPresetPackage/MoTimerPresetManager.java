@@ -36,7 +36,7 @@ public class MoTimerPresetManager {
 
 
     public static void save(Context context) {
-        MoReadWrite.saveFile(FILE_NAME, MoFile.getData(SEP_KEY,presets),context);
+        MoReadWrite.saveFile(FILE_NAME, MoFile.getData(presets),context);
     }
 
     /**
@@ -47,7 +47,7 @@ public class MoTimerPresetManager {
      */
     public static void load(String data, Context context) {
         if(presets.isEmpty()){
-            String[] parts = MoFile.loadable(SEP_KEY,MoReadWrite.readFile(FILE_NAME,context));
+            String[] parts = MoFile.loadable(MoReadWrite.readFile(FILE_NAME,context));
             for(String s: parts){
                 if(!s.isEmpty()){
                     MoTimerPreset preset = new MoTimerPreset();

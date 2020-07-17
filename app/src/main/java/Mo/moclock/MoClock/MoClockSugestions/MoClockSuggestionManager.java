@@ -52,12 +52,12 @@ public class MoClockSuggestionManager {
 
 
     public static void save(Context context){
-        MoReadWrite.saveFile(FILE_NAME, MoFile.getData(SEP_KEY,suggestions),context);
+        MoReadWrite.saveFile(FILE_NAME, MoFile.getData(suggestions),context);
     }
 
     public static void load(Context context){
         if(suggestions.isEmpty()){
-            String[] com = MoFile.loadable(SEP_KEY,MoReadWrite.readFile(FILE_NAME,context));
+            String[] com = MoFile.loadable(MoReadWrite.readFile(FILE_NAME,context));
             for(String c:com){
                 if(!c.isEmpty()){
                     MoClockSuggestion suggestion = new MoClockSuggestion(c,context);

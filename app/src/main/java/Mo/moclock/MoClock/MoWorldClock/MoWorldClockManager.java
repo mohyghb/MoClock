@@ -2,49 +2,62 @@ package Mo.moclock.MoClock.MoWorldClock;
 
 import android.content.Context;
 import android.widget.Toast;
-
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.TimeZone;
-
 import Mo.moclock.MoIO.MoFile;
 import Mo.moclock.MoIO.MoLoadable;
 import Mo.moclock.MoIO.MoSavable;
+import Mo.moclock.MoLog.MoLog;
 import Mo.moclock.MoReadWrite.MoReadWrite;
 import Mo.moclock.MoReadWrite.MoSave;
 import Mo.moclock.R;
 
 public class MoWorldClockManager implements MoSave, MoSavable, MoLoadable {
 
-    private static final String SEP_KEY = "&mwcmsepkey&";
     private static final String FILE_NAME = "mwcmfile";
+    private static final String WORLD_CLOCK_FILE = "world_clock.csv";
     private static ArrayList<MoWorldClock> worldClocks = new ArrayList<>();
+    public static ArrayList<MoCountryCityCoordinate> coordinates = new ArrayList<>();
 
     public static MoWorldClockManager manager = new MoWorldClockManager();
 
-//    @Deprecated
-//    public  void add(String id,Context context){
-//        loadIfNotLoaded(context);
-//        MoWorldClock c = new MoWorldClock(id);
-//        if(!worldClocks.contains(c)){
-//            // only add if its not already there
-//            worldClocks.add(c);
-//        }else{
-//            Toast.makeText(context,context.getString(R.string.error_already_added),Toast.LENGTH_SHORT).show();
-//        }
-//        save(context);
-//    }
+    // load the world clock data into our objects
+    public static void loadCountryCityCoordinates(Context context) {
+        if (coordinates.isEmpty()) {
+            try (BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(context.getAssets().open(WORLD_CLOCK_FILE), StandardCharsets.UTF_8))) {
+                String mLine;
+                int i = 0;
+                while ((mLine = reader.readLine()) != null) {
+                    String[] elements = mLine.split(",");
+                    MoCountryCityCoordinate coordinate = new MoCountryCityCoordinate()
+                            .setName(elements[0])
+                            .setLat(Double.parseDouble(elements[1]))
+                            .setLon(Double.parseDouble(elements[2]));
+                    coordinates.add(coordinate);
+                    i++;
+                }
+            } catch (Exception e) {
+                // ignore
+                e.printStackTrace();
+            }
+        }
+        MoLog.print("size " + coordinates.size());
+    }
 
     /**
      * adds a world clock and saves it
+     *
      * @param context
      * @param c
      */
-    public void add(Context context, MoWorldClock c){
+    public void add(Context context, MoWorldClock c) {
         loadIfNotLoaded(context);
-        if(worldClocks.contains(c)){
-            Toast.makeText(context,context.getString(R.string.error_already_added),Toast.LENGTH_SHORT).show();
-        }else{
+        if (worldClocks.contains(c)) {
+            Toast.makeText(context, context.getString(R.string.error_already_added), Toast.LENGTH_SHORT).show();
+        } else {
             c.setSearchMode(false);
             worldClocks.add(c);
         }
@@ -52,7 +65,7 @@ public class MoWorldClockManager implements MoSave, MoSavable, MoLoadable {
     }
 
 
-    public  void remove(int index,Context context){
+    public void remove(int index, Context context) {
         loadIfNotLoaded(context);
         worldClocks.remove(index);
         save(context);
@@ -61,11 +74,12 @@ public class MoWorldClockManager implements MoSave, MoSavable, MoLoadable {
 
     /**
      * deletes the selected world clocks
+     *
      * @param context
      */
-    public void deleteSelected(Context context){
-        for(int i = worldClocks.size()-1; i>=0;i--){
-            if(worldClocks.get(i).isSelected()){
+    public void deleteSelected(Context context) {
+        for (int i = worldClocks.size() - 1; i >= 0; i--) {
+            if (worldClocks.get(i).isSelected()) {
                 worldClocks.remove(i);
             }
         }
@@ -73,48 +87,47 @@ public class MoWorldClockManager implements MoSave, MoSavable, MoLoadable {
     }
 
 
-    public void deselectAll(){
-        for(MoWorldClock worldClock:worldClocks){
+    public void deselectAll() {
+        for (MoWorldClock worldClock : worldClocks) {
             worldClock.setSelected(false);
         }
     }
 
-    public void selectAll(){
-        for(MoWorldClock worldClock:worldClocks){
+    public void selectAll() {
+        for (MoWorldClock worldClock : worldClocks) {
             worldClock.setSelected(true);
         }
     }
 
-    public int getSelectedSize(){
+    public int getSelectedSize() {
         int t = 0;
-        for(MoWorldClock clock: worldClocks){
-            if(clock.isSelected())
+        for (MoWorldClock clock : worldClocks) {
+            if (clock.isSelected())
                 t++;
         }
         return t;
     }
 
 
-    public int size(){
+    public int size() {
         return worldClocks.size();
     }
 
-    private void loadIfNotLoaded(Context context){
-        if(worldClocks.isEmpty()){
-            load("",context);
+    private void loadIfNotLoaded(Context context) {
+        if (worldClocks.isEmpty()) {
+            load("", context);
         }
     }
 
 
-    public ArrayList<MoWorldClock> getWorldClocks(){
+    public ArrayList<MoWorldClock> getWorldClocks() {
         return worldClocks;
     }
 
 
-
     @Override
     public void save(Context context) {
-        MoReadWrite.saveFile(FILE_NAME,getData(),context);
+        MoReadWrite.saveFile(FILE_NAME, getData(), context);
     }
 
     /**
@@ -126,11 +139,11 @@ public class MoWorldClockManager implements MoSave, MoSavable, MoLoadable {
     @Override
     public void load(String data, Context context) {
         worldClocks.clear();
-        String[] components = MoFile.loadable(MoReadWrite.readFile(FILE_NAME,context));
-        for(String s: components){
-            if(!s.isEmpty()){
+        String[] components = MoFile.loadable(MoReadWrite.readFile(FILE_NAME, context));
+        for (String s : components) {
+            if (!s.isEmpty()) {
                 MoWorldClock c = new MoWorldClock();
-                c.load(s,context);
+                c.load(s, context);
                 worldClocks.add(c);
             }
         }

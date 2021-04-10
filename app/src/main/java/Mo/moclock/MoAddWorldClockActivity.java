@@ -48,98 +48,51 @@ public class MoAddWorldClockActivity extends AppCompatActivity {
     private ProgressBar progressBar;
 
 
-
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mo_add_world_clock);
+        MoWorldClockManager.loadCountryCityCoordinates(this);
         this.init();
-
     }
 
-    private void init(){
+    private void init() {
         //loadIfNotLoaded();
         this.progressBar = findViewById(R.id.world_clock_progress_bar);
         this.cancel = findViewById(R.id.cancel_world_clock_search);
-        this.cancel.setOnClickListener((v)-> finish());
+        this.cancel.setOnClickListener((v) -> finish());
         this.listView = findViewById(R.id.cities_list_view);
         this.search = findViewById(R.id.name_world_text_field);
 
 
-
-
         search.setOnEditorActionListener((textView, i, keyEvent) -> {
-            onSearch(textView,i,keyEvent);
+            onSearch(textView, i, keyEvent);
             return false;
         });
 
 
-
         this.moListView = new MoListView<>(listView,
-                new MoWorldClockArrayAdapter(this,0, citiesWorldClocks,null),
-                citiesWorldClocks,this);
+                new MoWorldClockArrayAdapter(this, 0, citiesWorldClocks, null),
+                citiesWorldClocks, this);
         hideProgress();
     }
 
-    private void onSearch(TextView textView, int actionId, KeyEvent event){
+    private void onSearch(TextView textView, int actionId, KeyEvent event) {
         if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) ||
                 (actionId == EditorInfo.IME_ACTION_GO) || actionId == EditorInfo.IME_ACTION_DONE) {
             // then we need to search
             showProgressLoading();
-            GoogleSearch googleSearch = new GoogleSearch();
-            googleSearch.setOnResult(()-> this.onGoogleSearchResult(googleSearch.getAnswerBoxManager()));
-            googleSearch.setOnRateLimit(this::onGoogleSearchError);
-            googleSearch.setSearch("time zone of " + this.search.getText().toString());
-            googleSearch.execute();
+
         }
     }
 
 
-    private void onGoogleSearchResult(MoAnswerBoxManager answerBoxManager){
-        hideProgress();
-        answerBoxManager.display(2);
-        List<MoAnswerBox> boxes = answerBoxManager.getAnswerBoxes();
-        if(!boxes.isEmpty()){
-            ArrayList<String> results = boxes.get(0).getWholeData();
-            if(results.size() > 1) {
-                String parsableData = results.get(1);
-                MoTimeZoneOffset timeZoneOffset = new MoTimeZoneOffset(parsableData);
-                MoWorldClock worldClock = new MoWorldClock(timeZoneOffset);
-                citiesWorldClocks.add(worldClock);
-                moListView.setArrayAdapter(new MoWorldClockArrayAdapter(MoAddWorldClockActivity.this,
-                    0,citiesWorldClocks,null));
-            }else {
-                // error
-                onGoogleSearchError();
-            }
-        }else {
-            // error
-            onGoogleSearchError();
-        }
-    }
-
-    private void onGoogleSearchError(){
-        hideProgress();
-        runOnUiThread(() -> {
-            Snackbar.make(search,FAILED,Snackbar.LENGTH_LONG)
-                    .setAnchorView(search)
-                    .setBackgroundTint(getColor(R.color.error_color))
-                    .setTextColor(getColor(R.color.snack_bar_text))
-                    .show();
-        });
-    }
-
-
-    private void hideProgress(){
+    private void hideProgress() {
         progressBar.setIndeterminate(false);
         progressBar.setVisibility(View.INVISIBLE);
     }
 
-    private void showProgressLoading(){
+    private void showProgressLoading() {
         progressBar.setIndeterminate(true);
         progressBar.setVisibility(View.VISIBLE);
     }

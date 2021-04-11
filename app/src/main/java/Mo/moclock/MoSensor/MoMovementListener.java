@@ -14,7 +14,7 @@ import android.os.Vibrator;
 import android.util.Log;
 import android.widget.Toast;
 
-import Mo.moclock.MoLog.MoLog;
+import com.moofficial.moessentials.MoEssentials.MoLog.MoLog;
 
 public abstract class MoMovementListener implements SensorEventListener {
 

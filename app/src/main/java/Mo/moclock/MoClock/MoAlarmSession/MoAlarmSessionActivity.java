@@ -30,35 +30,22 @@ import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.io.IOException;
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Objects;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.TimeUnit;
+
 
 import Mo.moclock.MainActivity;
 import Mo.moclock.MoClock.MoAlarmClockManager;
-import Mo.moclock.MoClock.MoEmptyAlarmException;
 import Mo.moclock.MoClock.MoSmartCancel.MoObjectDetectionAlarmCancel;
 import Mo.moclock.MoClock.MoSmartCancel.MoSmartCancel;
 import Mo.moclock.MoClock.MoSmartCancel.MoTapCancelAlarm;
 import Mo.moclock.MoClock.MoTimer.MoTimer;
 
 import Mo.moclock.MoHotWordDetection.MoHotWordDetector;
-import Mo.moclock.MoLog.MoLog;
-import Mo.moclock.MoMusic.MoVolume;
 import Mo.moclock.MoSensor.MoMovementListener;
-import Mo.moclock.MoSensor.MoShakeListener;
-import Mo.moclock.MoVibration.MoVibration;
 import Mo.moclock.R;
 
 public class MoAlarmSessionActivity extends AppCompatActivity implements GestureDetector.OnGestureListener,

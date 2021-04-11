@@ -7,8 +7,9 @@ import android.os.Vibrator;
 
 import androidx.annotation.NonNull;
 
-import Mo.moclock.MoIO.MoFile;
-import Mo.moclock.MoIO.MoLoadable;
+import com.moofficial.moessentials.MoEssentials.MoFileManager.MoIO.MoFile;
+import com.moofficial.moessentials.MoEssentials.MoFileManager.MoIO.MoLoadable;
+
 
 public class MoVibration implements MoLoadable {
 

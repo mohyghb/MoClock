@@ -6,12 +6,13 @@ import android.widget.Toast;
 
 import androidx.preference.PreferenceManager;
 
+import com.moofficial.moessentials.MoEssentials.MoFileManager.MoIO.MoFile;
+import com.moofficial.moessentials.MoEssentials.MoFileManager.MoIO.MoLoadable;
+import com.moofficial.moessentials.MoEssentials.MoFileManager.MoIO.MoSavable;
+
 import java.util.Calendar;
 
 import Mo.moclock.MoDate.MoDate;
-import Mo.moclock.MoIO.MoFile;
-import Mo.moclock.MoIO.MoLoadable;
-import Mo.moclock.MoIO.MoSavable;
 import Mo.moclock.R;
 
 public class MoSnooze implements MoSavable, MoLoadable {

@@ -2,14 +2,15 @@ package Mo.moclock.MoClock.MoClockSugestions;
 
 import android.content.Context;
 
+import com.moofficial.moessentials.MoEssentials.MoFileManager.MoIO.MoFile;
+import com.moofficial.moessentials.MoEssentials.MoFileManager.MoIO.MoLoadable;
+import com.moofficial.moessentials.MoEssentials.MoFileManager.MoIO.MoSavable;
+
 import java.util.Objects;
 
 import Mo.moclock.MoClock.MoAlarmClock;
 import Mo.moclock.MoDate.MoDate;
 import Mo.moclock.MoDate.MoTimeDifference;
-import Mo.moclock.MoIO.MoFile;
-import Mo.moclock.MoIO.MoLoadable;
-import Mo.moclock.MoIO.MoSavable;
 
 public class MoClockSuggestion implements MoSavable, MoLoadable {
 
@@ -98,7 +99,7 @@ public class MoClockSuggestion implements MoSavable, MoLoadable {
      */
     @Override
     public String getData() {
-        return MoFile.getData(creationMilli.getData(), setFor.getData());
+        return MoFile.getData(creationMilli, setFor);
     }
 
 

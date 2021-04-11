@@ -58,6 +58,5 @@ dependencies {
     }
     // Import aar for native component compilation
     implementation 'com.github.luben:zstd-jni:1.4.4-3@aar'
-
-
+    implementation project(":MoEssentials")
 }

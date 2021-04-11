@@ -1,2 +1,3 @@
+include ':MoEssentials'
 include ':app'
 rootProject.name='MoClock'

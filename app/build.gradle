@@ -52,5 +52,12 @@ dependencies {
     // hot-word detection for smart voice cancel
     implementation(name: 'pocketsphinx-android-5prealpha-release', ext: 'aar')
 
+    implementation('us.dustinj.timezonemap:timezonemap:4.0') {
+        // Exclude standard compression library
+        exclude group: 'com.github.luben', module: 'zstd-jni'
+    }
+    // Import aar for native component compilation
+    implementation 'com.github.luben:zstd-jni:1.4.4-3@aar'
+
 
 }

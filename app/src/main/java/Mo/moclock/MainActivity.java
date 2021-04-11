@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.preference.PreferenceManager;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.AudioAttributes;
@@ -11,6 +12,7 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.IOException;
@@ -23,16 +25,18 @@ import Mo.moclock.MoClock.MoTimer.MoTimer;
 import Mo.moclock.MoClock.MoTimer.MoTimerPresetPackage.MoTimerPreset;
 import Mo.moclock.MoClock.MoWorldClock.MoWorldClock;
 import Mo.moclock.MoClock.MoWorldClock.MoWorldClockManager;
+import Mo.moclock.MoLog.MoLog;
 import Mo.moclock.MoMusic.MoMusicPlayer;
 import Mo.moclock.MoSection.MoSectionManager;
 import Mo.moclock.MoSensor.MoShakeListener;
 import Mo.moclock.MoSharedPref.MoSharedPref;
 import Mo.moclock.MoTheme.MoTheme;
 import Mo.moclock.MoUri.MoUri;
+import us.dustinj.timezonemap.TimeZone;
+import us.dustinj.timezonemap.TimeZoneMap;
 
 
 public class MainActivity extends AppCompatActivity {
-
 
 
     public static boolean isInApp = true;
@@ -48,9 +52,6 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigation;
 
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,9 +60,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
-    private void init(){
+    private void init() {
         MoSharedPref.loadAll(this);
         MoAnimation.initAllAnimations(this);
         this.moStopWatchManager.setStopWatch_linear_layout(findViewById(R.id.linear_stopwatch_layout));
@@ -79,18 +78,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
-
-
-    private void initSmartShakeListeners(){
-         smartShake = new MoShakeListener(true) {
+    private void initSmartShakeListeners() {
+        smartShake = new MoShakeListener(true) {
             /**
              * when this class detects a shake
              */
             @Override
             public void onShakeDetected() {
-                switch (MoSectionManager.getInstance().getSection()){
+                switch (MoSectionManager.getInstance().getSection()) {
                     case MoSectionManager.ALARM_SECTION:
                         moAlarmSectionManager.onSmartShake(this);
                         break;
@@ -103,28 +98,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
-    private void initBottomNavigation(){
+    private void initBottomNavigation() {
         this.bottomNavigation = findViewById(R.id.bottom_navigation);
         this.moStopWatchManager.getStopWatch_linear_layout().setVisibility(View.INVISIBLE);
         this.moTimerSectionManager.timer_liner_layout.setVisibility(View.INVISIBLE);
-        this.bottomNavigation.setOnNavigationItemSelectedListener((item)->{
-            switch (item.getItemId()){
+        this.bottomNavigation.setOnNavigationItemSelectedListener((item) -> {
+            switch (item.getItemId()) {
                 case R.id.Alarm_Section:
-                    changeLayout(true,false,false,false,false);
+                    changeLayout(true, false, false, false, false);
                     MoSectionManager.getInstance().setSection(MoSectionManager.ALARM_SECTION);
                     return true;
                 case R.id.StopWatch_Section:
-                    changeLayout(false,true,false,false,false);
+                    changeLayout(false, true, false, false, false);
                     MoSectionManager.getInstance().setSection(MoSectionManager.STOP_WATCH_SECTION);
                     return true;
                 case R.id.Timer_Section:
-                    changeLayout(false,false,true,false,false);
+                    changeLayout(false, false, true, false, false);
                     MoSectionManager.getInstance().setSection(MoSectionManager.TIMER_SECTION);
                     return true;
                 case R.id.WorldClock_Section:
-                    changeLayout(false,false,false,true,false);
+                    changeLayout(false, false, false, true, false);
                     MoSectionManager.getInstance().setSection(MoSectionManager.WORLD_CLOCK_SECTION);
                     return true;
                 default:
@@ -134,43 +127,42 @@ public class MainActivity extends AppCompatActivity {
         switchSection();
     }
 
-    private void switchSection(){
-        switch (MoSectionManager.getInstance().getSection()){
+    private void switchSection() {
+        switch (MoSectionManager.getInstance().getSection()) {
             case MoSectionManager.ALARM_SECTION:
-                changeLayout(true,false,false,false,true);
+                changeLayout(true, false, false, false, true);
                 break;
             case MoSectionManager.STOP_WATCH_SECTION:
-                changeLayout(false,true,false,false,true);
+                changeLayout(false, true, false, false, true);
                 break;
             case MoSectionManager.TIMER_SECTION:
-                changeLayout(false,false,true,false,true);
+                changeLayout(false, false, true, false, true);
                 break;
             case MoSectionManager.WORLD_CLOCK_SECTION:
-                changeLayout(false,false,false,true,true);
+                changeLayout(false, false, false, true, true);
                 break;
         }
     }
 
 
-    private void changeLayout(boolean alarm, boolean stopwatch,boolean timer,boolean world,boolean setSelected){
-        this.moStopWatchManager.getStopWatch_linear_layout().setVisibility(stopwatch?View.VISIBLE:View.INVISIBLE);
-        this.moTimerSectionManager.timer_liner_layout.setVisibility(timer?View.VISIBLE:View.INVISIBLE);
-        this.moAlarmSectionManager.alarm_linear_layout.setVisibility(alarm?View.VISIBLE:View.INVISIBLE);
-        this.moWorldClockSectionManager.world_clock_linear_layout.setVisibility(world?View.VISIBLE:View.INVISIBLE);
-        if(!setSelected){
+    private void changeLayout(boolean alarm, boolean stopwatch, boolean timer, boolean world, boolean setSelected) {
+        this.moStopWatchManager.getStopWatch_linear_layout().setVisibility(stopwatch ? View.VISIBLE : View.INVISIBLE);
+        this.moTimerSectionManager.timer_liner_layout.setVisibility(timer ? View.VISIBLE : View.INVISIBLE);
+        this.moAlarmSectionManager.alarm_linear_layout.setVisibility(alarm ? View.VISIBLE : View.INVISIBLE);
+        this.moWorldClockSectionManager.world_clock_linear_layout.setVisibility(world ? View.VISIBLE : View.INVISIBLE);
+        if (!setSelected) {
             return;
         }
-        if(alarm){
+        if (alarm) {
             this.bottomNavigation.setSelectedItemId(R.id.Alarm_Section);
-        }else if(timer){
+        } else if (timer) {
             this.bottomNavigation.setSelectedItemId(R.id.Timer_Section);
-        }else if(stopwatch){
+        } else if (stopwatch) {
             this.bottomNavigation.setSelectedItemId(R.id.StopWatch_Section);
-        } else if(world){
+        } else if (world) {
             this.bottomNavigation.setSelectedItemId(R.id.WorldClock_Section);
         }
     }
-
 
 
     @Override
@@ -186,20 +178,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void changeIsInApp(boolean b){
+    private void changeIsInApp(boolean b) {
         isInApp = b;
     }
 
 
     @Override
     public void onBackPressed() {
-        if(MoAlarmClock.isInDeleteMode){
+        if (MoAlarmClock.isInDeleteMode) {
             moAlarmSectionManager.cancelDeleteAlarmMode();
-        }else if(MoTimerPreset.isInDeleteMode){
+        } else if (MoTimerPreset.isInDeleteMode) {
             moTimerSectionManager.cancelDeleteAlarmMode();
-        }else if(MoWorldClock.isInDeleteMode){
+        } else if (MoWorldClock.isInDeleteMode) {
             moWorldClockSectionManager.cancelDeleteMode();
-        }else {
+        } else {
             super.onBackPressed();
             finishAffinity();
         }
@@ -215,6 +207,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * whenever the window is not infocus we should make a service for the timer
      * if the timer is running
+     *
      * @param hasFocus
      */
     @Override
@@ -223,12 +216,12 @@ public class MainActivity extends AppCompatActivity {
         moTimerSectionManager.onWindowFocusChanged();
         moWorldClockSectionManager.onWindowFocusChanged();
         super.onWindowFocusChanged(hasFocus);
-        if(!hasFocus){
+        if (!hasFocus) {
             MoTimer.universalTimer.startService(this);
             MoStopWatch.universal.startNotificationService(this);
             this.smartShake.stop();
             changeIsInApp(false);
-        } else{
+        } else {
             moAlarmSectionManager.updateSubTitle();
             moTimerSectionManager.closeTimerService();
             MoStopWatch.universal.cancelNotificationService(this);
@@ -240,10 +233,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
-
-    private void initAlarmSection(){
+    private void initAlarmSection() {
         moAlarmSectionManager = new MoAlarmSectionManager(this);
         moAlarmSectionManager.initAlarmSection();
     }

@@ -4,10 +4,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Vibrator;
 
+import com.moofficial.moessentials.MoEssentials.MoLog.MoLog;
+
 import java.io.File;
 import java.io.IOException;
 
-import Mo.moclock.MoLog.MoLog;
+
 import Mo.moclock.R;
 import edu.cmu.pocketsphinx.Assets;
 import edu.cmu.pocketsphinx.Hypothesis;

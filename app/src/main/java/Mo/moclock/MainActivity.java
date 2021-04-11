@@ -14,6 +14,9 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.moofficial.moessentials.MoEssentials.MoLog.MoLog;
+import com.moofficial.moessentials.MoEssentials.MoMultiThread.MoThread.MoOnThreadRun;
+import com.moofficial.moessentials.MoEssentials.MoMultiThread.MoThread.MoThread;
 
 import java.io.IOException;
 
@@ -23,16 +26,12 @@ import Mo.moclock.MoClock.MoAlarmClockManager;
 import Mo.moclock.MoClock.MoStopWatch.MoStopWatch;
 import Mo.moclock.MoClock.MoTimer.MoTimer;
 import Mo.moclock.MoClock.MoTimer.MoTimerPresetPackage.MoTimerPreset;
-import Mo.moclock.MoClock.MoWorldClock.MoWorldClock;
+
 import Mo.moclock.MoClock.MoWorldClock.MoWorldClockManager;
-import Mo.moclock.MoLog.MoLog;
-import Mo.moclock.MoMusic.MoMusicPlayer;
 import Mo.moclock.MoSection.MoSectionManager;
 import Mo.moclock.MoSensor.MoShakeListener;
 import Mo.moclock.MoSharedPref.MoSharedPref;
 import Mo.moclock.MoTheme.MoTheme;
-import Mo.moclock.MoUri.MoUri;
-import us.dustinj.timezonemap.TimeZone;
 import us.dustinj.timezonemap.TimeZoneMap;
 
 
@@ -189,8 +188,8 @@ public class MainActivity extends AppCompatActivity {
             moAlarmSectionManager.cancelDeleteAlarmMode();
         } else if (MoTimerPreset.isInDeleteMode) {
             moTimerSectionManager.cancelDeleteAlarmMode();
-        } else if (MoWorldClock.isInDeleteMode) {
-            moWorldClockSectionManager.cancelDeleteMode();
+        } else if (moWorldClockSectionManager.onBackPressed()) {
+            // we have consumed the back press there, so we can ignore it here
         } else {
             super.onBackPressed();
             finishAffinity();
@@ -214,7 +213,6 @@ public class MainActivity extends AppCompatActivity {
     public void onWindowFocusChanged(boolean hasFocus) {
         moAlarmSectionManager.onWindowFocusChanged();
         moTimerSectionManager.onWindowFocusChanged();
-        moWorldClockSectionManager.onWindowFocusChanged();
         super.onWindowFocusChanged(hasFocus);
         if (!hasFocus) {
             MoTimer.universalTimer.startService(this);

@@ -27,7 +27,6 @@ import Mo.moclock.MoId.MoId;
 import Mo.moclock.MoInflatorView.MoViewDisplayable;
 import Mo.moclock.MoInflatorView.MoInflaterView;
 import Mo.moclock.MoClock.MoSnooze.MoSnooze;
-import Mo.moclock.MoLog.MoLog;
 import Mo.moclock.MoUI.MoTextInput;
 import Mo.moclock.MoVibration.MoVibration;
 import Mo.moclock.MoVibration.MoVibrationTypes;

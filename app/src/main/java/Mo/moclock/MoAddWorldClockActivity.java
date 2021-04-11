@@ -1,101 +1,134 @@
 package Mo.moclock;
 
-import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.KeyEvent;
+import android.content.Context;
+import android.content.Intent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.textfield.TextInputEditText;
+import com.moofficial.moessentials.MoEssentials.MoLog.MoLog;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoActivity.MoSmartActivity;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSearchable.MoSearchable;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoRecyclerView.MoRecyclerUtils;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoRecyclerView.MoRecyclerView;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViewBuilder.MoMarginBuilder;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViews.MoBars.MoSearchBar;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViews.MoBars.MoToolBar;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViews.MoNormal.MoCardRecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.TimeZone;
 
-import Mo.moclock.MoClock.MoWorldClock.MoTimeZoneOffset;
+import Mo.moclock.MoClock.MoWorldClock.MoCities.MoCityCoordinate;
+import Mo.moclock.MoClock.MoWorldClock.MoCities.MoCityRecyclerAdapter;
 import Mo.moclock.MoClock.MoWorldClock.MoWorldClock;
-import Mo.moclock.MoClock.MoWorldClock.MoWorldClockArrayAdapter;
 import Mo.moclock.MoClock.MoWorldClock.MoWorldClockManager;
-import Mo.moclock.MoGoogleSearch.Google.GoogleSearch;
-import Mo.moclock.MoGoogleSearch.MoGoogle.MoAnswerBox;
-import Mo.moclock.MoGoogleSearch.MoGoogle.MoAnswerBoxManager;
-import Mo.moclock.MoListView.MoListView;
-import Mo.moclock.MoLog.MoLog;
 
-public class MoAddWorldClockActivity extends AppCompatActivity {
+
+public class MoAddWorldClockActivity extends MoSmartActivity implements MoCityRecyclerAdapter.MoOnCitySelectedListener, MoWorldClockManager.MoOnWorldClockAvailableObserver {
 
 
     private static final String FAILED = "Sorry, something went wrong at this moment, please try again later.";
 
-    private ArrayList<MoWorldClock> citiesWorldClocks = new ArrayList<>();
-
-
-    private Button cancel;
-
-    private ListView listView;
-    private MoListView<MoWorldClock> moListView;
-    private TextInputEditText search;
+    private MoCardRecyclerView cardRecyclerView;
+    private MoRecyclerView recyclerView;
+    private MoCityRecyclerAdapter adapter;
+    private MoToolBar mainToolbar;
+    private MoSearchBar searchBar;
+    private MoSearchable searchable;
     private ProgressBar progressBar;
 
+    @Override
+    protected void init() {
+        setTitle(R.string.worldClockAdd_title);
+        setSubTitle(R.string.worldClockAdd_subtitle);
+        initRecyclerView();
+        setupToolbars();
+        setupSearchable();
+
+        // initially put the user inside search mode when this activity launches
+        searchable.activateSearch();
+
+        initProgressbar();
+        toggleProgressbar();
+    }
+
+    private void initProgressbar() {
+        progressBar = new ProgressBar(this);
+        l.linearNested.addView(progressBar, MoMarginBuilder.getLinearParams(this, 0,
+                (int) (getResources().getDisplayMetrics().density * 80), 0, 0));
+    }
+
+    private void toggleProgressbar() {
+        runOnUiThread(() -> {
+            if (MoWorldClockManager.cities.isEmpty()) {
+                this.progressBar.setVisibility(View.VISIBLE);
+            } else {
+                this.progressBar.setVisibility(View.GONE);
+            }
+        });
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mo_add_world_clock);
-        MoWorldClockManager.loadCountryCityCoordinates(this);
-        this.init();
+    public void onWorldClockAvailable() {
+        adapter.update(this, MoWorldClockManager.cities);
+        toggleProgressbar();
     }
 
-    private void init() {
-        //loadIfNotLoaded();
-        this.progressBar = findViewById(R.id.world_clock_progress_bar);
-        this.cancel = findViewById(R.id.cancel_world_clock_search);
-        this.cancel.setOnClickListener((v) -> finish());
-        this.listView = findViewById(R.id.cities_list_view);
-        this.search = findViewById(R.id.name_world_text_field);
-
-
-        search.setOnEditorActionListener((textView, i, keyEvent) -> {
-            onSearch(textView, i, keyEvent);
-            return false;
-        });
-
-
-        this.moListView = new MoListView<>(listView,
-                new MoWorldClockArrayAdapter(this, 0, citiesWorldClocks, null),
-                citiesWorldClocks, this);
-        hideProgress();
+    @Override
+    protected void onStart() {
+        super.onStart();
+        MoWorldClockManager.subscribe(this);
     }
 
-    private void onSearch(TextView textView, int actionId, KeyEvent event) {
-        if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) ||
-                (actionId == EditorInfo.IME_ACTION_GO) || actionId == EditorInfo.IME_ACTION_DONE) {
-            // then we need to search
-            showProgressLoading();
-
-        }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        MoWorldClockManager.unsubscribe(this);
     }
 
-
-    private void hideProgress() {
-        progressBar.setIndeterminate(false);
-        progressBar.setVisibility(View.INVISIBLE);
+    @Override
+    public void onCitySelected(MoCityCoordinate cityCoordinate) {
+        MoLog.print(cityCoordinate.getName());
+        MoWorldClockManager.add(this, MoWorldClock.from(cityCoordinate));
+        Toast.makeText(this, getString(R.string.worldClockAdd_success_message, cityCoordinate.getName()), Toast.LENGTH_SHORT).show();
+        finish();
     }
 
-    private void showProgressLoading() {
-        progressBar.setIndeterminate(true);
-        progressBar.setVisibility(View.VISIBLE);
+    private void setupSearchable() {
+        searchable = new MoSearchable(this, getGroupRootView(), () -> MoWorldClockManager.cities);
+        //noinspection unchecked
+        searchable.setSearchOnTextChanged(true)
+                .setAppBarLayout(this.l.appBarLayout)
+                .setActivity(this)
+                .setSearchButton(this.mainToolbar.getRightButton())
+                .setCancelSearch(this.searchBar.getLeftButton())
+                .setSearchTextView(this.searchBar.getEditText())
+                .setClearSearch(this.searchBar.getRightButton())
+                .setOnSearchFinished(list -> adapter.update(this, (List<MoCityCoordinate>) list))
+                .addNormalViews(this.mainToolbar)
+                .addUnNormalViews(this.searchBar);
     }
 
+    private void setupToolbars() {
+        mainToolbar = new MoToolBar(this);
+        mainToolbar.hideMiddle().setRightIcon(R.drawable.ic_baseline_search_24).setLeftOnClickListener((v) -> onBackPressed());
 
+        searchBar = new MoSearchBar(this);
+
+        l.setupMultipleToolbars(mainToolbar, mainToolbar, searchBar);
+        syncTitle(mainToolbar.getTitle());
+    }
+
+    private void initRecyclerView() {
+        cardRecyclerView = new MoCardRecyclerView(this);
+        adapter = new MoCityRecyclerAdapter(this, MoWorldClockManager.cities, this);
+        recyclerView = MoRecyclerUtils.get(cardRecyclerView.getRecyclerView(), this.adapter).setMaxHeight(getHeightPixels());
+        recyclerView.show();
+        l.linearNested.addView(this.cardRecyclerView);
+    }
+
+    public static void startActivity(Context context) {
+        context.startActivity(new Intent(context, MoAddWorldClockActivity.class));
+    }
 }

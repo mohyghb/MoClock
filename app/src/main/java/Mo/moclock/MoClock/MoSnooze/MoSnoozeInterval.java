@@ -2,9 +2,9 @@ package Mo.moclock.MoClock.MoSnooze;
 
 import android.content.Context;
 
-import Mo.moclock.MoIO.MoFile;
-import Mo.moclock.MoIO.MoLoadable;
-import Mo.moclock.MoIO.MoSavable;
+import com.moofficial.moessentials.MoEssentials.MoFileManager.MoIO.MoFile;
+import com.moofficial.moessentials.MoEssentials.MoFileManager.MoIO.MoLoadable;
+import com.moofficial.moessentials.MoEssentials.MoFileManager.MoIO.MoSavable;
 
 public class MoSnoozeInterval implements MoSavable, MoLoadable {
 

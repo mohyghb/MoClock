@@ -1,81 +1,150 @@
 package Mo.moclock;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Handler;
 import android.view.View;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.ListView;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.moofficial.moessentials.MoEssentials.MoDate.MoDate;
+import com.moofficial.moessentials.MoEssentials.MoLog.MoLog;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoFragment.MoOnBackPressed;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSelectable.MoSelectable;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSelectable.MoSelectableInterface.MoOnEmptySelectionListener;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSelectable.MoSelectableInterface.MoOnSelectFinishedListener;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoRecyclerView.MoRecyclerUtils;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoRecyclerView.MoRecyclerView;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViews.MoBars.MoToolBar;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViews.MoNormal.MoCardRecyclerView;
 
 import java.util.Calendar;
+import java.util.List;
 
-import Mo.moclock.MoAnimation.MoAnimation;
 import Mo.moclock.MoClock.MoWorldClock.MoWorldClock;
 import Mo.moclock.MoClock.MoWorldClock.MoWorldClockManager;
-import Mo.moclock.MoDate.MoDate;
-import Mo.moclock.MoListView.MoListView;
-import Mo.moclock.MoRunnable.MoRunnable;
+import Mo.moclock.MoClock.MoWorldClock.MoWorldClockRecyclerAdapter;
 
 public class MoWorldClockSectionManager implements MoOnBackPressed {
-    LinearLayout world_clock_linear_layout;
-    ImageButton addButton;
-    ListView listView;
-    MoListView<MoWorldClock> moListView;
-    Button floatingActionButton;
-    TextView title;
-    TextView subTitle;
-    Handler updateTimeHandler = new Handler();
-    Runnable handlerTask;
-    Activity activity;
-    private BottomNavigationView bottomNavigation;
 
-    private Button cancelDeleteButton,delete;
-    private CheckBox selectAll;
-    private LinearLayout linearDeleteMode;
+    public static String UPDATE_TIME_PAYLOAD = "update_time";
 
-    public MoWorldClockSectionManager(Activity a) {
+    View root;
+    private MainActivity activity;
+    private TextView title;
+    private TextView subTitle;
+    private MoToolBar toolBar;
+    private MoCardRecyclerView cardRecyclerView;
+    private MoRecyclerView recyclerView;
+    private MoWorldClockRecyclerAdapter adapter;
+    private MoSelectable<MoWorldClock> selectable;
+    private MoDate date = new MoDate();
+    private Handler handler = new Handler();
+    private View emptyView;
+
+    public MoWorldClockSectionManager(MainActivity a) {
         this.activity = a;
-//        this.handlerTask = new Runnable() {
-//            @Override
-//            public void run() {
-//                if(!MoWorldClock.isInDeleteMode){
-//                    // only update the current time if they are not deleting
-//                    updateCurrentTime();
-//                }
-//                moListView.update(!MoWorldClock.isInDeleteMode);
-//                updateTimeHandler.postDelayed(this, 1000 * (59 - Calendar.getInstance().get(Calendar.SECOND)));
-//            }
-//        };
+    }
+
+    private void updateTime() {
+        activity.runOnUiThread(() -> {
+            if (!this.selectable.isInActionMode()) {
+                updateTimeTitle();
+            } else {
+                this.date = new MoDate();
+            }
+            adapter.notifyItemRangeChanged(0, adapter.getItemCount(), UPDATE_TIME_PAYLOAD);
+        });
+        handler.postDelayed(this::updateTime, getDelayMillis());
+    }
+
+    private void updateTimeTitle() {
+        this.date = new MoDate();
+        title.setText(date.getReadableTime());
+    }
+
+    private long getDelayMillis() {
+        return (60 - date.getCalendar().get(Calendar.SECOND)) * 1000;
     }
 
     void initWorldClockSection() {
-        MoWorldClockManager.init(this.activity);
-        this.title = activity.findViewById(R.id.World_Clock_Title);
-        this.subTitle = activity.findViewById(R.id.World_Clock_Sub_Title);
-        this.floatingActionButton = activity.findViewById(R.id.world_clock_empty_list_view);
-        this.floatingActionButton.setOnClickListener((v) -> MoAddWorldClockActivity.startActivity(this.activity));
-        this.addButton = activity.findViewById(R.id.add_world_clock_button);
-        activity.findViewById(R.id.settings_world_clock).setVisibility(View.GONE);
-        this.addButton.setOnClickListener((v) -> MoAddWorldClockActivity.startActivity(this.activity));
-        this.listView = activity.findViewById(R.id.world_clocks_list_view);
-        this.bottomNavigation = activity.findViewById(R.id.bottom_navigation);
-        this.delete = activity.findViewById(R.id.delete_world_button);
-        this.cancelDeleteButton = activity.findViewById(R.id.cancel_delete_world);
-        this.linearDeleteMode = activity.findViewById(R.id.delete_mode_world);
-        this.selectAll = activity.findViewById(R.id.select_all_world_clocks);
-        this.selectAll.setVisibility(View.INVISIBLE);
+        MoWorldClockManager.loadCities(this.activity);
+        MoWorldClockManager.load(this.activity);
+        initEmptyView();
+        initTitleSubtitle();
+        initToolbar();
+        initRecyclerView();
+        initSelectable();
+        updateTime();
+    }
 
+    private void initEmptyView() {
+        this.emptyView = activity.findViewById(R.id.layout_worldClock_emptyView);
+        this.emptyView.findViewById(R.id.button_emptyWorldClock_addCity)
+                .setOnClickListener((v) -> MoAddWorldClockActivity.startActivityForResult(activity, MainActivity.ADD_WORLD_CLOCK_CODE));
+    }
+
+    private void initTitleSubtitle() {
+        this.title = activity.findViewById(R.id.mo_lib_title);
+        this.subTitle = activity.findViewById(R.id.mo_lib_subtitle);
+        this.subTitle.setText(R.string.worldClock_localTime);
+    }
+
+    private void initSelectable() {
+        this.selectable = new MoSelectable<>(this.activity, (ViewGroup)this.root, adapter);
+        this.selectable.setCounterView(this.title)
+                .setSelectAllCheckBox(this.toolBar.getCheckBox())
+                .addNormalViews(toolBar.getRightButton(), activity.getBottomNavigation(), subTitle)
+                .addUnNormalViews(toolBar.getCheckBox(), toolBar.getMiddleButton())
+                .setOnEmptySelectionListener(() -> selectable.removeAction())
+                .setOnCanceledListener(this::updateTimeTitle);
+    }
+
+    private void initRecyclerView() {
+        this.cardRecyclerView = activity.findViewById(R.id.cardRecycler_worldClock_list);
+        this.cardRecyclerView.getCardView().makeTransparent();
+        this.adapter = new MoWorldClockRecyclerAdapter(activity, MoWorldClockManager.worldClocks);
+        this.recyclerView = MoRecyclerUtils.get(cardRecyclerView.getRecyclerView(), adapter)
+                .setLayoutManagerType(MoRecyclerView.STAGGERED_GRID_LAYOUT_MANAGER)
+                .show();
+        this.adapter.setEmptyView(this.emptyView)
+                .setRecyclerView(this.recyclerView)
+                .setEmptyViewCallback((showEmpty) -> {
+                    if (showEmpty) {
+                        toolBar.hideRight();
+                    } else {
+                        toolBar.showRight();
+                    }
+                })
+                .notifyEmptyState();
+    }
+
+    private void initToolbar() {
+        this.toolBar = activity.findViewById(R.id.toolbar_worldClock_main);
+        this.toolBar.hideMiddle()
+                .hideTitle()
+                .hideLeft()
+                .setMiddleIcon(R.drawable.ic_baseline_delete_outline_24)
+                .setMiddleOnClickListener((v) -> onDeleteClicked())
+                .setRightIcon(R.drawable.ic_add_black_30dp)
+                .setRightOnClickListener((v) -> MoAddWorldClockActivity.startActivityForResult(activity, MainActivity.ADD_WORLD_CLOCK_CODE));
+    }
+
+    private void onDeleteClicked() {
+        MoWorldClockManager.removeSelected(activity, adapter.getSelectedItems());
+        selectable.removeAction();
+        adapter.notifyEmptyState().notifyDataSetChanged();
+    }
+
+    public void onWorldClockChanged() {
+        this.adapter.notifyEmptyState().notifyDataSetChanged();
     }
 
     @Override
     public boolean onBackPressed() {
+        if (selectable.isInActionMode()) {
+            selectable.removeAction();
+            return true;
+        }
         return false;
     }
 }

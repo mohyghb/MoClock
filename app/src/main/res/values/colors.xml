@@ -3,6 +3,7 @@
     <color name="colorPrimary">#4caf50</color>
     <color name="colorPrimaryDark">#00695c</color>
     <color name="colorAccent">@color/colorPrimary</color>
+    <color name="colorAccent10">#1A4CAF50</color>
 
 
     <color name="colorPrimary_DarkMode">#a5d6a7</color>
@@ -27,6 +28,7 @@
     <color name="resumeButton">#2196f3</color>
 
     <color name="error_color">#E24444</color>
+    <color name="error_color10">#19E24444</color>
 
     <color name="snack_bar_text">@color/MoWhite</color>
 

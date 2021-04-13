@@ -17,7 +17,6 @@ import java.util.List;
 
 import Mo.moclock.MainActivity;
 import Mo.moclock.MoClock.MoWorldClock.MoCities.MoCityCoordinate;
-import us.dustinj.timezonemap.TimeZoneMap;
 
 public class MoWorldClockManager {
 
@@ -25,30 +24,28 @@ public class MoWorldClockManager {
     private static final String WORLD_CLOCK_FILE = "world_clock.csv";
     public static ArrayList<MoWorldClock> worldClocks = new ArrayList<>();
     public static ArrayList<MoCityCoordinate> cities = new ArrayList<>();
-    public static TimeZoneMap map;
-    private static List<MoOnWorldClockAvailableObserver> observers = new ArrayList<>();
+//    private static List<MoOnWorldClockAvailableObserver> observers = new ArrayList<>();
 
     public static void init(Context context) {
-        new Thread() {
-            @Override
-            public void run() {
-                MoWorldClockManager.map = TimeZoneMap.forEverywhere();
-                MoWorldClockManager.loadCities(context);
-                observers.forEach(MoOnWorldClockAvailableObserver::onWorldClockAvailable);
-            }
-        }.start();
+//        new Thread() {
+//            @Override
+//            public void run() {
+//                MoWorldClockManager.loadCities(context);
+//                observers.forEach(MoOnWorldClockAvailableObserver::onWorldClockAvailable);
+//            }
+//        }.start();
     }
 
     public static void subscribe(MoOnWorldClockAvailableObserver observer) {
-        if (!observers.contains(observer)) {
-            observers.add(observer);
-        }
-        MoLog.print("(sub) observers size = " + observers.size());
+//        if (!observers.contains(observer)) {
+//            observers.add(observer);
+//        }
+//        MoLog.print("(sub) observers size = " + observers.size());
     }
 
     public static void unsubscribe(MoOnWorldClockAvailableObserver observer) {
-        observers.remove(observer);
-        MoLog.print("(unsub) observers size = " + observers.size());
+//        observers.remove(observer);
+//        MoLog.print("(unsub) observers size = " + observers.size());
     }
 
     /**

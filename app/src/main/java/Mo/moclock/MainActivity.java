@@ -2,23 +2,12 @@ package Mo.moclock;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.preference.PreferenceManager;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.media.AudioAttributes;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.moofficial.moessentials.MoEssentials.MoLog.MoLog;
-import com.moofficial.moessentials.MoEssentials.MoMultiThread.MoThread.MoOnThreadRun;
-import com.moofficial.moessentials.MoEssentials.MoMultiThread.MoThread.MoThread;
-
-import java.io.IOException;
 
 import Mo.moclock.MoAnimation.MoAnimation;
 import Mo.moclock.MoClock.MoAlarmClock;
@@ -27,12 +16,10 @@ import Mo.moclock.MoClock.MoStopWatch.MoStopWatch;
 import Mo.moclock.MoClock.MoTimer.MoTimer;
 import Mo.moclock.MoClock.MoTimer.MoTimerPresetPackage.MoTimerPreset;
 
-import Mo.moclock.MoClock.MoWorldClock.MoWorldClockManager;
 import Mo.moclock.MoSection.MoSectionManager;
 import Mo.moclock.MoSensor.MoShakeListener;
 import Mo.moclock.MoSharedPref.MoSharedPref;
 import Mo.moclock.MoTheme.MoTheme;
-import us.dustinj.timezonemap.TimeZoneMap;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -49,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public static final int ADD_WORLD_CLOCK_CODE = 0;
     private BottomNavigationView bottomNavigation;
+    private View bottomDeleteBar;
 
 
     @Override
@@ -58,14 +46,28 @@ public class MainActivity extends AppCompatActivity {
         this.init();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        switch (requestCode) {
+            case MoAlarmSectionManager.CREATE_ALARM_CODE:
+                moAlarmSectionManager.updateAll();
+                break;
+            case ADD_WORLD_CLOCK_CODE:
+                moWorldClockSectionManager.onWorldClockChanged();
+                break;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
 
     private void init() {
         MoSharedPref.loadAll(this);
         MoAnimation.initAllAnimations(this);
         this.moStopWatchManager.setStopWatch_linear_layout(findViewById(R.id.linear_stopwatch_layout));
-        this.moWorldClockSectionManager.world_clock_linear_layout = findViewById(R.id.world_clock_layout);
+        this.moWorldClockSectionManager.root = findViewById(R.id.layout_worldClock);
         this.moTimerSectionManager.timer_liner_layout = findViewById(R.id.linear_timer_layout);
         this.initAlarmSection();
+        this.bottomDeleteBar = findViewById(R.id.delete_mode_preset);
         this.moTimerSectionManager.initTimerSection();
         this.moStopWatchManager.initStopWatchSection();
         this.initBottomNavigation();
@@ -148,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
         this.moStopWatchManager.getStopWatch_linear_layout().setVisibility(stopwatch ? View.VISIBLE : View.INVISIBLE);
         this.moTimerSectionManager.timer_liner_layout.setVisibility(timer ? View.VISIBLE : View.INVISIBLE);
         this.moAlarmSectionManager.alarm_linear_layout.setVisibility(alarm ? View.VISIBLE : View.INVISIBLE);
-        this.moWorldClockSectionManager.world_clock_linear_layout.setVisibility(world ? View.VISIBLE : View.INVISIBLE);
+        this.moWorldClockSectionManager.root.setVisibility(world ? View.VISIBLE : View.INVISIBLE);
         if (!setSelected) {
             return;
         }
@@ -199,7 +201,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        moWorldClockSectionManager.updateTimeHandler.removeCallbacks(moWorldClockSectionManager.handlerTask);
         MoAlarmClockManager.getInstance().onDestroy();
     }
 
@@ -236,17 +237,11 @@ public class MainActivity extends AppCompatActivity {
         moAlarmSectionManager.initAlarmSection();
     }
 
+    public BottomNavigationView getBottomNavigation() {
+        return bottomNavigation;
+    }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        switch (requestCode) {
-            case MoAlarmSectionManager.CREATE_ALARM_CODE:
-                moAlarmSectionManager.updateAll();
-                break;
-            case ADD_WORLD_CLOCK_CODE:
-                this.moWorldClockSectionManager.moListView.updateHideIfEmpty();
-                break;
-        }
-        super.onActivityResult(requestCode, resultCode, data);
+    public View getBottomDeleteBar() {
+        return bottomDeleteBar;
     }
 }

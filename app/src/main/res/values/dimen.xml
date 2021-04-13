@@ -28,4 +28,7 @@
 
     <item name="mo_fade_init_value" format="float" type="dimen">0.3</item>
 
+    <dimen name="cityView_horizontalMargin">12dp</dimen>
+    <dimen name="cityView_verticalMargin">50dp</dimen>
+
 </resources>

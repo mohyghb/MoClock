@@ -1,6 +1,7 @@
 package Mo.moclock;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
@@ -130,5 +131,9 @@ public class MoAddWorldClockActivity extends MoSmartActivity implements MoCityRe
 
     public static void startActivity(Context context) {
         context.startActivity(new Intent(context, MoAddWorldClockActivity.class));
+    }
+
+    public static void startActivityForResult(Activity a, int code) {
+        a.startActivityForResult(new Intent(a, MoAddWorldClockActivity.class), code);
     }
 }

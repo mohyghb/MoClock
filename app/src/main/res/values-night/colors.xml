@@ -4,10 +4,12 @@
     <color name="colorPrimary">#a5d6a7</color>
     <color name="colorPrimaryDark">#00695c</color>
     <color name="colorAccent">#a7ffeb</color>
+    <color name="colorAccent10">#1AA7FFEB</color>
 
     <color name="divider_color">@color/colorPrimary_DarkMode</color>
 
     <color name="error_color">#cf6679</color>
+    <color name="error_color10">#1ACF6679</color>
 
     <color name="snack_bar_text">@color/MoBlack</color>
 

@@ -13,6 +13,7 @@ import java.util.Objects;
 import java.util.TimeZone;
 import Mo.moclock.MoClock.MoWorldClock.MoCities.MoCityCoordinate;
 import Mo.moclock.MoDate.MoDate;
+import Mo.moclock.MoHotWordDetection.MoHotWordDetector;
 
 
 public class MoWorldClock implements MoSavable, MoLoadable, MoSelectableItem {
@@ -59,8 +60,15 @@ public class MoWorldClock implements MoSavable, MoLoadable, MoSelectableItem {
         return moDate;
     }
 
+    // updates the date time
+    public MoWorldClock update() {
+        this.moDate = new MoDate();
+        return this;
+    }
+
     public MoWorldClock updateTimeZone() {
-        timeZone = TimeZone.getTimeZone(zoneId);
+        // todo this needs to be changed in another ticket
+        timeZone = TimeZone.getTimeZone("America/Vancouver");
         moDate.getCalendar().setTimeZone(timeZone);
         return this;
     }
@@ -91,9 +99,10 @@ public class MoWorldClock implements MoSavable, MoLoadable, MoSelectableItem {
 
 
     public static MoWorldClock from(MoCityCoordinate cityCoordinate) {
+        // todo this needs to be addressed in another ticket, we are just hard coding timezones right now
         return new MoWorldClock()
                 .setName(cityCoordinate.getName())
-                .setZoneId(Objects.requireNonNull(MoWorldClockManager.map.getOverlappingTimeZone(cityCoordinate.getLat(), cityCoordinate.getLon())).getZoneId())
+                .setZoneId("")
                 .updateTimeZone();
     }
 }

@@ -315,6 +315,7 @@
     <string name="worldClockAdd_title">Add city</string>
     <string name="worldClockAdd_subtitle">Search for a city</string>
     <string name="worldClockAdd_success_message">%s was added to your world clocks!</string>
+    <string name="worldClock_localTime">Local Time</string>
 
 
 </resources>

@@ -11,6 +11,7 @@ import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSelectable
 import java.util.Calendar;
 import java.util.Objects;
 import java.util.TimeZone;
+
 import Mo.moclock.MoClock.MoWorldClock.MoCities.MoCityCoordinate;
 import Mo.moclock.MoDate.MoDate;
 import Mo.moclock.MoHotWordDetection.MoHotWordDetector;
@@ -60,16 +61,15 @@ public class MoWorldClock implements MoSavable, MoLoadable, MoSelectableItem {
         return moDate;
     }
 
-    // updates the date time
+    // updates the date time and timezone
     public MoWorldClock update() {
         this.moDate = new MoDate();
-        return this;
+        return updateTimeZone();
     }
 
     public MoWorldClock updateTimeZone() {
-        // todo this needs to be changed in another ticket
-        timeZone = TimeZone.getTimeZone("America/Vancouver");
-        moDate.getCalendar().setTimeZone(timeZone);
+        timeZone = TimeZone.getTimeZone(this.zoneId);
+        moDate.setTimeZone(timeZone);
         return this;
     }
 
@@ -99,10 +99,9 @@ public class MoWorldClock implements MoSavable, MoLoadable, MoSelectableItem {
 
 
     public static MoWorldClock from(MoCityCoordinate cityCoordinate) {
-        // todo this needs to be addressed in another ticket, we are just hard coding timezones right now
         return new MoWorldClock()
                 .setName(cityCoordinate.getName())
-                .setZoneId("")
+                .setZoneId(cityCoordinate.getZoneId())
                 .updateTimeZone();
     }
 }

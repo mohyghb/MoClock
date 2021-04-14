@@ -6,8 +6,7 @@ import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSearchable
 public class MoCityCoordinate implements MoSearchableItem {
 
     private String name;
-    private double lat;
-    private double lon;
+    private String zoneId;
     private boolean isSearched;
 
     public String getName() {
@@ -19,21 +18,12 @@ public class MoCityCoordinate implements MoSearchableItem {
         return this;
     }
 
-    public double getLat() {
-        return lat;
+    public String getZoneId() {
+        return zoneId;
     }
 
-    public MoCityCoordinate setLat(double lat) {
-        this.lat = lat;
-        return this;
-    }
-
-    public double getLon() {
-        return lon;
-    }
-
-    public MoCityCoordinate setLon(double lon) {
-        this.lon = lon;
+    public MoCityCoordinate setZoneId(String zoneId) {
+        this.zoneId = zoneId;
         return this;
     }
 

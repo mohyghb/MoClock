@@ -21,7 +21,7 @@ import Mo.moclock.MoClock.MoWorldClock.MoCities.MoCityCoordinate;
 public class MoWorldClockManager {
 
     private static final String FILE_NAME = "mwcmfile";
-    private static final String WORLD_CLOCK_FILE = "world_clock.csv";
+    private static final String WORLD_CLOCK_FILE = "citiesWithZoneId.csv";
     public static ArrayList<MoWorldClock> worldClocks = new ArrayList<>();
     public static ArrayList<MoCityCoordinate> cities = new ArrayList<>();
 //    private static List<MoOnWorldClockAvailableObserver> observers = new ArrayList<>();
@@ -63,8 +63,7 @@ public class MoWorldClockManager {
                 String[] elements = mLine.split(",");
                 MoCityCoordinate coordinate = new MoCityCoordinate()
                         .setName(elements[0])
-                        .setLat(Double.parseDouble(elements[1]))
-                        .setLon(Double.parseDouble(elements[2]));
+                        .setZoneId(elements[1]);
                 cities.add(coordinate);
             }
         } catch (Exception e) {

@@ -153,7 +153,6 @@ public class MoAlarmSessionActivity extends AppCompatActivity implements Gesture
         // start listening for voice cancellation
         initSmartVoiceCancel();
 
-
         // cancel the timer of notification timer
         MoNotificationTimerSession.cancelTimer();
     }
@@ -196,7 +195,9 @@ public class MoAlarmSessionActivity extends AppCompatActivity implements Gesture
     private void activateMovementListener(){
         SharedPreferences s = PreferenceManager.getDefaultSharedPreferences(this);
         boolean active = s.getBoolean(getString(R.string.smart_mute),false);
-        if(active){
+        if(active) {
+            if (this.moInformation.getType() == MoInitAlarmSession.Type.TIMER)
+                return;
             this.moMovementListener = new MoMovementListener(this.moInformation.getClock().getVibration().isActive()) {
                 @Override
                 public void onStoppedMoving() {
@@ -396,9 +397,7 @@ public class MoAlarmSessionActivity extends AppCompatActivity implements Gesture
                 this.resetTimer();
                 break;
         }
-
-        //System.out.println("---------------double tap------------------");
-        return false;
+        return true;
     }
 
     @Override

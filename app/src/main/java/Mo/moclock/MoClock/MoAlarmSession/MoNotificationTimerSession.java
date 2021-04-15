@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
 import Mo.moclock.MoDate.MoTimeUtils;
+import Mo.moclock.MoId.MoId;
 import Mo.moclock.MoMusic.MoMusicPlayer;
 import Mo.moclock.MoMusic.MoVolume;
 import Mo.moclock.MoNotification.MoNotificationChannel;
@@ -32,7 +33,7 @@ public class MoNotificationTimerSession extends Service {
     public final static String DESCRIPTION = "Fires a pop up for timer when it finishes";
 
     public final static int REQUEST_CODE = 130;
-    public final static int FORE_GROUND_SERVICE_ID = 10081;
+    public static int FORE_GROUND_SERVICE_ID = 10081;
 
 
     public final static String STOP_ACTION = "Stop";
@@ -78,6 +79,9 @@ public class MoNotificationTimerSession extends Service {
             imp = NotificationCompat.PRIORITY_HIGH;
         }
         MoNotificationChannel.createNotificationChannel(NAME,DESCRIPTION,this,CHANNEL_ID_TIMER,imp);
+        // we need to assign a different id each time to show the
+        // heads up notification (otherwise the system wouldn't do it)
+        FORE_GROUND_SERVICE_ID = MoId.getRandomInt();
         startForeground(FORE_GROUND_SERVICE_ID, notification(this,false));
         super.onCreate();
     }

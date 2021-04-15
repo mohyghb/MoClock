@@ -41,7 +41,6 @@ public class MoInitAlarmSession {
                 break;
             case CLOCK:
                 moInformation.changeTitleIfEmpty("Alarm");
-//
                 Intent i2 = new Intent(context,MoNotificationAlarmSession.class);
                 ContextCompat.startForegroundService(context,i2);
                 break;

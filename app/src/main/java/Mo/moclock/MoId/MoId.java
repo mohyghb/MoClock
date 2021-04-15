@@ -38,6 +38,10 @@ public class MoId implements MoSavable, MoLoadable {
         return randInt(12,1003122340);
     }
 
+    public static int getRandomInt() {
+        return (int)(Math.random() * 100000000);
+    }
+
 
     public static int randInt(int min, int max) {
 

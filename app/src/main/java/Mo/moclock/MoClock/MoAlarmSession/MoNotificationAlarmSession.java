@@ -19,6 +19,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.preference.PreferenceManager;
 
 import Mo.moclock.MoDate.MoDate;
+import Mo.moclock.MoId.MoId;
 import Mo.moclock.MoMusic.MoMusicPlayer;
 import Mo.moclock.MoMusic.MoVolume;
 import Mo.moclock.MoNotification.MoNotificationChannel;
@@ -78,7 +79,9 @@ public class MoNotificationAlarmSession extends Service {
             imp = NotificationCompat.PRIORITY_HIGH;
         }
         MoNotificationChannel.createNotificationChannel(NAME, DESCRIPTION, this, CHANNEL_ID_ALARM, imp);
-        startForeground(FORE_GROUND_SERVICE_ID, notification(this, false));
+        // we need to assign a different id each time to show the
+        // heads up notification (otherwise the system wouldn't do it)
+        startForeground(MoId.getRandomInt(), notification(this, false));
         super.onCreate();
     }
 

@@ -10,7 +10,7 @@
         style="@style/TextAppearance.Compat.Notification.Title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="MoTimer"
+        android:text="Timer"
         android:textColor="@color/notification_text_color" />
 
     <LinearLayout

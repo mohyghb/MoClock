@@ -90,15 +90,15 @@ public class MoPresetRecyclerAdapter extends RecyclerView.Adapter<MoPresetRecycl
             return true;
         });
 
+        Drawable drawable;
         if(presets.get(position).isSelected()){
             // red background
-            Drawable drawable = context.getDrawable(R.drawable.glow_edge_red);
-            holder.linearLayout.setBackground(drawable);
+            drawable = context.getDrawable(R.drawable.glow_edge_red);
         }else{
             // normal background
-            Drawable drawable = context.getDrawable(R.drawable.glow_edge);
-            holder.linearLayout.setBackground(drawable);
+            drawable = context.getDrawable(R.drawable.glow_edge);
         }
+        holder.linearLayout.setBackground(drawable);
     }
 
 

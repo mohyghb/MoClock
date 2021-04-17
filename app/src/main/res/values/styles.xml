@@ -102,4 +102,10 @@
     </style>
 
 
+    <style name="notification_timer_text" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/timer_textSize</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@color/notification_text_color</item>
+    </style>
+
 </resources>

@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.os.IBinder;
 import android.widget.RemoteViews;
 import android.widget.Toast;
@@ -36,7 +37,7 @@ public class MoNotificationAlarmSession extends Service {
     public final static String ALARM_STOPPED = "Alarm stopped";
 
     public final static int REQUEST_CODE = 12;
-    public final static int FORE_GROUND_SERVICE_ID = 10;
+    public static int FORE_GROUND_SERVICE_ID = 10;
 
     public final static int SITUATION_ALARM_STOP = 0;
     public final static int SITUATION_ALARM_SNOOZE = 1;
@@ -81,7 +82,8 @@ public class MoNotificationAlarmSession extends Service {
         MoNotificationChannel.createNotificationChannel(NAME, DESCRIPTION, this, CHANNEL_ID_ALARM, imp);
         // we need to assign a different id each time to show the
         // heads up notification (otherwise the system wouldn't do it)
-        startForeground(MoId.getRandomInt(), notification(this, false));
+        FORE_GROUND_SERVICE_ID = MoId.getRandomInt();
+        startForeground(FORE_GROUND_SERVICE_ID, notification(this, false));
         super.onCreate();
     }
 
@@ -118,53 +120,47 @@ public class MoNotificationAlarmSession extends Service {
                 | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         PendingIntent fullScreenPendingIntent = PendingIntent.getActivity(context, 0,
                 fullScreenIntent, PendingIntent.FLAG_ONE_SHOT);
+
         playSound(context);
         vibrate();
-        RemoteViews notificationLayout = new RemoteViews(context.getPackageName(),
-                R.layout.timer_notification_small);
+
         MoDate date = new MoDate();
-        notificationLayout.setTextViewText(R.id.hour_notification_small, date.getReadableTime());
-        notificationLayout.setTextViewText(R.id.timer_notification_title, moInformation.getTitle());
-        notificationLayout.setTextViewText(R.id.minute_notification_small, "");
-        notificationLayout.setTextViewText(R.id.second_notification_small, "");
-        notificationLayout.setTextViewText(R.id.timer_dot_2, "");
-        notificationLayout.setTextViewText(R.id.timer_dot_1, "");
-        Notification customNotification;
+
+        NotificationCompat.Builder customNotification;
         int importance;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
             importance = NotificationManager.IMPORTANCE_HIGH;
         } else {
             importance = NotificationCompat.PRIORITY_HIGH;
         }
+
+        SharedPreferences s = PreferenceManager.getDefaultSharedPreferences(context);
+        boolean addSnooze = moInformation.getClock().getSnooze().isActive();
+        boolean addStop = !s.getBoolean(context.getString(R.string.smart_alarm_cancel_switch),false);
+
         customNotification = new NotificationCompat.Builder(context, CHANNEL_ID_ALARM)
                 .setSmallIcon(R.drawable.ic_access_alarms_black_24dp)
-                .setContent(notificationLayout)
-                .setStyle(new NotificationCompat.DecoratedCustomViewStyle())
-                .setColorized(true)
-                .setColor(context.getColor(R.color.notification_stopwatch_background))
+                .setContentTitle(context.getString(R.string.generic_alarm))
+                .setContentText(date.getReadableDate() + " " + date.getReadableTime())
                 .setPriority(importance)
                 .setFullScreenIntent(fullScreenPendingIntent, true)
                 .setContentIntent(fullScreenPendingIntent)
                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-                .setOnlyAlertOnce(true)
-                .build();
-        SharedPreferences s = PreferenceManager.getDefaultSharedPreferences(context);
-        boolean addSnooze = moInformation.getClock().getSnooze().isActive();
-        boolean addStop = !s.getBoolean(context.getString(R.string.smart_alarm_cancel_switch),false);
-        String stopAction = addStop?STOP_ACTION:OPEN_ACTION;
-        String snoozeAction = addSnooze?SNOOZE_ACTION:NULL_ACTION;
-        customNotification.actions = new Notification.Action[]{
-                new Notification.Action(R.drawable.ic_add_black_24, STOP_ACTION, getAction(context, stopAction)),
-                new Notification.Action(R.drawable.ic_add_black_24, SNOOZE_ACTION, getAction(context, snoozeAction))
-        };
-        return customNotification;
+                .setOnlyAlertOnce(true);
+
+        if (addStop) {
+            customNotification.addAction(R.drawable.ic_baseline_stop_24, STOP_ACTION, getAction(context, STOP_ACTION));
+        }
+
+        if (addSnooze) {
+            customNotification.addAction(R.drawable.ic_baseline_snooze_24, SNOOZE_ACTION, getAction(context, SNOOZE_ACTION));
+        }
+
+        return customNotification.build();
     }
 
 
     public static PendingIntent getAction(Context context, String action) {
-        if(action.equals(NULL_ACTION)){
-            return null;
-        }
         Intent pendingIntent = new Intent(context, MoAlarmSessionBroadCast.class);
         pendingIntent.setAction(action);
         return PendingIntent.getBroadcast(context, REQUEST_CODE, pendingIntent, PendingIntent.FLAG_UPDATE_CURRENT);

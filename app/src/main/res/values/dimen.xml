@@ -10,6 +10,7 @@
     <dimen name="round_radius">100dp</dimen>
     <dimen name= "big_elevation">5dp</dimen>
     <dimen name= "medium_elevation">3dp</dimen>
+    <dimen name="timer_textSize">14sp</dimen>
 
     <dimen name="tfe_bottom_sheet_corner_radius">15dp</dimen>
     <dimen name="tfe_bottom_sheet_top_padding">8dp</dimen>

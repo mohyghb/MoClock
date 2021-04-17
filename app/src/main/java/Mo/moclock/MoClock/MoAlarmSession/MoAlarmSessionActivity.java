@@ -226,13 +226,12 @@ public class MoAlarmSessionActivity extends AppCompatActivity implements Gesture
 
 
     private void snoozeAlarm() {
-        if(moInformation.getClock().getSnooze().isActive()){
+        if (moInformation.getClock().getSnooze().isActive()) {
             snoozed = true;
             stopAlarm();
             MoAlarmClockManager.getInstance().snoozeAlarm(moInformation.getId(),5,this);
-        }else{
+        } else {
             Toast.makeText(this, "Snooze is not available", Toast.LENGTH_SHORT).show();
-            stopAlarmConsiderSmart();
         }
     }
 

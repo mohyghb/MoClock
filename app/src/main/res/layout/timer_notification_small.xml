@@ -25,50 +25,40 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="sans-serif-light"
-            android:text="00"
-            android:textColor="@color/notification_text_color"
-            android:textSize="24sp" />
+            style="@style/notification_timer_text"
+            android:text="00"/>
 
         <TextView
             android:id="@+id/timer_dot_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="sans-serif-light"
-            android:text=":"
-            android:textColor="@color/notification_text_color"
-            android:textSize="24sp" />
+            style="@style/notification_timer_text"
+            android:text=":" />
 
         <TextView
             android:id="@+id/minute_notification_small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="sans-serif-light"
-            android:text="00"
-            android:textColor="@color/notification_text_color"
-            android:textSize="24sp" />
+            style="@style/notification_timer_text"
+            android:text="00" />
 
         <TextView
             android:id="@+id/timer_dot_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="sans-serif-light"
-            android:text=":"
-            android:textColor="@color/notification_text_color"
-            android:textSize="24sp" />
+            style="@style/notification_timer_text"
+            android:text=":" />
 
         <TextView
             android:id="@+id/second_notification_small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="sans-serif-light"
-            android:text="00"
-            android:textColor="@color/notification_text_color"
-            android:textSize="24sp" />
+            style="@style/notification_timer_text"
+            android:text="00"/>
     </LinearLayout>
 
 </LinearLayout>

@@ -9,7 +9,6 @@
 
         <item name="android:navigationBarColor">@color/MaterialDark</item>
         <item name="imageButtonStyle">@style/MoImageButton_Style_Dark</item>
-        <item name="android:windowAnimationStyle">@style/WindowAnimationStyle</item>
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
         <item name="materialCardViewStyle">@style/MoCardStyle_Dark</item>
 

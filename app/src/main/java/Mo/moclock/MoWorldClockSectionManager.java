@@ -2,6 +2,9 @@ package Mo.moclock;
 
 import android.app.Activity;
 import android.os.Handler;
+import android.transition.ChangeBounds;
+import android.transition.Fade;
+import android.transition.TransitionSet;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -84,8 +87,8 @@ public class MoWorldClockSectionManager implements MoOnBackPressed {
     }
 
     private void initTitleSubtitle() {
-        this.title = activity.findViewById(R.id.mo_lib_title);
-        this.subTitle = activity.findViewById(R.id.mo_lib_subtitle);
+        this.title = root.findViewById(R.id.mo_lib_title);
+        this.subTitle = root.findViewById(R.id.mo_lib_subtitle);
         this.subTitle.setText(R.string.worldClock_localTime);
     }
 
@@ -96,7 +99,9 @@ public class MoWorldClockSectionManager implements MoOnBackPressed {
                 .addNormalViews(toolBar.getRightButton(), activity.getBottomNavigation(), subTitle)
                 .addUnNormalViews(toolBar.getCheckBox(), toolBar.getMiddleButton())
                 .setOnEmptySelectionListener(() -> selectable.removeAction())
-                .setOnCanceledListener(this::updateTimeTitle);
+                .setOnCanceledListener(this::updateTimeTitle)
+                .setTransitionIn(new TransitionSet().addTransition(new ChangeBounds()).addTransition(new Fade()))
+                .setTransitionOut(new TransitionSet().addTransition(new ChangeBounds()).addTransition(new Fade()));
     }
 
     private void initRecyclerView() {

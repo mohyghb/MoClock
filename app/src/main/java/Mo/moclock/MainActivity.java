@@ -66,16 +66,18 @@ public class MainActivity extends AppCompatActivity {
         this.moStopWatchManager.setStopWatch_linear_layout(findViewById(R.id.linear_stopwatch_layout));
         this.moWorldClockSectionManager.root = findViewById(R.id.layout_worldClock);
         this.moTimerSectionManager.timer_liner_layout = findViewById(R.id.linear_timer_layout);
-        this.initAlarmSection();
         this.bottomDeleteBar = findViewById(R.id.delete_mode_preset);
         this.moTimerSectionManager.initTimerSection();
         this.moStopWatchManager.initStopWatchSection();
         this.initBottomNavigation();
+        this.initAlarmSection();
         moWorldClockSectionManager.initWorldClockSection();
         this.initSmartShakeListeners();
         moTimerSectionManager.closeTimerService();
         // adding all the animations to a sparse array
         MoTheme.updateTheme(this);
+
+        switchSection();
     }
 
 
@@ -125,7 +127,6 @@ public class MainActivity extends AppCompatActivity {
                     return false;
             }
         });
-        switchSection();
     }
 
     private void switchSection() {
@@ -149,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
     private void changeLayout(boolean alarm, boolean stopwatch, boolean timer, boolean world, boolean setSelected) {
         this.moStopWatchManager.getStopWatch_linear_layout().setVisibility(stopwatch ? View.VISIBLE : View.INVISIBLE);
         this.moTimerSectionManager.timer_liner_layout.setVisibility(timer ? View.VISIBLE : View.INVISIBLE);
-        this.moAlarmSectionManager.alarm_linear_layout.setVisibility(alarm ? View.VISIBLE : View.INVISIBLE);
+        this.moAlarmSectionManager.root.setVisibility(alarm ? View.VISIBLE : View.INVISIBLE);
         this.moWorldClockSectionManager.root.setVisibility(world ? View.VISIBLE : View.INVISIBLE);
         if (!setSelected) {
             return;
@@ -186,8 +187,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (MoAlarmClock.isInDeleteMode) {
-            moAlarmSectionManager.cancelDeleteAlarmMode();
+        if (moAlarmSectionManager.onBackPressed()) {
+           // we have consumed the back press there, so we can ignore it here
         } else if (MoTimerPreset.isInDeleteMode) {
             moTimerSectionManager.cancelDeleteAlarmMode();
         } else if (moWorldClockSectionManager.onBackPressed()) {
@@ -212,7 +213,6 @@ public class MainActivity extends AppCompatActivity {
      */
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
-        moAlarmSectionManager.onWindowFocusChanged();
         moTimerSectionManager.onWindowFocusChanged();
         super.onWindowFocusChanged(hasFocus);
         if (!hasFocus) {

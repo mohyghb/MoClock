@@ -30,7 +30,7 @@
     <string name="add_alarm">add alarm</string>
     <string name="new_alarm">New Alarm</string>
     <string name="add_city">add time zone</string>
-    <string name="search_city_name">Search a timezone</string>
+    <string name="search_city_name">Search a city…</string>
 
     <string name="all">Select all</string>
 
@@ -318,5 +318,7 @@
     <string name="worldClockAdd_success_message">%s was added to your world clocks!</string>
     <string name="worldClock_localTime">Local Time</string>
 
+
+    <!-- Alarm Clock Constants -->
 
 </resources>

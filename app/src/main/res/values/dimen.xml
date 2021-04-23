@@ -32,4 +32,6 @@
     <dimen name="cityView_horizontalMargin">12dp</dimen>
     <dimen name="cityView_verticalMargin">50dp</dimen>
 
+    <item name="toolbar_height_percentage" format="float" type="dimen">0.37</item>
+
 </resources>

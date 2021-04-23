@@ -99,7 +99,9 @@ public class MoNotificationAlarmSession extends Service {
         if (volumeTimer != null) {
             volumeTimer.cancel();
         }
-        moMusicPlayer.onDestroy(this);
+        if (moMusicPlayer != null) {
+            moMusicPlayer.onDestroy(this);
+        }
         MoVibration.cancel();
         MoVibration.vibrateOnce(this,200);
         MoAlarmWakeLock.releaseCpuLock();

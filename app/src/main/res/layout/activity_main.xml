@@ -224,164 +224,20 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <LinearLayout
-        android:id="@+id/linear_alarm_layout"
+    <include
+        layout="@layout/content_alarm_clocks"
+        android:id="@+id/layout_alarmClock"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:orientation="vertical"
-        android:weightSum="1"
         app:layout_constraintBottom_toTopOf="@id/bottom_navigation_card_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible">
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.25"
-            tools:visibility="visible">
-
-            <CheckBox
-                android:id="@+id/select_all_alarms"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="8dp"
-                android:fontFamily="sans-serif-light"
-                android:text="@string/all"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <LinearLayout
-                android:id="@+id/linearLayout11"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="4dp"
-                android:orientation="horizontal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent">
-
-
-                <ImageButton
-                    android:id="@+id/add_alarm_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:padding="4dp"
-                    android:src="@drawable/ic_add_black_30dp" />
-
-                <ImageButton
-                    android:id="@+id/settings_alarm"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:padding="4dp"
-                    android:src="@drawable/ic_more_vert_black_30dp" />
-
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/title_alarm_app_name"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-thin"
-                android:forceDarkAllowed="false"
-                android:gravity="center"
-                android:text="@string/app_name"
-                android:textSize="60sp"
-                android:textStyle="normal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:visibility="visible" />
-
-            <TextView
-                android:id="@+id/alarm_sub_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-light"
-                android:text="Next alarm in 2 hrs "
-                app:layout_constraintEnd_toEndOf="@+id/title_alarm_app_name"
-                app:layout_constraintStart_toStartOf="@+id/title_alarm_app_name"
-                app:layout_constraintTop_toBottomOf="@+id/title_alarm_app_name" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/card_alarm_list_view"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.75"
-            android:background="@color/transparent"
-            android:backgroundTint="@color/transparent"
-            app:cardBackgroundColor="@color/transparent"
-            app:cardCornerRadius="@dimen/card_corners_top"
-            app:cardElevation="0dp">
-
-            <ListView
-                android:id="@+id/alarms_list_view"
-                style="@android:style/Widget.ListView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="2dp"
-                android:layout_weight="0.75"
-                android:divider="@null"
-                android:elevation="0dp"
-                android:scrollbarTrackVertical="@null"
-                android:scrollbars="none"
-                android:visibility="visible">
-
-            </ListView>
-        </androidx.cardview.widget.CardView>
-
-        <LinearLayout
-            android:id="@+id/linear_empty_alarm_layout"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_gravity="center"
-            android:layout_weight="0.75"
-            android:foregroundGravity="center"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:weightSum="2">
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_gravity="center"
-                android:layout_weight="2"
-                android:foregroundGravity="center"
-                android:gravity="center"
-                android:padding="36dp"
-                android:text="@string/empty_alarms_hint"
-                android:textAlignment="center" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/alarm_empty_list_view"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center|bottom"
-                android:layout_margin="8dp"
-                android:contentDescription="@string/add_alarm"
-
-
-                android:text="@string/add_alarm"
-                android:visibility="visible"
-                app:icon="@drawable/ic_add_black_24" />
-        </LinearLayout>
-    </LinearLayout>
+        tools:visibility="gone" />
 
     <include
-        android:id="@+id/layout_worldClock"
         layout="@layout/content_world_clock"
+        android:id="@+id/layout_worldClock"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/bottom_navigation_card_view"

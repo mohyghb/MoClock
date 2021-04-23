@@ -29,7 +29,7 @@ public class MoCityCoordinate implements MoSearchableItem {
 
     @Override
     public boolean updateSearchable(Object... objects) {
-        return MoSearchableUtils.isSearchable(true, objects, this.name);
+        return MoSearchableUtils.isSearchable(false, objects, this.name);
     }
 
     @Override

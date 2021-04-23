@@ -29,4 +29,8 @@
     <color name="notification_stopwatch_background">@color/colorPrimary_DarkMode</color>
     <color name="notification_text_color">@android:color/black</color>
 
+
+    <color name="selected_item_color">@color/colorPrimary</color>
+    <color name="selected_item_color_overlay">#0700897B</color>
+
 </resources>

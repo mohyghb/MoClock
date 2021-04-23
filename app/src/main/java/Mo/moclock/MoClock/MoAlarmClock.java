@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.view.View;
+import android.webkit.ValueCallback;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,6 +16,7 @@ import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.moofficial.moessentials.MoEssentials.MoFileManager.MoIO.MoFile;
 import com.moofficial.moessentials.MoEssentials.MoFileManager.MoIO.MoLoadable;
 import com.moofficial.moessentials.MoEssentials.MoFileManager.MoIO.MoSavable;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSelectable.MoSelectableInterface.MoSelectableItem;
 
 import java.util.Calendar;
 import java.util.Objects;
@@ -32,12 +34,7 @@ import Mo.moclock.MoVibration.MoVibration;
 import Mo.moclock.MoVibration.MoVibrationTypes;
 import Mo.moclock.R;
 
-public class MoAlarmClock implements MoSavable, MoViewDisplayable, MoLoadable {
-
-
-
-    private static final String SEP_KEY = "&fosp23dop&";
-
+public class MoAlarmClock implements MoSavable, MoViewDisplayable, MoLoadable, MoSelectableItem {
 
     private MoId id;
     private String title;
@@ -61,8 +58,9 @@ public class MoAlarmClock implements MoSavable, MoViewDisplayable, MoLoadable {
 
 
     private MoAlarmListView arrayAdapter;
+    private MoAlarmClockListener listener;
 
-    private boolean isSelected;
+    private boolean isSelected = false;
     public static boolean isInDeleteMode = false;
 
     public MoAlarmClock(){
@@ -76,6 +74,10 @@ public class MoAlarmClock implements MoSavable, MoViewDisplayable, MoLoadable {
         this.pathToMusic = true;
     }
 
+    public MoAlarmClock setListener(MoAlarmClockListener listener) {
+        this.listener = listener;
+        return this;
+    }
 
     public int getId() {
         return id.getId();
@@ -125,15 +127,14 @@ public class MoAlarmClock implements MoSavable, MoViewDisplayable, MoLoadable {
         return repeating;
     }
 
-    public boolean isSelected() {
-        return isSelected;
-    }
-
     public void setRepeating(MoRepeating repeating) {
         this.repeating = repeating;
         if(!this.repeating.isEmpty()){
             // if repeating is not empty we need to change the date
             this.dateTime.setCalendar(MoDate.getNextOccuring(this.repeating.getRepeating(),this.dateTime.getCalendar()));
+            if (this.listener != null) {
+                this.listener.onRepeatingChanged();
+            }
         }
     }
 
@@ -151,6 +152,13 @@ public class MoAlarmClock implements MoSavable, MoViewDisplayable, MoLoadable {
 
     public void setActive(boolean active) {
         isActive = active;
+        if (listener != null) {
+            listener.onActiveChanged(isActive);
+        }
+    }
+
+    public void setActiveWithoutInvokingListener(boolean active) {
+        isActive = active;
     }
 
 
@@ -164,11 +172,6 @@ public class MoAlarmClock implements MoSavable, MoViewDisplayable, MoLoadable {
 
     public MoDate getDate(){
         return this.dateTime;
-    }
-
-    public void updateAdapter(){
-        arrayAdapter.notifyDataSetChanged();
-
     }
 
     public void snooze(Context context){
@@ -224,8 +227,6 @@ public class MoAlarmClock implements MoSavable, MoViewDisplayable, MoLoadable {
 
         clockLayoutView = MoInflaterView.inflate(R.layout.card_view_alarm,c);
         assert clockLayoutView != null;
-        View divider = clockLayoutView.findViewById(R.id.clock_divider);
-        divider.setVisibility(View.INVISIBLE);
 
 
         initTexts();
@@ -266,7 +267,6 @@ public class MoAlarmClock implements MoSavable, MoViewDisplayable, MoLoadable {
     private void initSwitches(Context c) {
         active = clockLayoutView.findViewById(R.id.is_active_switch);
         active.setChecked(this.isActive);
-        active.setOnCheckedChangeListener((compoundButton, b) -> onSwitchChanged(c, active));
     }
 
     private void initTexts() {
@@ -324,23 +324,6 @@ public class MoAlarmClock implements MoSavable, MoViewDisplayable, MoLoadable {
         MoTextInput.setColorCondition(isActive,MoColor.color_text_on_highlight,MoColor.color_text_disabled,date,c);
         MoTextInput.setColorCondition(isActive,MoColor.color_text_on_highlight,MoColor.color_text_disabled,repeatingDays,c);
         MoTextInput.setColorCondition(isActive,MoColor.color_text_on_normal,MoColor.color_text_disabled,titleTextView,c);
-    }
-
-    private void onSwitchChanged(Context c, SwitchMaterial active) {
-        this.isActive = active.isChecked();
-        if(this.isActive){
-            // activate it
-            this.activate(c);
-        } else {
-            try {
-                MoAlarmClockManager.getInstance().cancelAlarm(this.getId(),c);
-            } catch (MoEmptyAlarmException e) {
-                e.printStackTrace();
-            }
-        }
-
-        final Handler handler = new Handler();
-        handler.postDelayed(this::updateAdapter, 200);
     }
 
 
@@ -407,6 +390,17 @@ public class MoAlarmClock implements MoSavable, MoViewDisplayable, MoLoadable {
         this.pathToMusic = Boolean.parseBoolean(components[7]);
     }
 
+    @Override
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    @Override
+    public boolean onSelect() {
+        this.isSelected = !this.isSelected;
+        return this.isSelected;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -420,5 +414,10 @@ public class MoAlarmClock implements MoSavable, MoViewDisplayable, MoLoadable {
     @Override
     public int hashCode() {
         return Objects.hash(dateTime,repeating.getRepeating());
+    }
+
+    public interface MoAlarmClockListener {
+        void onActiveChanged(boolean isActive);
+        void onRepeatingChanged();
     }
 }

@@ -3,7 +3,9 @@ package Mo.moclock;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
@@ -54,7 +56,6 @@ public class MoCreateAlarmActivity extends AppCompatActivity {
     List<Chip> chips;
 
 
-
     TextInputEditText alarmName;
 
 
@@ -92,22 +93,22 @@ public class MoCreateAlarmActivity extends AppCompatActivity {
         this.timePicker = findViewById(R.id.time_picker_alarm);
         this.timePicker.setIs24HourView(true);
         this.myCalendar = Calendar.getInstance();
-        this.myCalendar.set(Calendar.SECOND,0);
+        this.myCalendar.set(Calendar.SECOND, 0);
         initPrefMode();
         initChips();
         initEditMode();
     }
 
     // loads the preferences of the user inside
-    private void initPrefMode(){
+    private void initPrefMode() {
         SharedPreferences s = PreferenceManager.getDefaultSharedPreferences(this);
-        this.snooze.setChecked(s.getBoolean(getString(R.string.snooze_general),true));
-        this.vibration.setChecked(s.getBoolean(getString(R.string.vibration_general),true));
-        this.music.setChecked(s.getBoolean(getString(R.string.music_general),true));
+        this.snooze.setChecked(s.getBoolean(getString(R.string.snooze_general), true));
+        this.vibration.setChecked(s.getBoolean(getString(R.string.vibration_general), true));
+        this.music.setChecked(s.getBoolean(getString(R.string.music_general), true));
     }
 
-    private void initEditMode(){
-        if(isEditMode()){
+    private void initEditMode() {
+        if (isEditMode()) {
             // time
             this.timePicker.setMinute(clock.getDateTime().get(Calendar.MINUTE));
             this.timePicker.setHour(clock.getDateTime().get(Calendar.HOUR_OF_DAY));
@@ -125,10 +126,10 @@ public class MoCreateAlarmActivity extends AppCompatActivity {
 
             // if activated chips are not empty
             // then show the days
-            if(this.weekdaysChip.getCheckedChipIds().size()>0){
+            if (this.weekdaysChip.getCheckedChipIds().size() > 0) {
                 //List<String> texts = getTextChips();
                 updateDateTextView(MoRepeating.readableFormat(this.getPositionChips()));
-            }else{
+            } else {
                 updateDateTextView(MoDate.getReadableDate(this.myCalendar));
             }
             // then this alarm is already created just change things
@@ -136,12 +137,12 @@ public class MoCreateAlarmActivity extends AppCompatActivity {
         }
     }
 
-    private boolean isEditMode(){
+    private boolean isEditMode() {
         return clock != null;
     }
 
 
-    private void initChips(){
+    private void initChips() {
         this.sunday = findViewById(R.id.Sunday_Chip);
         this.monday = findViewById(R.id.Monday_Chip);
         this.tuesday = findViewById(R.id.Tuesday_Chip);
@@ -160,32 +161,32 @@ public class MoCreateAlarmActivity extends AppCompatActivity {
         this.chips.add(saturday);
 
         CompoundButton.OnCheckedChangeListener listener = (compoundButton, b) -> {
-            if(this.weekdaysChip.getCheckedChipIds().size()>0){
+            if (this.weekdaysChip.getCheckedChipIds().size() > 0) {
                 //List<String> texts = getTextChips();
                 updateDateTextView(MoRepeating.readableFormat(this.getPositionChips()));
-            }else{
+            } else {
                 updateDateTextView(MoDate.getReadableDate(this.myCalendar));
             }
 
 
         };
 
-        for(Chip c: this.chips){
+        for (Chip c : this.chips) {
             c.setOnCheckedChangeListener(listener);
         }
     }
 
     private List<String> getTextChips() {
         List<String> texts = new ArrayList<>();
-        if(this.weekdaysChip.getCheckedChipIds().size() == 7){
+        if (this.weekdaysChip.getCheckedChipIds().size() == 7) {
             // every day is checked
             texts.add("Everyday");
             return texts;
         }
-        for(Integer id: this.weekdaysChip.getCheckedChipIds()){
-            for(Chip c: this.chips){
-                if(c.getId() == id){
-                    texts.add(c.getText().charAt(0)+"");
+        for (Integer id : this.weekdaysChip.getCheckedChipIds()) {
+            for (Chip c : this.chips) {
+                if (c.getId() == id) {
+                    texts.add(c.getText().charAt(0) + "");
                     break;
                 }
             }
@@ -195,10 +196,10 @@ public class MoCreateAlarmActivity extends AppCompatActivity {
 
     private List<Integer> getPositionChips() {
         List<Integer> positions = new ArrayList<>();
-        for(Integer id: this.weekdaysChip.getCheckedChipIds()){
+        for (Integer id : this.weekdaysChip.getCheckedChipIds()) {
             int index = 0;
-            for(Chip c: this.chips){
-                if(c.getId() == id){
+            for (Chip c : this.chips) {
+                if (c.getId() == id) {
                     positions.add(index);
                     break;
                 }
@@ -208,14 +209,14 @@ public class MoCreateAlarmActivity extends AppCompatActivity {
         return positions;
     }
 
-    private void activatePositionChips(List<Integer> index){
-        for(Integer i: index){
+    private void activatePositionChips(List<Integer> index) {
+        for (Integer i : index) {
             activateChip(i);
         }
     }
 
-    private void activateChip(int index){
-        switch (index){
+    private void activateChip(int index) {
+        switch (index) {
             case Calendar.SUNDAY:
                 this.sunday.setChecked(true);
                 break;
@@ -245,16 +246,16 @@ public class MoCreateAlarmActivity extends AppCompatActivity {
     }
 
 
-    private void setUpTime(){
-        this.myCalendar.set(Calendar.MINUTE,this.timePicker.getMinute());
-        this.myCalendar.set(Calendar.HOUR_OF_DAY,this.timePicker.getHour());
-        this.myCalendar.set(Calendar.SECOND,0);
-        while(this.myCalendar.before(Calendar.getInstance()) && this.getPositionChips().isEmpty()){
-            this.myCalendar.add(Calendar.DATE,1);
+    private void setUpTime() {
+        this.myCalendar.set(Calendar.MINUTE, this.timePicker.getMinute());
+        this.myCalendar.set(Calendar.HOUR_OF_DAY, this.timePicker.getHour());
+        this.myCalendar.set(Calendar.SECOND, 0);
+        while (this.myCalendar.before(Calendar.getInstance()) && this.getPositionChips().isEmpty()) {
+            this.myCalendar.add(Calendar.DATE, 1);
         }
     }
 
-    private void setListeners(){
+    private void setListeners() {
         DatePickerDialog.OnDateSetListener date = (view, year, monthOfYear, dayOfMonth) -> {
             // TODO Auto-generated method stub
             myCalendar.set(Calendar.YEAR, year);
@@ -268,18 +269,16 @@ public class MoCreateAlarmActivity extends AppCompatActivity {
                 myCalendar.get(Calendar.DAY_OF_MONTH));
         // making sure that the user can not choose a timer before the current time
         dialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
-        this.datePicker.setOnClickListener((v)-> dialog.show());
+        this.datePicker.setOnClickListener((v) -> dialog.show());
 
 
-        this.save.setOnClickListener((v)->{
+        this.save.setOnClickListener((v) -> {
             // save alarm
             save();
         });
 
 
-        this.cancel.setOnClickListener((v)-> finish());
-
-
+        this.cancel.setOnClickListener((v) -> finish());
 
 
     }
@@ -289,20 +288,19 @@ public class MoCreateAlarmActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         // removing the reference of editing
-        if(clock!=null){
-            clock.updateAdapter();
+        if (clock != null) {
             clock = null;
         }
 
     }
 
-    private void save(){
+    private void save() {
         this.setUpTime();
-        MoAlarmClock c ;
-        if(isEditMode()){
-           c = clock;
-           // this alarm already has an id
-        }else{
+        MoAlarmClock c;
+        if (isEditMode()) {
+            c = clock;
+            // this alarm already has an id
+        } else {
             c = new MoAlarmClock();
             // setting an id for this which is unique
             c.setId(MoAlarmClockManager.getInstance().getNextId());
@@ -311,24 +309,25 @@ public class MoCreateAlarmActivity extends AppCompatActivity {
         c.setDateTime(this.myCalendar);
         c.setActive(true);
         c.setSnooze(new MoSnooze(this, this.snooze.isChecked()));
-        c.setVibration(new MoVibration(MoVibrationTypes.BASIC,this.vibration.isChecked()));
+        c.setVibration(new MoVibration(MoVibrationTypes.BASIC, this.vibration.isChecked()));
         c.setPathToMusic(this.music.isChecked());
         c.setRepeating(new MoRepeating(this.getPositionChips()));
-        if(isEditMode()){
+        if (isEditMode()) {
             //just update/save the changes also activate since this might be earlier than others
             MoAlarmClockManager.getInstance().saveActivate(this);
-            Toast.makeText(this,"Alarm changed to "+
-                    c.getDate().getReadableDifference(Calendar.getInstance()),Toast.LENGTH_LONG).show();
-        }else{
+            Toast.makeText(this, "Alarm changed to " +
+                    c.getDate().getReadableDifference(Calendar.getInstance()), Toast.LENGTH_LONG).show();
+        } else {
             // add alarm if not editing
-            MoAlarmClockManager.getInstance().addAlarm(c,this);
+            MoAlarmClockManager.getInstance().addAlarm(c, this);
         }
 
         finish();
     }
 
-
-
+    public static void startActivityForResult(Activity a,int code) {
+        a.startActivityForResult(new Intent(a, MoCreateAlarmActivity.class), code);
+    }
 
 
 }

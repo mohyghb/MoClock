@@ -18,6 +18,7 @@ import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViews.MoBars.MoSea
 import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViews.MoBars.MoToolBar;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViews.MoNormal.MoCardRecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import Mo.moclock.MoClock.MoWorldClock.MoCities.MoCityCoordinate;
@@ -42,7 +43,6 @@ public class MoAddWorldClockActivity extends MoSmartActivity implements MoCityRe
     @Override
     protected void init() {
         setTitle(R.string.worldClockAdd_title);
-        setSubTitle(R.string.worldClockAdd_subtitle);
         initRecyclerView();
         setupToolbars();
         setupSearchable();
@@ -106,7 +106,8 @@ public class MoAddWorldClockActivity extends MoSmartActivity implements MoCityRe
                 .setCancelSearch(this.searchBar.getLeftButton())
                 .setSearchTextView(this.searchBar.getEditText())
                 .setClearSearch(this.searchBar.getRightButton())
-                .setOnSearchFinished(list -> adapter.update(this, (List<MoCityCoordinate>) list))
+                .setShowNothingWhenSearchEmpty(true)
+                .setOnSearchFinished(list -> adapter.update(this, (List<MoCityCoordinate>) list, getGroupRootView()))
                 .addNormalViews(this.mainToolbar)
                 .addUnNormalViews(this.searchBar);
     }
@@ -116,6 +117,7 @@ public class MoAddWorldClockActivity extends MoSmartActivity implements MoCityRe
         mainToolbar.hideMiddle().setRightIcon(R.drawable.ic_baseline_search_24).setLeftOnClickListener((v) -> onBackPressed());
 
         searchBar = new MoSearchBar(this);
+        searchBar.setSearchHint(R.string.search_city_name);
 
         l.setupMultipleToolbars(mainToolbar, mainToolbar, searchBar);
         syncTitle(mainToolbar.getTitle());
@@ -123,7 +125,7 @@ public class MoAddWorldClockActivity extends MoSmartActivity implements MoCityRe
 
     private void initRecyclerView() {
         cardRecyclerView = new MoCardRecyclerView(this);
-        adapter = new MoCityRecyclerAdapter(this, MoWorldClockManager.cities, this);
+        adapter = new MoCityRecyclerAdapter(this, new ArrayList<>(), this);
         recyclerView = MoRecyclerUtils.get(cardRecyclerView.getRecyclerView(), this.adapter).setMaxHeight(getHeightPixels());
         recyclerView.show();
         l.linearNested.addView(this.cardRecyclerView);

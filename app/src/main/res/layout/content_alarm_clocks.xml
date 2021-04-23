@@ -1,51 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/world_clock_layout"
+    android:id="@+id/layout_alarmClocks_rootConstraint"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:visibility="visible">
+    android:layout_height="match_parent">
 
     <include
+        android:id="@+id/layout_alarmClocks_collapsingToolbar"
         layout="@layout/mo_title_subtitle"
-        android:id="@+id/layout_worldClock_titleSubtitle"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintHeight_percent="@dimen/toolbar_height_percentage"
         app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintHeight_percent="@dimen/toolbar_height_percentage"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
     <com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViews.MoBars.MoToolBar
-        android:id="@+id/toolbar_worldClock_main"
+        android:id="@+id/toolbar_alarmClocks_main"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintVertical_bias="1.0"
-        app:layout_constraintTop_toTopOf="@id/layout_worldClock_titleSubtitle"
-        app:layout_constraintBottom_toBottomOf="@id/layout_worldClock_titleSubtitle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintTop_toTopOf="@id/layout_alarmClocks_collapsingToolbar"
+        app:layout_constraintStart_toStartOf="@id/layout_alarmClocks_collapsingToolbar"
+        app:layout_constraintEnd_toEndOf="@id/layout_alarmClocks_collapsingToolbar"
+        app:layout_constraintBottom_toBottomOf="@id/layout_alarmClocks_collapsingToolbar"/>
 
     <com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViews.MoNormal.MoCardRecyclerView
-        android:id="@+id/cardRecycler_worldClock_list"
+        android:id="@+id/card_alarmClocks_recycler"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_worldClock_main"
+        app:layout_constraintTop_toBottomOf="@id/layout_alarmClocks_collapsingToolbar"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <include
-        android:id="@+id/layout_worldClock_emptyView"
+        layout="@layout/content_empty_view_alarms"
+        android:id="@+id/layout_alarmClocks_emptyView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        layout="@layout/content_empty_view_world_clock"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_worldClock_main"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/layout_alarmClocks_collapsingToolbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>

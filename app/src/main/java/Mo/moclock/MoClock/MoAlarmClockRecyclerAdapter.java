@@ -41,10 +41,7 @@ public class MoAlarmClockRecyclerAdapter extends
     @NonNull
     @Override
     public MoAlarmClockViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = MoInflaterView.inflate(R.layout.card_view_alarm, parent, context);
-//        LayoutInflater inflater = (LayoutInflater)context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-//
-//        View v = inflater.inflate(R.layout.card_view_alarm, parent, false);
+        View v = MoInflaterView.inflate(R.layout.modern_alarm_card, parent, context);
         return new MoAlarmClockViewHolder(v, listener);
     }
 
@@ -91,7 +88,7 @@ public class MoAlarmClockRecyclerAdapter extends
 
     private void updateEnabledSwitch(@NonNull MoAlarmClockViewHolder holder) {
         if (isSelecting()) {
-            holder.enabled.setVisibility(View.GONE);
+            holder.enabled.setVisibility(View.INVISIBLE);
         } else {
             holder.enabled.setVisibility(View.VISIBLE);
         }

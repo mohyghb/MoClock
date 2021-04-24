@@ -11,6 +11,8 @@
     <dimen name= "big_elevation">5dp</dimen>
     <dimen name= "medium_elevation">3dp</dimen>
     <dimen name="timer_textSize">14sp</dimen>
+    <dimen name="card_alarm_viewMargin">28dp</dimen>
+    <dimen name="card_alarm_viewMarginGone">12dp</dimen>
 
     <dimen name="tfe_bottom_sheet_corner_radius">15dp</dimen>
     <dimen name="tfe_bottom_sheet_top_padding">8dp</dimen>
@@ -29,7 +31,7 @@
 
     <item name="mo_fade_init_value" format="float" type="dimen">0.3</item>
 
-    <dimen name="cityView_horizontalMargin">12dp</dimen>
+    <dimen name="cityView_horizontalMargin">24dp</dimen>
     <dimen name="cityView_verticalMargin">50dp</dimen>
 
     <item name="toolbar_height_percentage" format="float" type="dimen">0.37</item>

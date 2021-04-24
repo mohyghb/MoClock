@@ -106,7 +106,9 @@ public class MoAlarmSectionManager implements MoAlarmClockRecyclerAdapter.MoOnAc
                 this.toolBar.showMiddle();
             }
         });
-        this.recyclerView = MoRecyclerUtils.get(cardRecyclerView.getRecyclerView(), recyclerAdapter).show();
+        this.recyclerView = MoRecyclerUtils.get(cardRecyclerView.getRecyclerView(), recyclerAdapter)
+                .setLayoutManagerType(MoRecyclerView.STAGGERED_GRID_LAYOUT_MANAGER)
+                .show();
         this.recyclerAdapter.notifyEmptyState();
         setSubtitle();
 

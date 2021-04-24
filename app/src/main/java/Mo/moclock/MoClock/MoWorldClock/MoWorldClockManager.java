@@ -24,29 +24,6 @@ public class MoWorldClockManager {
     private static final String WORLD_CLOCK_FILE = "citiesWithZoneId.csv";
     public static ArrayList<MoWorldClock> worldClocks = new ArrayList<>();
     public static ArrayList<MoCityCoordinate> cities = new ArrayList<>();
-//    private static List<MoOnWorldClockAvailableObserver> observers = new ArrayList<>();
-
-    public static void init(Context context) {
-//        new Thread() {
-//            @Override
-//            public void run() {
-//                MoWorldClockManager.loadCities(context);
-//                observers.forEach(MoOnWorldClockAvailableObserver::onWorldClockAvailable);
-//            }
-//        }.start();
-    }
-
-    public static void subscribe(MoOnWorldClockAvailableObserver observer) {
-//        if (!observers.contains(observer)) {
-//            observers.add(observer);
-//        }
-//        MoLog.print("(sub) observers size = " + observers.size());
-    }
-
-    public static void unsubscribe(MoOnWorldClockAvailableObserver observer) {
-//        observers.remove(observer);
-//        MoLog.print("(unsub) observers size = " + observers.size());
-    }
 
     /**
      * loads in the cities that we have along with their coordinates into a list so that it can be
@@ -69,6 +46,20 @@ public class MoWorldClockManager {
         } catch (Exception e) {
             // ignore
         }
+    }
+
+    /**
+     * returns true if we already have this world clock added in their collection
+     * @param name
+     * @return
+     */
+    public static boolean has(String name) {
+        for (MoWorldClock c: worldClocks) {
+            if (c.getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

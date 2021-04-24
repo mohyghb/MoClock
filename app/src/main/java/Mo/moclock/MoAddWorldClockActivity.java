@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.moofficial.moessentials.MoEssentials.MoLog.MoLog;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoActivity.MoSmartActivity;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSearchable.MoSearchable;
@@ -35,7 +36,6 @@ public class MoAddWorldClockActivity extends MoSmartActivity implements MoCityRe
     private MoCardRecyclerView cardRecyclerView;
     private MoRecyclerView recyclerView;
     private MoCityRecyclerAdapter adapter;
-    private MoToolBar mainToolbar;
     private MoSearchBar searchBar;
     private MoSearchable searchable;
     private ProgressBar progressBar;
@@ -77,23 +77,15 @@ public class MoAddWorldClockActivity extends MoSmartActivity implements MoCityRe
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        MoWorldClockManager.subscribe(this);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        MoWorldClockManager.unsubscribe(this);
-    }
-
-    @Override
     public void onCitySelected(MoCityCoordinate cityCoordinate) {
-        MoLog.print(cityCoordinate.getName());
-        MoWorldClockManager.add(this, MoWorldClock.from(cityCoordinate));
-        Toast.makeText(this, getString(R.string.worldClockAdd_success_message, cityCoordinate.getName()), Toast.LENGTH_SHORT).show();
-        finish();
+        if (MoWorldClockManager.has(cityCoordinate.getName())) {
+            Snackbar.make(getRootView(), getString(R.string.worldClockAdd_alreadyHaveIt, cityCoordinate.getName()), Snackbar.LENGTH_SHORT).show();
+        } else {
+            MoLog.print(cityCoordinate.getName());
+            MoWorldClockManager.add(this, MoWorldClock.from(cityCoordinate));
+            Toast.makeText(this, getString(R.string.worldClockAdd_success_message, cityCoordinate.getName()), Toast.LENGTH_SHORT).show();
+            finish();
+        }
     }
 
     private void setupSearchable() {
@@ -102,25 +94,19 @@ public class MoAddWorldClockActivity extends MoSmartActivity implements MoCityRe
         searchable.setSearchOnTextChanged(true)
                 .setAppBarLayout(this.l.appBarLayout)
                 .setActivity(this)
-                .setSearchButton(this.mainToolbar.getRightButton())
-                .setCancelSearch(this.searchBar.getLeftButton())
                 .setSearchTextView(this.searchBar.getEditText())
                 .setClearSearch(this.searchBar.getRightButton())
                 .setShowNothingWhenSearchEmpty(true)
                 .setOnSearchFinished(list -> adapter.update(this, (List<MoCityCoordinate>) list, getGroupRootView()))
-                .addNormalViews(this.mainToolbar)
                 .addUnNormalViews(this.searchBar);
     }
 
     private void setupToolbars() {
-        mainToolbar = new MoToolBar(this);
-        mainToolbar.hideMiddle().setRightIcon(R.drawable.ic_baseline_search_24).setLeftOnClickListener((v) -> onBackPressed());
-
         searchBar = new MoSearchBar(this);
         searchBar.setSearchHint(R.string.search_city_name);
+        searchBar.getLeftButton().setOnClickListener((v) -> onBackPressed());
 
-        l.setupMultipleToolbars(mainToolbar, mainToolbar, searchBar);
-        syncTitle(mainToolbar.getTitle());
+        l.setupMultipleToolbars(searchBar, searchBar);
     }
 
     private void initRecyclerView() {

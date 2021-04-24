@@ -41,10 +41,8 @@ public class MoCreateAlarmActivity extends AppCompatActivity {
 
 
     TimePicker timePicker;
-
     ImageButton datePicker;
     TextView datePickerTv;
-
     ChipGroup weekdaysChip;
     Chip sunday;
     Chip monday;
@@ -54,21 +52,13 @@ public class MoCreateAlarmActivity extends AppCompatActivity {
     Chip friday;
     Chip saturday;
     List<Chip> chips;
-
-
     TextInputEditText alarmName;
-
-
     SwitchMaterial snooze;
     SwitchMaterial vibration;
     SwitchMaterial music;
-
     Calendar myCalendar;
-
-
     Button save;
     Button cancel;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -291,7 +281,6 @@ public class MoCreateAlarmActivity extends AppCompatActivity {
         if (clock != null) {
             clock = null;
         }
-
     }
 
     private void save() {
@@ -313,7 +302,7 @@ public class MoCreateAlarmActivity extends AppCompatActivity {
         c.setPathToMusic(this.music.isChecked());
         c.setRepeating(new MoRepeating(this.getPositionChips()));
         if (isEditMode()) {
-            //just update/save the changes also activate since this might be earlier than others
+            // just update/save the changes also activate since this might be earlier than others
             MoAlarmClockManager.getInstance().saveActivate(this);
             Toast.makeText(this, "Alarm changed to " +
                     c.getDate().getReadableDifference(Calendar.getInstance()), Toast.LENGTH_LONG).show();

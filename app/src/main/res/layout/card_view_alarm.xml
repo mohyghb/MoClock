@@ -6,29 +6,22 @@
     android:id="@+id/alarm_card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="2dp"
-    android:foreground="?android:attr/selectableItemBackground"
+    android:background="?android:attr/selectableItemBackground"
     app:cardCornerRadius="@dimen/card_corners_top"
-    app:cardPreventCornerOverlap="true"
-    app:cardUseCompatPadding="true"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.6"
-    app:layout_constraintStart_toEndOf="@+id/delete_alarm_check_box"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintBottom_toBottomOf="parent">
+    android:clipToPadding="true"
+    android:layout_margin="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/alarm_constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="34dp"
-        android:elevation="0dp">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/alarm_title_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
+            android:layout_marginStart="38dp"
+            android:layout_marginTop="24dp"
             android:layout_weight="1"
             android:fontFamily="sans-serif-light"
             android:text="title_alarm"
@@ -37,13 +30,14 @@
             app:layout_constraintBottom_toTopOf="@id/alarm_time_textView"/>
 
         <LinearLayout
+            android:id="@+id/linear_date_repeating"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginStart="8dp"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/alarm_time_textView"
             app:layout_constraintStart_toEndOf="@id/alarm_time_textView"
-            app:layout_constraintTop_toBottomOf="@id/alarm_title_textView">
+            app:layout_constraintTop_toTopOf="@id/alarm_time_textView">
 
             <TextView
                 android:id="@+id/repeatingDaysTextView"
@@ -66,27 +60,31 @@
             android:id="@+id/alarm_time_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.8"
+            android:layout_marginBottom="24dp"
+            android:layout_marginStart="34dp"
+            app:layout_goneMarginTop="24dp"
             android:fontFamily="sans-serif-thin"
             android:text="20:14"
             android:textSize="45sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/linear_date_repeating"
             app:layout_constraintTop_toBottomOf="@+id/alarm_title_textView"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintVertical_bias="0.0" />
 
         <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/is_active_switch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
             android:checked="true"
             android:padding="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/alarm_time_textView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/alarm_title_textView"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintTop_toTopOf="@id/alarm_time_textView"
+            app:layout_constraintStart_toEndOf="@id/linear_date_repeating"
+            app:layout_constraintHorizontal_bias="1.0"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

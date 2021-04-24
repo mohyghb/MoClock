@@ -7,23 +7,18 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textColor">@color/MoBlack</item>
-        <item name="materialCardViewStyle">@style/MoCardStyle</item>
-        <item name="android:listViewStyle">@style/MoListStyle</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@android:color/white</item>
-        <item name="android:navigationBarColor">@android:color/white</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
         <item name="android:windowContentTransitions">true</item>
         <item name="android:windowActivityTransitions">true</item>
+
+        <item name="materialCardViewStyle">@style/CardView.MoclockStyle</item>
     </style>
 
-    <style name="MoListStyle" parent="Widget.AppCompat.ListView">
-        <item name="android:backgroundTint">@color/MoWhite</item>
-    </style>
-
-    <style name="MoCardStyle" parent="Widget.MaterialComponents.CardView">
-        <item name="android:backgroundTint">@color/MoWhite_v2</item>
-        <item name="cardElevation">@dimen/card_elevation</item>
+    <style name="CardView.MoclockStyle" parent="Widget.MaterialComponents.CardView">
+        <item name="cardElevation">4dp</item>
     </style>
 
     <style name="MoBottomNavigationStyleLight" parent="Widget.MaterialComponents.BottomNavigationView">

@@ -288,13 +288,7 @@ public class MoAlarmClock implements MoSavable, MoViewDisplayable, MoLoadable, M
     }
 
     private void initCheckBox() {
-        checkBox = clockLayoutView.findViewById(R.id.delete_alarm_check_box);
-        checkBox.setOnCheckedChangeListener((compoundButton, b) -> {
-            if(!compoundButton.isPressed()){
-                return;
-            }
-            onSelect(checkBox);
-        });
+
     }
 
     /**

@@ -3,7 +3,9 @@ package Mo.moclock;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.telecom.CallRedirectionService;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputType;
@@ -11,6 +13,7 @@ import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.webkit.ValueCallback;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -27,6 +30,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoInflatorView.MoInflaterView;
 
 import Mo.moclock.MoAnimation.MoAnimation;
 import Mo.moclock.MoClock.MoTimer.MoTimer;
@@ -35,10 +39,11 @@ import Mo.moclock.MoClock.MoTimer.MoTimerPresetPackage.MoTimerPreset;
 import Mo.moclock.MoClock.MoTimer.MoTimerPresetPackage.MoTimerPresetManager;
 import Mo.moclock.MoDate.MoTimeUtils;
 import Mo.moclock.MoRunnable.MoRunnable;
+import Mo.moclock.MoSection.MoSectionManager;
 import Mo.moclock.MoSensor.MoShakeListener;
 import Mo.moclock.MoUI.MoTextInput;
 
-public class MoTimerSectionManager {
+public class MoTimerSectionManager implements MainActivity.SelectModeInterface {
     private final MainActivity mainActivity;
     /**
      * timer
@@ -46,7 +51,7 @@ public class MoTimerSectionManager {
 
     private final String SMART_SHAKE_TIMER_VALUE = "10";
 
-    private final String ENTER_TIME = "Please enter a time first";
+    private final String ENTER_TIME = "Please enter a time above first";
     ConstraintLayout timer_liner_layout;
     private TextInputEditText hourTimer;
     private TextInputEditText minuteTimer;
@@ -176,6 +181,8 @@ public class MoTimerSectionManager {
         turnDelete(false);
 
 
+        MoSectionManager.getInstance().subscribe(value -> MoTimer.universalTimer.setUpdateTextViews(value == MoSectionManager.TIMER_SECTION));
+
     }
 
     private void updatePauseButton(TextView pauseTimer, String pauseButtonText) {
@@ -244,21 +251,31 @@ public class MoTimerSectionManager {
             AlertDialog.Builder builder = new AlertDialog.Builder(mainActivity);
             builder.setTitle("Timer Preset (" + MoTimeUtils.convertToReadableFormat(milliSeconds) + ")");
             builder.setMessage("Set a name to add this timer as a preset");
-            final EditText input = new EditText(mainActivity);
-            int maxLength = 20;
-            InputFilter[] fArray = new InputFilter[1];
-            fArray[0] = new InputFilter.LengthFilter(maxLength);
-            input.setFilters(fArray);
-            // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
-            input.setInputType(InputType.TYPE_CLASS_TEXT);
-            builder.setView(input);
+
+            View dialogView = MoInflaterView.inflate(R.layout.alert_dialog_timer_preset, mainActivity);
+            TextInputEditText input = dialogView.findViewById(R.id.textField_alertDialogTimerPreset);
+            builder.setView(dialogView);
+
             // Set up the buttons
-            builder.setPositiveButton("Add", (dialog, which) -> {
-                MoTimerPresetManager.add(new MoTimerPreset(input.getText().toString(),milliSeconds),mainActivity);
-                mAdapter.notifyDataSetChanged();
+            builder.setPositiveButton("Add", null);
+            builder.setNegativeButton("Cancel", null);
+            AlertDialog alertDialog = builder.create();
+
+            alertDialog.setOnShowListener(dialogInterface -> {
+                Button button = ((AlertDialog) alertDialog).getButton(AlertDialog.BUTTON_POSITIVE);
+                button.setOnClickListener(view -> {
+                    if (input.getText().toString().isEmpty()) {
+                        input.setError("Please enter a name to save this preset");
+                        return;
+                    }
+                    MoTimerPresetManager.add(new MoTimerPreset(input.getText().toString(),milliSeconds),mainActivity);
+                    mAdapter.notifyDataSetChanged();
+                    //Dismiss once everything is OK.
+                    alertDialog.dismiss();
+                });
             });
-            builder.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
-            builder.show();
+
+            alertDialog.show();
         }
     }
 
@@ -362,7 +379,7 @@ public class MoTimerSectionManager {
     private void onSizeOfSelectedChanged(int size){
         if(size==0){
             // none of them are selected
-            turnDelete(false);
+            cancelDeleteAlarmMode();
         }else{
             turnDelete(true);
         }
@@ -462,4 +479,8 @@ public class MoTimerSectionManager {
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
+    @Override
+    public boolean isSelecting() {
+        return MoTimerPreset.isInDeleteMode;
+    }
 }

@@ -30,7 +30,7 @@ import Mo.moclock.MoRunnable.MoRunnable;
 import Mo.moclock.MoUI.MoTextInput;
 import Mo.moclock.R;
 
-public class MoTimer extends Service implements MoSavable, MoLoadable, MoSave {
+public class MoTimer extends Service {
 
 
     public static MoTimer universalTimer = new MoTimer();
@@ -53,6 +53,7 @@ public class MoTimer extends Service implements MoSavable, MoLoadable, MoSave {
     private long endTimeMilli;
     private long currentTimeMilli;
     private boolean isPaused;
+    private boolean updateTextViews = true;
 
     /**
      * is running refers to any point where there is a timer
@@ -86,6 +87,8 @@ public class MoTimer extends Service implements MoSavable, MoLoadable, MoSave {
 
 
     private void printTime(){
+        if (!updateTextViews)
+            return;
         String[] texts = MoTimeUtils.convertMilli(MoTimer.universalTimer.currentTimeMilli);
         timerTextInputs[0].setText(texts[0]);
         timerTextInputs[1].setText(texts[1]);
@@ -271,7 +274,10 @@ public class MoTimer extends Service implements MoSavable, MoLoadable, MoSave {
         this.countDownTimer = countDownTimer;
     }
 
-
+    public MoTimer setUpdateTextViews(boolean updateTextViews) {
+        this.updateTextViews = updateTextViews;
+        return this;
+    }
 
     public void onFinish(){
         progressBar.setProgress(0);
@@ -417,35 +423,4 @@ public class MoTimer extends Service implements MoSavable, MoLoadable, MoSave {
         this.buttons = buttons;
     }
 
-    /**
-     * loads a savable object into its class
-     *
-     * @param data
-     * @param context
-     */
-    @Override
-    public void load(String data, Context context) {
-//        String[] components = MoFile.loadable(SEP_KEY,MoReadWrite.readFile(FILE_NAME_TIMER,context));
-//        this.endTimeMilli = Long.parseLong(components[0]);
-//        this.notificationTimer.load(components[1],context);
-//        this.isPaused = Boolean.parseBoolean(components[2]);
-//        this.currentTimeMilli = Long.parseLong(components[3]);
-    }
-
-    /**
-     * @return the data that is going to be saved by the save method
-     * inside the class which implements MoSavable
-     */
-    @Override
-    public String getData() {
-        return null;
-//        return MoFile.getData(SEP_KEY,this.endTimeMilli,
-//                this.notificationTimer.getData(),this.isPaused,this.currentTimeMilli);
-    }
-
-
-    @Override
-    public void save(Context context) {
-        MoReadWrite.saveFile(FILE_NAME_TIMER,this.getData(),context);
-    }
 }

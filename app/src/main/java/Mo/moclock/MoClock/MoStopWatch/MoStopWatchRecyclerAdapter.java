@@ -33,7 +33,7 @@ public class MoStopWatchRecyclerAdapter extends MoRecyclerAdapter<MoStopWatchRec
 
     @Override
     public void onBindViewHolder(@NonNull MoStopWatchViewHolder holder, int position) {
-        holder.bind(dataSet.get(position), position);
+        holder.bind(dataSet.get(position), position + 1);
     }
 
     public static class MoStopWatchViewHolder extends RecyclerView.ViewHolder {

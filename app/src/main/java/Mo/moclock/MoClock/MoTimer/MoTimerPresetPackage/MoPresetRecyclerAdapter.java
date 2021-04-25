@@ -12,10 +12,10 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.moofficial.moessentials.MoEssentials.MoUI.MoInflatorView.MoInflaterView;
 
 import java.util.ArrayList;
 
-import Mo.moclock.MoInflatorView.MoInflaterView;
 import Mo.moclock.MoRunnable.MoRunnable;
 import Mo.moclock.R;
 
@@ -69,7 +69,7 @@ public class MoPresetRecyclerAdapter extends RecyclerView.Adapter<MoPresetRecycl
     @Override
     public TabViewHolder onCreateViewHolder(ViewGroup parent,
                                             int viewType) {
-        View v = MoInflaterView.inflate(R.layout.timer_preset_layout,parent.getContext());
+        View v = MoInflaterView.inflate(R.layout.timer_preset_layout, parent, parent.getContext());
         return new TabViewHolder(v);
     }
 

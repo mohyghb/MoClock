@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card_cityView"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:foreground="?android:attr/selectableItemBackground"
     app:cardCornerRadius="@dimen/card_corners_top"
@@ -26,12 +26,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Vancouver"
-            style="@style/AlarmClockStyle.worldClock"/>
+            android:fontFamily="sans-serif-condensed-medium"
+            android:textSize="22sp"
+            android:layout_marginStart="4dp"/>
 
         <TextView
             android:id="@+id/time_world_clock"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
             android:text="12:06"
             style="@style/AlarmClockStyle.worldClock"/>
 
@@ -42,6 +45,8 @@
             android:text="2021/02/13"
             android:layout_marginStart="6dp"
             style="@style/AlarmClockDateStyle" />
+
+
 
 
 

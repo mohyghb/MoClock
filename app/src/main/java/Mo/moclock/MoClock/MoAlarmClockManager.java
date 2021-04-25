@@ -345,7 +345,7 @@ public class MoAlarmClockManager implements Iterable<MoAlarmClock>, MoSavable, M
      * @param c        An MoAlarmClock
      * @param activity required for application purposes
      */
-    private void cancelAlarm(MoAlarmClock c, Context activity) {
+    public void cancelAlarm(MoAlarmClock c, Context activity) {
         AlarmManager alarmMgr = (AlarmManager) activity.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(activity, MoAlarmReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(activity, c.getId(), intent, 0);

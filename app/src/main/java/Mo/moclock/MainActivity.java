@@ -75,8 +75,6 @@ public class MainActivity extends AppCompatActivity {
         moTimerSectionManager.closeTimerService();
         // adding all the animations to a sparse array
         MoTheme.updateTheme(this);
-
-        switchSection();
     }
 
 
@@ -176,6 +174,21 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         changeIsInApp(true);
         this.moAlarmSectionManager.onResume();
+
+        // if we are in select mode and they come through the notification, we must still show the select
+        // mode sections instead of jumping to other states
+        boolean alarmIsSelecting = moAlarmSectionManager.isSelecting();
+        boolean worldClockIsSelecting = moWorldClockSectionManager.isSelecting();
+        boolean timerPresetIsSelecting = moTimerSectionManager.isSelecting();
+
+        if (alarmIsSelecting) {
+            MoSectionManager.getInstance().setSection(MoSectionManager.ALARM_SECTION);
+        } else if (worldClockIsSelecting) {
+            MoSectionManager.getInstance().setSection(MoSectionManager.WORLD_CLOCK_SECTION);
+        } else if (timerPresetIsSelecting) {
+            MoSectionManager.getInstance().setSection(MoSectionManager.TIMER_SECTION);
+        }
+        switchSection();
     }
 
 
@@ -241,5 +254,10 @@ public class MainActivity extends AppCompatActivity {
 
     public View getBottomDeleteBar() {
         return bottomDeleteBar;
+    }
+
+
+    public interface SelectModeInterface {
+        boolean isSelecting();
     }
 }

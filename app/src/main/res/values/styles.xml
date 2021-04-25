@@ -89,4 +89,11 @@
         <item name="android:text">00</item>
     </style>
 
+    <style name="StopWatchTimerStyle.Timer" parent="Widget.AppCompat.TextView">
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:textSize">65sp</item>
+        <item name="android:maxLength">2</item>
+        <item name="android:hint">00</item>
+    </style>
+
 </resources>

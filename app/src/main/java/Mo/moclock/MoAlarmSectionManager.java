@@ -35,7 +35,7 @@ import Mo.moclock.MoClock.MoClockSugestions.MoPrioritySuggestion;
 import Mo.moclock.MoClock.MoEmptyAlarmException;
 import Mo.moclock.MoSensor.MoShakeListener;
 
-public class MoAlarmSectionManager implements MoAlarmClockRecyclerAdapter.MoOnActiveClockChanged, MoOnCanceledListener, MoOnBackPressed {
+public class MoAlarmSectionManager implements MoAlarmClockRecyclerAdapter.MoOnActiveClockChanged, MoOnCanceledListener, MoOnBackPressed, MainActivity.SelectModeInterface {
     /**
      * alarm section
      */
@@ -308,5 +308,10 @@ public class MoAlarmSectionManager implements MoAlarmClockRecyclerAdapter.MoOnAc
             return true;
         }
         return false;
+    }
+
+    @Override
+    public boolean isSelecting() {
+        return recyclerAdapter.isSelecting();
     }
 }

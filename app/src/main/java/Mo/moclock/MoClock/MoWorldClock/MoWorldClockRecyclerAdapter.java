@@ -29,8 +29,7 @@ public class MoWorldClockRecyclerAdapter extends MoSelectableAdapter<MoWorldCloc
     @NonNull
     @Override
     public MoWorldClockViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = MoInflaterView.inflate(R.layout.view_city_world_clock, parent.getContext());
-        v.setLayoutParams(getMatchWrapParams());
+        View v = MoInflaterView.inflate(R.layout.view_city_world_clock, parent , context);
         return new MoWorldClockViewHolder(v);
     }
 

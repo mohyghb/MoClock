@@ -44,7 +44,11 @@
             android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".MoClock.MoAlarmActivity" />
         <activity android:name=".MainActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:alwaysRetainTaskState="true"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="adjustPan"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

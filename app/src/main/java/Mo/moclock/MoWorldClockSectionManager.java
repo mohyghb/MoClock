@@ -27,7 +27,7 @@ import Mo.moclock.MoClock.MoWorldClock.MoWorldClock;
 import Mo.moclock.MoClock.MoWorldClock.MoWorldClockManager;
 import Mo.moclock.MoClock.MoWorldClock.MoWorldClockRecyclerAdapter;
 
-public class MoWorldClockSectionManager implements MoOnBackPressed {
+public class MoWorldClockSectionManager implements MoOnBackPressed, MainActivity.SelectModeInterface {
 
     public static String UPDATE_TIME_PAYLOAD = "update_time";
 
@@ -151,5 +151,10 @@ public class MoWorldClockSectionManager implements MoOnBackPressed {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public boolean isSelecting() {
+        return adapter.isSelecting();
     }
 }

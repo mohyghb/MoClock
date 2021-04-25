@@ -44,7 +44,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
 
         <TextView
@@ -101,14 +101,12 @@
             android:id="@+id/timer_text_linear_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:clipChildren="false"
-            android:clipToPadding="false"
             android:gravity="center"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintBottom_toBottomOf="@+id/barTimer"
+            app:layout_constraintEnd_toEndOf="@id/barTimer"
+            app:layout_constraintStart_toStartOf="@id/barTimer"
+            app:layout_constraintTop_toTopOf="@id/barTimer">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/hour_timer_tv"
@@ -116,26 +114,22 @@
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:fontFamily="sans-serif-thin"
-                android:hint="00"
                 android:inputType="number"
-                android:maxLength="2"
                 android:nextFocusLeft="@id/minute_timer_tv"
                 android:nextFocusRight="@id/minute_timer_tv"
                 android:nextFocusUp="@id/minute_timer_tv"
                 android:nextFocusDown="@id/minute_timer_tv"
                 android:nextFocusForward="@id/minute_timer_tv"
                 android:selectAllOnFocus="true"
-
-                android:singleLine="false"
-                android:textSize="65sp" />
+                style="@style/StopWatchTimerStyle.Timer"/>
 
             <TextView
                 android:id="@+id/dot1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-thin"
                 android:text=":"
-                android:textSize="65sp" />
+                android:hint=""
+                style="@style/StopWatchTimerStyle.Timer"/>
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/minute_timer_tv"
@@ -145,37 +139,31 @@
                 android:fontFamily="sans-serif-thin"
                 android:hint="00"
                 android:inputType="number"
-                android:maxLength="2"
                 android:nextFocusLeft="@id/seconds_timer_tv"
                 android:nextFocusRight="@id/seconds_timer_tv"
                 android:nextFocusUp="@id/seconds_timer_tv"
                 android:nextFocusDown="@id/seconds_timer_tv"
                 android:nextFocusForward="@id/seconds_timer_tv"
                 android:selectAllOnFocus="true"
-                android:textSize="65sp" />
+                style="@style/StopWatchTimerStyle.Timer"/>
 
             <TextView
                 android:id="@+id/dot2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-thin"
-                android:inputType="number"
-                android:maxLength="2"
                 android:text=":"
-                android:textSize="65sp" />
+                android:hint=""
+                style="@style/StopWatchTimerStyle.Timer"/>
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/seconds_timer_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@null"
-                android:fontFamily="sans-serif-thin"
-                android:hint="00"
                 android:imeOptions="actionDone"
                 android:inputType="number"
-                android:maxLength="2"
                 android:selectAllOnFocus="true"
-                android:textSize="65sp" />
+                style="@style/StopWatchTimerStyle.Timer"/>
 
         </LinearLayout>
 
@@ -257,57 +245,6 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:visibility="gone" />
 
-
-
-
-
-
-    <LinearLayout
-        android:id="@+id/linear_delete_mode_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:visibility="gone"
-        android:weightSum="2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <Button
-            android:id="@+id/cancel_delete_mode"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:layout_weight="2"
-            android:text="@string/cancel"
-            android:visibility="visible"
-            app:cornerRadius="@dimen/round_radius" />
-
-
-        <Button
-            android:id="@+id/delete_alarm_button"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:layout_weight="2"
-            android:text="@string/delete"
-            android:visibility="visible"
-            app:cornerRadius="@dimen/round_radius"
-            app:icon="@drawable/ic_delete_black_24dp"
-            app:iconGravity="textStart"
-            app:iconPadding="4dp"
-            app:rippleColor="@color/error_color" />
-
-    </LinearLayout>
-
     <LinearLayout
         android:id="@+id/delete_mode_preset"
         android:layout_width="match_parent"
@@ -354,51 +291,6 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/delete_mode_world"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:visibility="gone"
-        android:weightSum="2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <Button
-            android:id="@+id/cancel_delete_world"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:layout_weight="2"
-            android:text="@string/cancel"
-            android:visibility="visible"
-            app:cornerRadius="@dimen/round_radius" />
-
-
-        <Button
-            android:id="@+id/delete_world_button"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:layout_weight="2"
-            android:text="@string/delete"
-            android:visibility="visible"
-            app:cornerRadius="@dimen/round_radius"
-            app:icon="@drawable/ic_delete_black_24dp"
-            app:iconGravity="textStart"
-            app:iconPadding="4dp"
-            app:rippleColor="@color/error_color" />
-
-    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

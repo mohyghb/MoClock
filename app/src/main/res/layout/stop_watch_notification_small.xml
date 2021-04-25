@@ -9,7 +9,7 @@
         style="@style/TextAppearance.Compat.Notification.Title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="MoStopwatch"
+        android:text="Stopwatch"
         android:textColor="@color/notification_text_color" />
 
     <LinearLayout
@@ -24,30 +24,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="sans-serif-light"
             android:text="00"
-            android:textColor="@color/notification_text_color"
-            android:textSize="24sp" />
+            style="@style/notification_timer_text" />
 
         <TextView
             android:id="@+id/textView33"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="sans-serif-light"
             android:text=":"
-            android:textColor="@color/notification_text_color"
-            android:textSize="24sp" />
+            style="@style/notification_timer_text" />
 
         <TextView
             android:id="@+id/minute_stopwatch_notification_small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="sans-serif-light"
             android:text="00"
-            android:textColor="@color/notification_text_color"
-            android:textSize="24sp" />
+            style="@style/notification_timer_text" />
 
 <!--        <TextView-->
 <!--            android:id="@+id/dot_timer_4"-->
@@ -74,7 +68,6 @@
         android:id="@+id/lap_counter_notification"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textColor="@color/notification_text_color" />
+        style="@style/notification_timer_text" />
 
 </LinearLayout>

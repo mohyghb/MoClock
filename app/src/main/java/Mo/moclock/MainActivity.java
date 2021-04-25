@@ -63,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
     private void init() {
         MoSharedPref.loadAll(this);
         MoAnimation.initAllAnimations(this);
-        this.moStopWatchManager.setStopWatch_linear_layout(findViewById(R.id.linear_stopwatch_layout));
         this.moWorldClockSectionManager.root = findViewById(R.id.layout_worldClock);
         this.moTimerSectionManager.timer_liner_layout = findViewById(R.id.linear_timer_layout);
         this.bottomDeleteBar = findViewById(R.id.delete_mode_preset);
@@ -103,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initBottomNavigation() {
         this.bottomNavigation = findViewById(R.id.bottom_navigation);
-        this.moStopWatchManager.getStopWatch_linear_layout().setVisibility(View.INVISIBLE);
+        this.moStopWatchManager.root.setVisibility(View.INVISIBLE);
         this.moTimerSectionManager.timer_liner_layout.setVisibility(View.INVISIBLE);
         this.bottomNavigation.setOnNavigationItemSelectedListener((item) -> {
             switch (item.getItemId()) {
@@ -148,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void changeLayout(boolean alarm, boolean stopwatch, boolean timer, boolean world, boolean setSelected) {
-        this.moStopWatchManager.getStopWatch_linear_layout().setVisibility(stopwatch ? View.VISIBLE : View.INVISIBLE);
+        this.moStopWatchManager.root.setVisibility(stopwatch ? View.VISIBLE : View.INVISIBLE);
         this.moTimerSectionManager.timer_liner_layout.setVisibility(timer ? View.VISIBLE : View.INVISIBLE);
         this.moAlarmSectionManager.root.setVisibility(alarm ? View.VISIBLE : View.INVISIBLE);
         this.moWorldClockSectionManager.root.setVisibility(world ? View.VISIBLE : View.INVISIBLE);
@@ -225,7 +224,6 @@ public class MainActivity extends AppCompatActivity {
             moTimerSectionManager.closeTimerService();
             MoStopWatch.universal.cancelNotificationService(this);
             moStopWatchManager.update();
-            moStopWatchManager.getMoLapMoListView().updateHideIfEmpty();
             this.smartShake.start(this);
             changeIsInApp(true);
         }

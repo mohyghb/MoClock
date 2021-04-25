@@ -1,7 +1,17 @@
 package Mo.moclock;
 
 import android.app.Activity;
+import android.os.Parcelable;
+import android.transition.ChangeBounds;
+import android.transition.ChangeClipBounds;
+import android.transition.ChangeScroll;
+import android.transition.Fade;
+import android.transition.Slide;
+import android.transition.TransitionManager;
+import android.transition.TransitionSet;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
@@ -10,40 +20,34 @@ import android.widget.TextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 
-import Mo.moclock.MoAnimation.MoAnimation;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoRecyclerView.MoRecyclerAdapters.MoRecyclerAdapter;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoRecyclerView.MoRecyclerUtils;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoRecyclerView.MoRecyclerView;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViews.MoNormal.MoCardRecyclerView;
+
 import Mo.moclock.MoClock.MoStopWatch.MoLap;
 import Mo.moclock.MoClock.MoStopWatch.MoLap_ListAdapter;
 import Mo.moclock.MoClock.MoStopWatch.MoStopWatch;
+import Mo.moclock.MoClock.MoStopWatch.MoStopWatchRecyclerAdapter;
 import Mo.moclock.MoListView.MoListView;
+import Mo.moclock.MoSection.MoSectionManager;
 
 public class MoStopWatchManager {
     /**
      * stop watch
      */
 
-    ConstraintLayout stopWatch_linear_layout;
-
-    public ConstraintLayout getStopWatch_linear_layout() {
-        return stopWatch_linear_layout;
-    }
-
-    public void setStopWatch_linear_layout(ConstraintLayout stopWatch_linear_layout) {
-        this.stopWatch_linear_layout = stopWatch_linear_layout;
-    }
-
-    private TextView hour;
     private TextView minute;
     private TextView second;
+    private TextView milliSecond;
     private Button start;// stop and resume are the same
     private Button stop;// lap and reset are the same
     private Button lap;
-    private MoListView<MoLap> moLapMoListView;
-
-    public MoListView<MoLap> getMoLapMoListView() {
-        return moLapMoListView;
-    }
-
-    ListView lapListView;
+    private MoCardRecyclerView cardRecyclerView;
+    private MoRecyclerView recyclerView;
+    private MoStopWatchRecyclerAdapter adapter;
+    private View headerLaps;
+    View root;
 
     Activity activity;
 
@@ -52,28 +56,19 @@ public class MoStopWatchManager {
     }
 
     void initStopWatchSection() {
-        this.hour = activity.findViewById(R.id.hour_stopwatch_tv);
-        this.minute = activity.findViewById(R.id.minute_stopwatch_tv);
-        this.second = activity.findViewById(R.id.seconds_stopwatch_tv);
+        root = activity.findViewById(R.id.layout_StopWatch);
+        minute = root.findViewById(R.id.text_stopWatchTimer_minute);
+        second = root.findViewById(R.id.text_stopWatchTimer_second);
+        milliSecond = root.findViewById(R.id.text_stopWatchTimer_milliSecond);
 
-        this.start = activity.findViewById(R.id.start_stop_watch_button);
-        this.stop = activity.findViewById(R.id.stop_time_stop_watch_button);
-        this.lap = activity.findViewById(R.id.lap_time_stop_watch_button);
+        View tripleRoot = root.findViewById(R.id.layout_stopWatch_tripleButton);
+        start = tripleRoot.findViewById(R.id.button_tripleSetup_start);
+        stop = tripleRoot.findViewById(R.id.button_tripleSetup_left);
+        lap = tripleRoot.findViewById(R.id.button_tripleSetup_right);
 
-        this.lapListView = activity.findViewById(R.id.lap_list_view);
+        headerLaps = root.findViewById(R.id.header_stopWatch_laps);
 
-        // adding header to listview
-        View header = activity.getLayoutInflater().inflate(R.layout.header_stopwatch, null);
-        lapListView.addHeaderView(header);
 
-        lapListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-            }
-        });
-
-        MoStopWatch.universal.changeButtonText();
 
         this.start.setOnClickListener(view -> {
             MoStopWatch.universal.start();
@@ -90,22 +85,51 @@ public class MoStopWatchManager {
         });
         this.lap.setOnClickListener(view -> {
             MoStopWatch.universal.lap();
+            updateRecyclerView();
             this.lap.setText(MoStopWatch.universal.getLapString());
-            this.moLapMoListView.updateHideIfEmpty(true);
             this.stop.setBackgroundColor(MoStopWatch.universal.getStopColor());
         });
         MoStopWatch.universal.setActivity(activity);
-        MoStopWatch.universal.setStopWatchTv(this.hour, this.minute, this.second);
+        MoStopWatch.universal.setStopWatchTv(this.minute, this.second, this.milliSecond);
         MoStopWatch.universal.setButtons(this.start, this.stop, this.lap);
+        MoStopWatch.universal.changeButtonText();
 
-        this.moLapMoListView = new MoListView<MoLap>(lapListView,
-                new MoLap_ListAdapter(activity, 0, MoStopWatch.universal.getLaps()),
-                MoStopWatch.universal.getLaps(), activity);
-        moLapMoListView.setDynamicEmptyView(new View[]{},activity.findViewById(R.id.stop_watch_list_card_view));
+
+
+        cardRecyclerView = root.findViewById(R.id.cardRecycler_stopWatch_laps);
+        adapter = new MoStopWatchRecyclerAdapter(this.activity, MoStopWatch.universal.getLaps());
+        recyclerView = MoRecyclerUtils.get(cardRecyclerView.getRecyclerView(), adapter)
+                .setReverseLayout(true)
+                .show();
+
+
+        MoSectionManager.getInstance().subscribe((v) -> {
+            // do not update the text views anymore since we are not on the page
+            MoStopWatch.universal.setUpdateTextViews(v == MoSectionManager.STOP_WATCH_SECTION);
+        });
+
     }
 
+    public void updateRecyclerView() {
+        activity.runOnUiThread(() -> {
+            adapter.notifyDataSetChanged();
+            recyclerView.scrollToPosition(MoStopWatch.universal.getLapsCount() - 1);
+        });
+        toggleRecyclerView();
+    }
 
-    public void update(){
+    private void toggleRecyclerView() {
+        if (adapter.getItemCount() > 0) {
+            cardRecyclerView.setVisibility(View.VISIBLE);
+            headerLaps.setVisibility(View.VISIBLE);
+        } else {
+            cardRecyclerView.setVisibility(View.GONE);
+            headerLaps.setVisibility(View.GONE);
+        }
+    }
+
+    public void update() {
         this.stop.setBackgroundColor(MoStopWatch.universal.getStopColor());
+        updateRecyclerView();
     }
 }

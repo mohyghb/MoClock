@@ -28,6 +28,10 @@ public class MoLapManager {
         return null;
     }
 
+    public int size() {
+        return laps.size();
+    }
+
     /**
      * adds the lap to the list
      * and accordingly adjusts highest and lowest laps

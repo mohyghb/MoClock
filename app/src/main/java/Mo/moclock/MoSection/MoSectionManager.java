@@ -1,9 +1,14 @@
 package Mo.moclock.MoSection;
 
 import android.content.Context;
+import android.webkit.ValueCallback;
 
 import com.moofficial.moessentials.MoEssentials.MoFileManager.MoIO.MoLoadable;
 import com.moofficial.moessentials.MoEssentials.MoFileManager.MoIO.MoSavable;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Consumer;
 
 import Mo.moclock.MoReadWrite.MoReadWrite;
 import Mo.moclock.MoReadWrite.MoSave;
@@ -19,6 +24,7 @@ public class MoSectionManager implements MoSavable, MoSave, MoLoadable {
 
 
     private int section;
+    private List<ValueCallback<Integer>> onSectionChangedListener = new ArrayList<>();
 
 
     private static MoSectionManager ourInstance = new MoSectionManager();
@@ -29,6 +35,17 @@ public class MoSectionManager implements MoSavable, MoSave, MoLoadable {
 
     private MoSectionManager() {
         this.section = ALARM_SECTION;
+    }
+
+
+    public void subscribe(ValueCallback<Integer> listener) {
+        if (onSectionChangedListener.contains(listener))
+            return;
+        onSectionChangedListener.add(listener);
+    }
+
+    public void unsubscribe(ValueCallback<Integer> listener) {
+        onSectionChangedListener.remove(listener);
     }
 
     /**
@@ -64,9 +81,11 @@ public class MoSectionManager implements MoSavable, MoSave, MoLoadable {
 
     public void setSection(int section) {
         this.section = section;
+        onSectionChangedListener.forEach(integerValueCallback -> integerValueCallback.onReceiveValue(section));
     }
 
-    public void onDestroy(){
+    public void onDestroy() {
+        ourInstance.onSectionChangedListener.clear();
         ourInstance = null;
         ourInstance = new MoSectionManager();
     }

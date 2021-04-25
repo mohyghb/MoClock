@@ -50,6 +50,8 @@ public abstract class MoStopWatch{
 
     private CountDownTimer countDownTimer;
 
+    private boolean updateTextViews = true;
+
     public MoStopWatch(TextView[] stopWatchTv, Activity activity){
         this.stopWatchTv = stopWatchTv;
         this.activity = activity;
@@ -107,19 +109,6 @@ public abstract class MoStopWatch{
                 }
             },0,PERIOD_OF_TICK);
 
-//            countDownTimer = new CountDownTimer(24*3600*7,PERIOD_OF_TICK) {
-//                @Override
-//                public void onTick(long l) {
-//                    incrementStopWatch();
-////                    this.onTick();
-//                    updateTv();
-//                }
-//
-//                @Override
-//                public void onFinish() {
-//
-//                }
-//            }.start();
         }
 
         this.setRunning(true);
@@ -160,7 +149,7 @@ public abstract class MoStopWatch{
     }
 
     public String getStopString(){
-        return this.isRunning?"Stop":"Resume";
+        return this.isRunning?"Pause":"Resume";
     }
 
     public int getStopColor(){
@@ -191,6 +180,10 @@ public abstract class MoStopWatch{
 
     }
 
+    public int getLapsCount() {
+        return this.moLapManager.size();
+    }
+
     public void reset(){
         this.cancel();
         this.moLapManager.reset();
@@ -202,7 +195,7 @@ public abstract class MoStopWatch{
     }
 
     private void updateTv(){
-        if(this.stopWatchTv!=null){
+        if(this.stopWatchTv!=null && updateTextViews){
             // no hour is needed
             String[] texts = MoTimeUtils.convertMilli(milliSecondsElapsed);
             stopWatchTv[0].setText(texts[1]);
@@ -261,6 +254,7 @@ public abstract class MoStopWatch{
 
     public void setStopWatchTv(TextView ... stopWatchTv) {
         this.stopWatchTv = stopWatchTv;
+        updateTv();
     }
 
 
@@ -310,7 +304,8 @@ public abstract class MoStopWatch{
         return moLapManager;
     }
 
-    public TimerTask getSavedNotificationTask() {
-        return savedNotificationTask;
+    public MoStopWatch setUpdateTextViews(boolean updateTextViews) {
+        this.updateTextViews = updateTextViews;
+        return this;
     }
 }

@@ -246,158 +246,19 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:visibility="gone" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/linear_stopwatch_layout"
+    <include
+        layout="@layout/content_stop_watch"
+        android:id="@+id/layout_StopWatch"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/bottom_navigation_card_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="gone">
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/stop_watch_list_card_view"
-            android:layout_width="0dp"
-            android:layout_height="350dp"
-            android:backgroundTint="@color/transparent"
-            app:cardBackgroundColor="@color/transparent"
-            app:cardCornerRadius="@dimen/card_corners_top"
-            app:cardElevation="0dp"
-            app:contentPadding="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/linear_stopwatch_button_layout"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <ListView
-                android:id="@+id/lap_list_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:animateLayoutChanges="false"
-                android:divider="@null"
-                android:headerDividersEnabled="true"
-                android:scrollbarThumbHorizontal="@null"
-                android:scrollbarThumbVertical="@null"
-                android:scrollbarTrackVertical="@null"
-                android:scrollbars="none" />
-        </androidx.cardview.widget.CardView>
-
-        <LinearLayout
-            android:id="@+id/linearLayout4"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:clipChildren="false"
-            android:clipToPadding="false"
-            android:gravity="center"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@+id/stop_watch_list_card_view"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/hour_stopwatch_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:fontFamily="sans-serif-thin"
-                android:maxLength="2"
-                android:nextFocusLeft="@id/minute_timer_tv"
-                android:nextFocusRight="@id/minute_timer_tv"
-                android:nextFocusUp="@id/minute_timer_tv"
-                android:nextFocusDown="@id/minute_timer_tv"
-                android:nextFocusForward="@id/minute_timer_tv"
-                android:singleLine="false"
-                android:text="00"
-
-                android:textSize="65sp" />
-
-            <TextView
-                android:id="@+id/dot3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-thin"
-                android:text=":"
-                android:textSize="65sp" />
-
-            <TextView
-                android:id="@+id/minute_stopwatch_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:fontFamily="sans-serif-thin"
-                android:maxLength="2"
-                android:nextFocusLeft="@id/seconds_timer_tv"
-                android:nextFocusRight="@id/seconds_timer_tv"
-                android:nextFocusUp="@id/seconds_timer_tv"
-                android:nextFocusDown="@id/seconds_timer_tv"
-                android:nextFocusForward="@id/seconds_timer_tv"
-                android:text="00"
-                android:textSize="65sp" />
-
-            <TextView
-                android:id="@+id/dot4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-thin"
-                android:maxLength="2"
-                android:text="."
-                android:textSize="65sp" />
-
-            <TextView
-                android:id="@+id/seconds_stopwatch_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:fontFamily="sans-serif-thin"
-                android:maxLength="2"
-                android:text="00"
-                android:textSize="65sp" />
+        tools:visibility="gone" />
 
 
-        </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/linear_stopwatch_button_layout"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal"
-            android:weightSum="3"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/start_stop_watch_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:layout_weight="1"
-                android:text="@string/start" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/stop_time_stop_watch_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:layout_weight="1.5"
-                android:text="@string/stop" />
-
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/lap_time_stop_watch_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:layout_weight="1.5"
-                android:insetTop="6dp"
-                android:insetBottom="6dp"
-                android:text="@string/lap" />
-
-        </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 

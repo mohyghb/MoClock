@@ -26,6 +26,8 @@
     <string name="stop">Stop</string>
     <string name="start">Start</string>
     <string name="lap">Lap</string>
+    <string name="generic_colon">:</string>
+    <string name="generic_dot">.</string>
 
     <string name="add_alarm">add alarm</string>
     <string name="new_alarm">New Alarm</string>

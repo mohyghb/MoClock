@@ -94,7 +94,6 @@ public class MoAlarmSectionManager implements MoAlarmClockRecyclerAdapter.MoOnAc
         this.emptyView = root.findViewById(R.id.layout_alarmClocks_emptyView);
         this.emptyView.findViewById(R.id.button_emptyAlarms_addAlarm).setOnClickListener((v) ->
                 MoCreateAlarmActivity.startActivityForResult(activity, CREATE_ALARM_CODE));
-        // todo for the empty layouts add click listener for the add alarm
 
         this.cardRecyclerView = root.findViewById(R.id.card_alarmClocks_recycler);
         this.cardRecyclerView.getCardView().makeTransparent();

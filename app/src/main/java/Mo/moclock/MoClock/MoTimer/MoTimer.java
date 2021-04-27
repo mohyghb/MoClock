@@ -203,6 +203,8 @@ public class MoTimer extends Service {
                 .setAutoCancel(true)
                 .setColor(context.getColor(R.color.notification_timer_background))
                 .setContentIntent(getAction(context,OPEN_ACTION))
+                .setOnlyAlertOnce(true)
+                .setSound(null)
                 .build();
 
         return customNotification;

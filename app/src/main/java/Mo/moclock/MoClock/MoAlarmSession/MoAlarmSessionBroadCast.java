@@ -37,10 +37,14 @@ public class MoAlarmSessionBroadCast extends BroadcastReceiver {
                 context.startActivity(fullScreenIntent);
                 break;
             case MoNotificationTimerSession.STOP_ACTION_ID:
+                if (!MoNotificationTimerSession.enabled)
+                    return;
                 Intent i2 = new Intent(context,MoNotificationTimerSession.class);
                 context.stopService(i2);
                 break;
             case MoNotificationTimerSession.RESET_ACTION:
+                if (!MoNotificationTimerSession.enabled)
+                    return;
                 Intent i4 = new Intent(context,MoNotificationTimerSession.class);
                 context.stopService(i4);
                 //reset it

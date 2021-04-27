@@ -3,6 +3,7 @@ package Mo.moclock;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.transition.ChangeBounds;
 import android.transition.Fade;
 import android.transition.TransitionManager;
@@ -202,7 +203,8 @@ public class MoAlarmSectionManager implements MoAlarmClockRecyclerAdapter.MoOnAc
                     onSettingPressed();
                     break;
                 case R.id.about_menu_item:
-                    // todo add ticket for implementing the about
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://mohyaghoub.wixsite.com/profile"));
+                    activity.startActivity(browserIntent);
                     break;
             }
             return false;

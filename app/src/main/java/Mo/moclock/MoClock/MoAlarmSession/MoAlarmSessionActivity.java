@@ -31,6 +31,7 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -59,10 +60,14 @@ public class MoAlarmSessionActivity extends AppCompatActivity implements Gesture
     private TextClock textClock;
     ConstraintLayout constraintLayout;
     MoInitAlarmSession.Type moType;
-    private GestureDetectorCompat detectorCompat;
+   // private GestureDetectorCompat detectorCompat;
     private MoSmartCancel smartCancel;
+
     private TextView snoozeText;
     private TextView stopText;
+    private ImageView snoozeButton;
+    private ImageView stopButton;
+
     private boolean snoozed;
 
 
@@ -75,9 +80,6 @@ public class MoAlarmSessionActivity extends AppCompatActivity implements Gesture
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mo_alarm_session);
         getWindow().addFlags(
                 WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
                         WindowManager.LayoutParams.FLAG_FULLSCREEN|
@@ -88,9 +90,11 @@ public class MoAlarmSessionActivity extends AppCompatActivity implements Gesture
                         WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION|
                         WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
         );
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_mo_alarm_session);
+
         hideSystemUI();
         init();
-        this.initLayoutAnimations();
     }
 
     private void hideSystemUI() {
@@ -121,13 +125,17 @@ public class MoAlarmSessionActivity extends AppCompatActivity implements Gesture
                 break;
         }
         if(moInformation == null) {
-            Toast.makeText(this, "The information was lost error please report this", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "The information was lost. Please report this", Toast.LENGTH_LONG).show();
             return;
         }
 
+
+
         this.title = findViewById(R.id.title_alarm);
-        this.stopText = findViewById(R.id.stop_alarm);
-        this.snoozeText = findViewById(R.id.snooze_button);
+        this.snoozeButton = findViewById(R.id.snooze_button);
+        this.stopButton = findViewById(R.id.stop_alarm);
+        this.snoozeText = findViewById(R.id.snooze_text);
+        this.stopText = findViewById(R.id.stop_alarm_text);
 
         stopText.setText(moInformation.getRightButton());
         snoozeText.setText(moInformation.getLeftButton());
@@ -135,10 +143,33 @@ public class MoAlarmSessionActivity extends AppCompatActivity implements Gesture
         this.title.setText(moInformation.getTitle());
         this.moType = moInformation.getType();
 
+        if (!moInformation.isClock()) {
+            snoozeButton.setImageDrawable(getDrawable(R.drawable.ic_baseline_restore_24));
+            stopButton.setImageDrawable(getDrawable(R.drawable.ic_baseline_timer_off_24));
+        }
 
 
-        this.detectorCompat = new GestureDetectorCompat(this,this);
-        detectorCompat.setOnDoubleTapListener(this);
+        stopButton.setOnLongClickListener((v) -> {
+            stopAlarmConsiderSmart();
+            return true;
+        });
+
+        snoozeButton.setOnLongClickListener((v) -> {
+            switch (moType){
+                case CLOCK:
+                    this.snoozeAlarm();
+                    break;
+                case TIMER:
+                    this.resetTimer();
+                    break;
+            }
+            return true;
+        });
+
+
+
+//        this.detectorCompat = new GestureDetectorCompat(this,this);
+//        detectorCompat.setOnDoubleTapListener(this);
 
 
         // also if smart cancel is not null start the activity
@@ -259,11 +290,6 @@ public class MoAlarmSessionActivity extends AppCompatActivity implements Gesture
         // dont close the activity on back pressed
     }
 
-    private void initLayoutAnimations(){
-        this.constraintLayout = findViewById(R.id.alarm_session_cons_layout);
-        startAnimation();
-    }
-
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -301,7 +327,7 @@ public class MoAlarmSessionActivity extends AppCompatActivity implements Gesture
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        detectorCompat.onTouchEvent(event);
+//        detectorCompat.onTouchEvent(event);
         return super.onTouchEvent(event);
     }
 
@@ -388,14 +414,7 @@ public class MoAlarmSessionActivity extends AppCompatActivity implements Gesture
     @Override
     public boolean onDoubleTap(MotionEvent motionEvent) {
         // we snooze the alarm for another time that they already have picked
-        switch (moType){
-            case CLOCK:
-                this.snoozeAlarm();
-                break;
-            case TIMER:
-                this.resetTimer();
-                break;
-        }
+
         return true;
     }
 
@@ -426,7 +445,7 @@ public class MoAlarmSessionActivity extends AppCompatActivity implements Gesture
 
     @Override
     public void onLongPress(MotionEvent motionEvent) {
-        stopAlarmConsiderSmart();
+//        stopAlarmConsiderSmart();
     }
 
     @Override

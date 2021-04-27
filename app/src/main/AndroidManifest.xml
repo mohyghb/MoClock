@@ -39,7 +39,7 @@
             android:excludeFromRecents="true"
             android:showForAllUsers="true"
             android:showOnLockScreen="true"
-            />
+            android:screenOrientation="portrait"/>
         <activity android:name=".MoCreateAlarmActivity"
             android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".MoClock.MoAlarmActivity" />

@@ -72,6 +72,8 @@ public class MoNotificationTimerSession extends Service {
 
     @Override
     public void onCreate() {
+        if (MoInitAlarmSession.list.isEmpty())
+            return;
         moInformation = MoInitAlarmSession.list.remove();
         int imp = 0;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {

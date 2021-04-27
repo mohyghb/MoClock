@@ -41,6 +41,10 @@ public class MoInformation {
         return this.clock;
     }
 
+    public boolean isClock() {
+        return this.type == MoInitAlarmSession.Type.CLOCK;
+    }
+
 
     public void changeTitleIfEmpty(String t){
         if(this.title.isEmpty()){

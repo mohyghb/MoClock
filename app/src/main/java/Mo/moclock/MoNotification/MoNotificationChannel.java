@@ -34,34 +34,6 @@ public class MoNotificationChannel {
             Objects.requireNonNull(notificationManager).createNotificationChannel(channel);
         }
     }
-
-
-    /**
-     *
-     * @param name user viewable name
-     * @param description of the channel
-     * @param context
-     * @param channelId unique id of the channel
-     * @param importance of the channel
-     * @param sound of the notification channel
-     */
-//    public static void createNotificationChannel(String name, String description,
-//                                                 Context context, String channelId, int importance, Uri sound) {
-//        NotificationChannel channel = null;
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//            channel = new NotificationChannel(channelId, name, importance);
-//            channel.setDescription(description);
-//            AudioAttributes audioAttributes = new AudioAttributes.Builder()
-//                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-//                    .setUsage(AudioAttributes.USAGE_NOTIFICATION)
-//                    .build();
-//            channel.setSound(sound,audioAttributes);
-//            NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
-//            Objects.requireNonNull(notificationManager).createNotificationChannel(channel);
-//        }
-//
-//    }
-
     /**
      * creates a notification channel with default
      * priority or importance
@@ -77,7 +49,7 @@ public class MoNotificationChannel {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(channelId, name, NotificationManager.IMPORTANCE_LOW);
             channel.setDescription(description);
-            channel.setImportance(NotificationManager.IMPORTANCE_DEFAULT);
+            channel.setSound(null, null);
             NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
             Objects.requireNonNull(notificationManager).createNotificationChannel(channel);
             return channel;

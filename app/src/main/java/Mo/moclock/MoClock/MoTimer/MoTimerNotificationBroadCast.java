@@ -24,6 +24,10 @@ public class MoTimerNotificationBroadCast extends BroadcastReceiver {
         if(action == null)
             return;
 
+        // don't do anything if timer has not been created
+        if (!MoTimer.universalTimer.isCreated())
+            return;
+
         switch (action){
             case MoTimer.CANCEL_ACTION:
                 MoTimer.universalTimer.cancel(context,false,false);

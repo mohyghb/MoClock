@@ -34,6 +34,7 @@ public class MoNotificationTimerSession extends Service {
 
     public final static int REQUEST_CODE = 130;
     public static int FORE_GROUND_SERVICE_ID = 10081;
+    public static boolean enabled = true;
 
 
     public final static String STOP_ACTION = "Stop";
@@ -88,7 +89,7 @@ public class MoNotificationTimerSession extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-
+        enabled = true;
         timer = new CountDownTimer(DURATION_TIMER,1000) {
             @Override
             public void onTick(long l) {
@@ -109,6 +110,7 @@ public class MoNotificationTimerSession extends Service {
 
     @Override
     public void onDestroy() {
+        enabled = false;
         cancelNotification();
         if(timer!=null){
             timer.cancel();

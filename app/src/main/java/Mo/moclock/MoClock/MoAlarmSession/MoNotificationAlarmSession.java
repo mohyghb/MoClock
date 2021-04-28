@@ -151,6 +151,7 @@ public class MoNotificationAlarmSession extends Service {
                 .setFullScreenIntent(fullScreenPendingIntent, true)
                 .setContentIntent(fullScreenPendingIntent)
                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                .setOngoing(true)
                 .setOnlyAlertOnce(true);
 
         customNotification.addAction(R.drawable.ic_baseline_stop_24, STOP_ACTION, smartCancelEnabled ? fullScreenPendingIntent : getAction(context, STOP_ACTION));

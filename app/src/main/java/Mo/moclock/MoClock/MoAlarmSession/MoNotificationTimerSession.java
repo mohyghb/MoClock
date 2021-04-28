@@ -194,6 +194,7 @@ public class MoNotificationTimerSession extends Service {
                     .setPriority(importance)
                     .setFullScreenIntent(fullScreenPendingIntent,true)
                     .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                    .setOngoing(true)
                     .setSound(null)
                     .build();
 
@@ -237,6 +238,7 @@ public class MoNotificationTimerSession extends Service {
                 .setColor(context.getColor(R.color.notification_stopwatch_background))
                 .setPriority(importance)
                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                .setOngoing(true)
                 .build();
 
 

@@ -240,7 +240,8 @@ public class MoAlarmSectionManager implements MoAlarmClockRecyclerAdapter.MoOnAc
                 popup.getMenu().add(ps.getTime());
                 popup.getMenu().getItem(i).setOnMenuItemClickListener(menuItem -> {
                     suggestion.createAlarm(activity);
-                    TransitionManager.beginDelayedTransition((ViewGroup) root);
+                    TransitionManager.beginDelayedTransition((ViewGroup) root, new TransitionSet()
+                            .addTransition(new ChangeBounds()).addTransition(new Fade()).setDuration(400));
                     updateAll();
                     return false;
                 });

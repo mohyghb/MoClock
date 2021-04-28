@@ -92,8 +92,7 @@ public class MoAlarmSessionActivity extends AppCompatActivity implements Gesture
                         WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION|
                         WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
         );
-        getWindow().setNavigationBarColor(getColor(R.color.MoBlack));
-        getWindow().setStatusBarColor(getColor(R.color.MoBlack));
+        MoAlarmSessionBroadCast.activityList.add(this);
         hideSystemUI();
         init();
     }

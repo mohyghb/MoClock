@@ -93,8 +93,7 @@ public class MoAlarmSectionManager implements MoAlarmClockRecyclerAdapter.MoOnAc
                 .hideExtraButton();
 
         this.emptyView = root.findViewById(R.id.layout_alarmClocks_emptyView);
-        this.emptyView.findViewById(R.id.button_emptyAlarms_addAlarm).setOnClickListener((v) ->
-                MoCreateAlarmActivity.startActivityForResult(activity, CREATE_ALARM_CODE));
+        this.emptyView.findViewById(R.id.button_emptyAlarms_addAlarm).setOnClickListener(this::showSuggestionPopUp);
 
         this.cardRecyclerView = root.findViewById(R.id.card_alarmClocks_recycler);
         this.cardRecyclerView.getCardView().makeTransparent();
@@ -241,8 +240,8 @@ public class MoAlarmSectionManager implements MoAlarmClockRecyclerAdapter.MoOnAc
                 popup.getMenu().add(ps.getTime());
                 popup.getMenu().getItem(i).setOnMenuItemClickListener(menuItem -> {
                     suggestion.createAlarm(activity);
-                    TransitionManager.beginDelayedTransition(recyclerView);
-                    recyclerAdapter.notifyDataSetChanged();
+                    TransitionManager.beginDelayedTransition((ViewGroup) root);
+                    updateAll();
                     return false;
                 });
                 i++;

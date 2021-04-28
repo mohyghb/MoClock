@@ -141,7 +141,7 @@ public class MoNotificationAlarmSession extends Service {
 
         SharedPreferences s = PreferenceManager.getDefaultSharedPreferences(context);
         boolean addSnooze = moInformation.getClock().getSnooze().isActive();
-        boolean addStop = !s.getBoolean(context.getString(R.string.smart_alarm_cancel_switch),false);
+        boolean smartCancelEnabled = s.getBoolean(context.getString(R.string.smart_alarm_cancel_switch),false);
 
         customNotification = new NotificationCompat.Builder(context, CHANNEL_ID_ALARM)
                 .setSmallIcon(R.drawable.ic_access_alarms_black_24dp)
@@ -153,9 +153,7 @@ public class MoNotificationAlarmSession extends Service {
                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                 .setOnlyAlertOnce(true);
 
-        if (addStop) {
-            customNotification.addAction(R.drawable.ic_baseline_stop_24, STOP_ACTION, getAction(context, STOP_ACTION));
-        }
+        customNotification.addAction(R.drawable.ic_baseline_stop_24, STOP_ACTION, smartCancelEnabled ? fullScreenPendingIntent : getAction(context, STOP_ACTION));
 
         if (addSnooze) {
             customNotification.addAction(R.drawable.ic_baseline_snooze_24, SNOOZE_ACTION, getAction(context, SNOOZE_ACTION));
@@ -173,7 +171,6 @@ public class MoNotificationAlarmSession extends Service {
 
 
     private Uri getAlarmUri() {
-        // TODO TEST
         // checking to see if user has set a custom alert for this
         Uri customAlert = MoUri.get(this,R.string.alarm_music);
         if(customAlert!=null){

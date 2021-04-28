@@ -1,5 +1,6 @@
 package Mo.moclock.MoClock.MoAlarmSession;
 
+import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -72,6 +73,8 @@ public class MoNotificationTimerSession extends Service {
 
     @Override
     public void onCreate() {
+        if (MoInitAlarmSession.list.isEmpty())
+            return;
         moInformation = MoInitAlarmSession.list.remove();
         int imp = 0;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
@@ -191,6 +194,7 @@ public class MoNotificationTimerSession extends Service {
                     .setPriority(importance)
                     .setFullScreenIntent(fullScreenPendingIntent,true)
                     .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                    .setOngoing(true)
                     .setSound(null)
                     .build();
 
@@ -234,6 +238,7 @@ public class MoNotificationTimerSession extends Service {
                 .setColor(context.getColor(R.color.notification_stopwatch_background))
                 .setPriority(importance)
                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                .setOngoing(true)
                 .build();
 
 

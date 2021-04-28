@@ -5,87 +5,102 @@
     android:id="@+id/alarm_session_cons_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/alarm_session_background_animation_list"
+    android:background="@color/MoBlack"
     tools:context=".MoClock.MoAlarmSession.MoAlarmSessionActivity">
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:weightSum="1"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout10"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextClock
-            android:id="@+id/text_clock"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="0.55"
-            android:fontFamily="sans-serif-thin"
-            android:foregroundGravity="center"
-            android:format12Hour="k:mm:ss"
-            android:gravity="center"
-            android:textColor="@color/MoWhite"
-            android:textSize="70sp" />
-
-        <TextView
-            android:id="@+id/title_alarm"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="0.45"
-            android:fontFamily="sans-serif-thin"
-            android:foregroundGravity="center"
-            android:gravity="center"
-            android:text="Alarm"
-            android:textAlignment="center"
-            android:textColor="@color/MoWhite"
-            android:textSize="30sp" />
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:id="@+id/linearLayout10"
+    <TextClock
+        android:id="@+id/text_clock"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"
-        android:orientation="horizontal"
-        android:weightSum="2"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_weight="0.55"
+        android:foregroundGravity="center"
+        android:format12Hour="k:mm:ss"
+        android:gravity="center"
+        android:textColor="@color/MoWhite_v3"
+        android:textSize="70sp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        style="@style/AlarmClockStyle"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintTop_toTopOf="parent"/>
 
-        <TextView
-            android:id="@+id/snooze_button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:layout_weight="1"
-            android:fontFamily="sans-serif-light"
-            android:text="Snooze"
-            android:textAlignment="center"
-            android:textColor="@color/colorPrimary_DarkMode"
-            android:textSize="16sp"
-            app:cornerRadius="100dp" />
-
-        <TextView
-            android:id="@+id/stop_alarm"
-
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:layout_weight="1"
-            android:fontFamily="sans-serif-light"
-            android:text="Stop"
-            android:textAlignment="center"
-            android:textColor="@color/colorPrimary_DarkMode"
-            android:textSize="16sp"
-            app:cornerRadius="100dp" />
+    <TextView
+        android:id="@+id/title_alarm"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-medium"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:text="Some sort of title will go here for example"
+        android:textColor="@color/MoWhite_v3"
+        app:layout_constraintTop_toBottomOf="@id/text_clock"
+        app:layout_constraintEnd_toEndOf="@id/text_clock"
+        app:layout_constraintStart_toStartOf="@id/text_clock"/>
 
 
-    </LinearLayout>
+    <ImageView
+        android:id="@+id/stop_alarm"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:background="?selectableItemBackgroundBorderless"
+        android:src="@drawable/ic_baseline_alarm_off_24"
+        android:padding="20dp"
+        android:layout_marginEnd="8dp"
+        android:tint="@color/MoWhite_v3"
+        app:layout_constraintVertical_bias="0.7"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintBottom_toTopOf="@id/stop_alarm_text"
+        app:layout_constraintTop_toBottomOf="@id/title_alarm"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/snooze_button"/>
+
+    <TextView
+        android:id="@+id/stop_alarm_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Long click to stop"
+        android:textColor="@color/MoWhite_v3"
+        app:layout_constraintTop_toBottomOf="@id/stop_alarm"
+        app:layout_constraintEnd_toEndOf="@id/stop_alarm"
+        app:layout_constraintStart_toStartOf="@id/stop_alarm"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.0"/>
+
+    <ImageView
+        android:id="@+id/snooze_button"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:background="?selectableItemBackgroundBorderless"
+        android:src="@drawable/ic_baseline_snooze_24"
+        android:tint="@color/MoWhite_v3"
+        android:padding="20dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintVertical_bias="0.7"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintEnd_toStartOf="@id/stop_alarm"
+        app:layout_constraintBottom_toTopOf="@id/snooze_text"
+        app:layout_constraintTop_toBottomOf="@id/title_alarm"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/snooze_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Long click to snooze"
+        android:gravity="center"
+        android:textColor="@color/MoWhite_v3"
+        app:layout_constraintTop_toBottomOf="@id/snooze_button"
+        app:layout_constraintEnd_toEndOf="@id/snooze_button"
+        app:layout_constraintStart_toStartOf="@id/snooze_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.0"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

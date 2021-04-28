@@ -45,6 +45,7 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
+import Mo.moclock.MoClock.MoAlarmSession.MoAlarmSessionBroadCast;
 import Mo.moclock.MoClock.MoSmartCancel.MoSmartCancel;
 import Mo.moclock.MoTapActivity;
 import Mo.moclock.R;
@@ -115,6 +116,8 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
   protected void onCreate(final Bundle savedInstanceState) {
 
     super.onCreate(savedInstanceState);
+
+    MoAlarmSessionBroadCast.activityList.add(this);
 
     nextTest = findViewById(R.id.Another_test_btn);
     nextObject = findViewById(R.id.Change_Object_btn);

@@ -277,7 +277,7 @@ public class CameraConnectionFragment extends Fragment {
               new Runnable() {
                 @Override
                 public void run() {
-                  Toast.makeText(activity, text, Toast.LENGTH_SHORT).show();
+                  Toast.makeText(activity, text, Toast.LENGTH_LONG).show();
                 }
               });
     }
@@ -375,7 +375,7 @@ public class CameraConnectionFragment extends Fragment {
     final CameraManager manager = (CameraManager) activity.getSystemService(Context.CAMERA_SERVICE);
     try {
       if (!cameraOpenCloseLock.tryAcquire(2500, TimeUnit.MILLISECONDS)) {
-        Toast.makeText(activity,"Wait a moment please until camera is ready",Toast.LENGTH_LONG).show();
+        Toast.makeText(activity,"Wait a moment please until camera is ready (you may need to unlock your phone first)",Toast.LENGTH_LONG).show();
         //throw new RuntimeException("Time out waiting to lock camera opening.");
       }
       if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
@@ -498,7 +498,7 @@ public class CameraConnectionFragment extends Fragment {
 
             @Override
             public void onConfigureFailed(final CameraCaptureSession cameraCaptureSession) {
-              showToast("Failed");
+              showToast("Failed, please unlock your phone first");
             }
           },
           null);

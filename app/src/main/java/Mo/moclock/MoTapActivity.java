@@ -10,6 +10,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
+import Mo.moclock.MoClock.MoAlarmSession.MoAlarmSessionBroadCast;
 import Mo.moclock.MoClock.MoSmartCancel.MoSmartCancel;
 import Mo.moclock.MoClock.MoSmartCancel.MoTapCancelAlarm;
 
@@ -27,7 +28,7 @@ public class MoTapActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mo_tap);
-
+        MoAlarmSessionBroadCast.activityList.add(this);
         init();
     }
 

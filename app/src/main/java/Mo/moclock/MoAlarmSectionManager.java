@@ -3,6 +3,7 @@ package Mo.moclock;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.transition.ChangeBounds;
 import android.transition.Fade;
 import android.transition.TransitionManager;
@@ -92,8 +93,7 @@ public class MoAlarmSectionManager implements MoAlarmClockRecyclerAdapter.MoOnAc
                 .hideExtraButton();
 
         this.emptyView = root.findViewById(R.id.layout_alarmClocks_emptyView);
-        this.emptyView.findViewById(R.id.button_emptyAlarms_addAlarm).setOnClickListener((v) ->
-                MoCreateAlarmActivity.startActivityForResult(activity, CREATE_ALARM_CODE));
+        this.emptyView.findViewById(R.id.button_emptyAlarms_addAlarm).setOnClickListener(this::showSuggestionPopUp);
 
         this.cardRecyclerView = root.findViewById(R.id.card_alarmClocks_recycler);
         this.cardRecyclerView.getCardView().makeTransparent();
@@ -202,7 +202,8 @@ public class MoAlarmSectionManager implements MoAlarmClockRecyclerAdapter.MoOnAc
                     onSettingPressed();
                     break;
                 case R.id.about_menu_item:
-                    // todo add ticket for implementing the about
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://mohyaghoub.wixsite.com/profile"));
+                    activity.startActivity(browserIntent);
                     break;
             }
             return false;
@@ -239,8 +240,9 @@ public class MoAlarmSectionManager implements MoAlarmClockRecyclerAdapter.MoOnAc
                 popup.getMenu().add(ps.getTime());
                 popup.getMenu().getItem(i).setOnMenuItemClickListener(menuItem -> {
                     suggestion.createAlarm(activity);
-                    TransitionManager.beginDelayedTransition(recyclerView);
-                    recyclerAdapter.notifyDataSetChanged();
+                    TransitionManager.beginDelayedTransition((ViewGroup) root, new TransitionSet()
+                            .addTransition(new ChangeBounds()).addTransition(new Fade()).setDuration(400));
+                    updateAll();
                     return false;
                 });
                 i++;

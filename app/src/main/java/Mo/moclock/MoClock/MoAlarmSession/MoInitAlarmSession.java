@@ -52,13 +52,13 @@ public class MoInitAlarmSession {
 
     public static void startAlarm(Context context,int id) throws MoEmptyAlarmException {
         MoAlarmClock c = MoAlarmClockManager.getInstance().getAlarm(id);
-        MoInitAlarmSession.start(context,c.getTitle(),"STOP\nlong press screen",
-                "SNOOZE\ndouble tap on screen",MoInitAlarmSession.Type.CLOCK,id);
+        MoInitAlarmSession.start(context,c.getTitle(),"Long click to snooze",
+                "Long click to stop",MoInitAlarmSession.Type.CLOCK,id);
     }
 
     public static void startTimer(Context context){
         MoInitAlarmSession.start(context,"Timer",
-                "STOP\nlong press screen","RESET\ndouble tap on screen", Type.TIMER,1);
+                "Long click to reset","Long click to stop", Type.TIMER,1);
     }
 
 }

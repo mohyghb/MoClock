@@ -15,277 +15,251 @@
   -->
 
 <!--suppress AndroidElementNotAllowed -->
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-
-
-
-    <PreferenceCategory app:title="Alarm" app:iconSpaceReserved="false">
-        <SwitchPreference
-            app:key="@string/smart_alarm"
-            app:title="@string/smart_alarm_shake_title"
-            app:summary="@string/smart_alarm_shake_summary"
-            app:defaultValue="false"
-            app:iconSpaceReserved="false"
-            />
-        <ListPreference
-            app:key="@string/smart_alarm_list"
-            app:title="@string/smart_alarm_shake_list_title"
-            app:summary="@string/smart_alarm_shake_list_summary"
-            app:dependency="@string/smart_alarm"
-            app:entries="@array/smart_alarm_shake_entries"
-            app:entryValues="@array/smart_alarm_shake_values"
-            app:iconSpaceReserved="false"/>
-
-        <com.takisoft.preferencex.TimePickerPreference
-            app:key="@string/smart_alarm_button"
-            app:title="@string/smart_alarm_shake_button_title"
-            app:summary="@string/smart_alarm_shake_button_summary"
-            app:iconSpaceReserved="false"
-            app:pref_hourFormat="h24"
-            app:enabled="false"
-            app:dependency="@string/smart_alarm_list"
-            app:pref_summaryHasTime="Selected time: %s"
-            app:allowDividerBelow="true"/>
-
-
-
-
-
-        <SwitchPreference
-            app:key="@string/snooze_general"
-            app:title="@string/snooze_general_title"
-            app:summary="@string/snooze_general_summary"
-            app:defaultValue="true"
-            app:iconSpaceReserved="false"
-            />
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:title="General">
 
         <ListPreference
-            app:key="@string/snooze_time"
-            app:title="@string/snooze_time_title"
-            app:summary="@string/snooze_time_summary"
-            app:entries="@array/snooze_time_entries"
-            app:entryValues="@array/snooze_time_values"
-            android:defaultValue="5 minutes"
-            app:iconSpaceReserved="false"/>
-
-        <ListPreference
-            app:key="@string/snooze_repeat"
-            app:title="@string/snooze_repeat_title"
-            app:summary="@string/snooze_repeat_summary"
-            app:entries="@array/snooze_repeat_entries"
-            app:entryValues="@array/snooze_repeat_values"
-            android:defaultValue="3 times"
-            app:iconSpaceReserved="false"/>
-
-        <SwitchPreference
-            app:key="@string/vibration_general"
-            app:title="@string/vibration_general_title"
-            app:summary="@string/vibration_general_summary"
-            app:defaultValue="true"
-            app:iconSpaceReserved="false"
-            />
-
-        <SwitchPreference
-            app:key="@string/music_general"
-            app:title="@string/music_general_title"
-            app:summary="@string/music_general_summary"
-            app:defaultValue="true"
-            app:iconSpaceReserved="false"
-            />
-
-
-        <Preference
-            app:key="@string/alarm_music"
-            app:title="@string/alarm_music_title"
-            app:summary="@string/alarm_music_summary"
-            app:iconSpaceReserved="false"
-            />
-
-        <Preference
-            app:key="@string/alarm_music_clear"
-            app:title="@string/alarm_music_clear_title"
-            app:summary="@string/alarm_music_clear_summary"
-            app:iconSpaceReserved="false"
-            />
-    </PreferenceCategory>
-
-    <PreferenceCategory app:title="Timer" app:iconSpaceReserved="false">
-        <SwitchPreference
-            app:key="@string/smart_timer"
-            app:title="@string/smart_timer_shake_title"
-            app:summary="@string/smart_timer_shake_summary"
-            app:defaultValue="false"
-            app:iconSpaceReserved="false"
-            />
-
-        <com.takisoft.preferencex.AutoSummaryEditTextPreference
-            app:key="@string/smart_timer_text"
-            app:summary="@string/smart_timer_shake_text_summary"
-            app:title="@string/smart_timer_shake_text_title"
-            app:iconSpaceReserved="false"
-            app:dependency="@string/smart_timer"
-            app:defaultValue="10"
-            android:inputType="number"
-            app:pref_summaryHasText="Preset timer is %s minutes"
-            />
-
-        <Preference
-            app:key="@string/timer_music"
-            app:title="@string/timer_music_title"
-            app:summary="@string/timer_music_summary"
-            app:iconSpaceReserved="false"
-            />
-
-        <Preference
-            app:key="@string/timer_music_clear"
-            app:title="@string/timer_music_clear_title"
-            app:summary="@string/timer_music_clear_summary"
-            app:iconSpaceReserved="false"
-            />
-
-    </PreferenceCategory>
-
-
-
-
-
-    <PreferenceCategory app:title="Smart Mute"
-        app:iconSpaceReserved="false">
-
-    <SwitchPreference
-        app:key="@string/smart_mute"
-        app:title="@string/smart_mute_title"
-        app:summary="@string/smart_mute_summary"
-        app:defaultValue="false"
-        app:iconSpaceReserved="false"
-        />
-
-    <SeekBarPreference
-        app:iconSpaceReserved="false"
-        android:max="5"
-        app:min="0"
-        android:defaultValue="1"
-        app:adjustable="true"
-        android:key="@string/smart_mute_delay"
-        android:title="@string/smart_mute_delay_title"
-        android:summary="@string/smart_mute_delay_summary"
-        app:seekBarIncrement="1"
-        app:showSeekBarValue="true"
-        android:dependency="@string/smart_mute"
-        />
-    </PreferenceCategory>
-
-
-    <PreferenceCategory app:title="Smart Cancel"
-        app:iconSpaceReserved="false">
-
-    <SwitchPreference
-        app:key="@string/smart_alarm_cancel_switch"
-        app:title="@string/smart_alarm_cancel_switch_title"
-        app:summary="@string/smart_alarm_cancel_switch_summary"
-        app:defaultValue="false"
-        app:iconSpaceReserved="false"
-        />
-    <ListPreference
-        app:key="@string/smart_alarm_cancel"
-        app:title="@string/smart_alarm_cancel_title"
-        app:summary="@string/smart_alarm_cancel_summary"
-        app:dependency="@string/smart_alarm_cancel_switch"
-        app:entries="@array/smart_alarm_cancel_entries"
-        app:entryValues="@array/smart_alarm_cancel_values"
-        app:iconSpaceReserved="false"/>
-
-    <SwitchPreference
-        android:key="@string/smart_alarm_no_choice"
-        android:title="@string/smart_alarm_no_choice_title"
-        android:summary="@string/smart_alarm_no_choice_description"
-        android:defaultValue="false"
-        app:iconSpaceReserved="false"
-        android:dependency="@string/smart_alarm_cancel_switch"
-        />
-
-
-    <SwitchPreference
-        app:key="@string/smart_voice_cancel"
-        app:title="@string/smart_voice_cancel_title"
-        app:summary="@string/smart_voice_cancel_summary"
-        app:defaultValue="false"
-        app:iconSpaceReserved="false"
-        />
-
-    </PreferenceCategory>
-
-
-    <PreferenceCategory app:title="Smart Suggestions" app:iconSpaceReserved="false">
-        <SwitchPreference
-            app:key="@string/show_suggestions"
-            app:title="@string/show_suggestions_title"
-            app:summary="@string/show_suggestions_summary"
-            app:defaultValue="false"
-            app:iconSpaceReserved="false"
-            />
-
-        <Preference
-            app:key="@string/clear_suggestions"
-            app:title="@string/clear_suggestions_title"
-            app:summary="@string/clear_suggestions_summary"
-            app:iconSpaceReserved="false"
-            />
-
-
-
-    </PreferenceCategory>
-
-
-
-    <PreferenceCategory app:title="General" app:iconSpaceReserved="false">
-
-        <ListPreference
-            app:key="@string/theme_version"
-            app:title="@string/theme_version_title"
-            app:summary="@string/theme_version_summary"
             app:entries="@array/theme_version_entries"
             app:entryValues="@array/theme_version_values"
-            app:iconSpaceReserved="false"/>
+            app:iconSpaceReserved="false"
+            app:key="@string/theme_version"
+            app:summary="@string/theme_version_summary"
+            app:title="@string/theme_version_title" />
 
         <ListPreference
             android:key="@string/volume_button"
             android:title="@string/volume_button_title"
-            app:iconSpaceReserved="false"
             app:entries="@array/volume_buttons_entries"
             app:entryValues="@array/volume_buttons_values"
-            app:summary="@string/volume_button_summary"
-            />
+            app:iconSpaceReserved="false"
+            app:summary="@string/volume_button_summary" />
 
         <SeekBarPreference
-            app:iconSpaceReserved="false"
-            android:max="100"
-            app:min="0"
             android:defaultValue="50"
-            app:adjustable="true"
             android:key="@string/shake_sensitivity"
-            android:title="@string/shake_sensitivity_title"
+            android:max="100"
             android:summary="@string/shake_sensitivity_summary"
+            android:title="@string/shake_sensitivity_title"
+            app:adjustable="true"
+            app:iconSpaceReserved="false"
+            app:min="0"
             app:seekBarIncrement="10"
-            app:showSeekBarValue="true"
-            />
-
+            app:showSeekBarValue="true" />
 
         <Preference
-            app:key="@string/reset_settings"
-            app:title="@string/reset_settings_title"
-            app:summary="@string/reset_settings_summary"
             app:iconSpaceReserved="false"
-            />
-
-
+            app:key="@string/reset_settings"
+            app:summary="@string/reset_settings_summary"
+            app:title="@string/reset_settings_title" />
 
     </PreferenceCategory>
 
 
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:title="Alarm">
+        <SwitchPreference
+            app:defaultValue="false"
+            app:iconSpaceReserved="false"
+            app:key="@string/smart_alarm"
+            app:summary="@string/smart_alarm_shake_summary"
+            app:title="@string/smart_alarm_shake_title" />
+        <ListPreference
+            app:dependency="@string/smart_alarm"
+            app:entries="@array/smart_alarm_shake_entries"
+            app:entryValues="@array/smart_alarm_shake_values"
+            app:iconSpaceReserved="false"
+            app:key="@string/smart_alarm_list"
+            app:summary="@string/smart_alarm_shake_list_summary"
+            app:title="@string/smart_alarm_shake_list_title" />
+
+        <com.takisoft.preferencex.TimePickerPreference
+            app:allowDividerBelow="true"
+            app:dependency="@string/smart_alarm_list"
+            app:enabled="false"
+            app:iconSpaceReserved="false"
+            app:key="@string/smart_alarm_button"
+            app:pref_hourFormat="h24"
+            app:pref_summaryHasTime="Selected time: %s"
+            app:summary="@string/smart_alarm_shake_button_summary"
+            app:title="@string/smart_alarm_shake_button_title" />
+
+
+        <SwitchPreference
+            app:defaultValue="true"
+            app:iconSpaceReserved="false"
+            app:key="@string/snooze_general"
+            app:summary="@string/snooze_general_summary"
+            app:title="@string/snooze_general_title" />
+
+        <ListPreference
+            android:defaultValue="5 minutes"
+            app:entries="@array/snooze_time_entries"
+            app:entryValues="@array/snooze_time_values"
+            app:iconSpaceReserved="false"
+            app:key="@string/snooze_time"
+            app:summary="@string/snooze_time_summary"
+            app:title="@string/snooze_time_title" />
+
+        <ListPreference
+            android:defaultValue="3 times"
+            app:entries="@array/snooze_repeat_entries"
+            app:entryValues="@array/snooze_repeat_values"
+            app:iconSpaceReserved="false"
+            app:key="@string/snooze_repeat"
+            app:summary="@string/snooze_repeat_summary"
+            app:title="@string/snooze_repeat_title" />
+
+        <SwitchPreference
+            app:defaultValue="true"
+            app:iconSpaceReserved="false"
+            app:key="@string/vibration_general"
+            app:summary="@string/vibration_general_summary"
+            app:title="@string/vibration_general_title" />
+
+        <SwitchPreference
+            app:defaultValue="true"
+            app:iconSpaceReserved="false"
+            app:key="@string/music_general"
+            app:summary="@string/music_general_summary"
+            app:title="@string/music_general_title" />
+
+
+        <Preference
+            app:iconSpaceReserved="false"
+            app:key="@string/alarm_music"
+            app:summary="@string/alarm_music_summary"
+            app:title="@string/alarm_music_title" />
+
+        <Preference
+            app:iconSpaceReserved="false"
+            app:key="@string/alarm_music_clear"
+            app:summary="@string/alarm_music_clear_summary"
+            app:title="@string/alarm_music_clear_title" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:title="Timer">
+        <SwitchPreference
+            app:defaultValue="false"
+            app:iconSpaceReserved="false"
+            app:key="@string/smart_timer"
+            app:summary="@string/smart_timer_shake_summary"
+            app:title="@string/smart_timer_shake_title" />
+
+        <com.takisoft.preferencex.AutoSummaryEditTextPreference
+            android:inputType="number"
+            app:defaultValue="10"
+            app:dependency="@string/smart_timer"
+            app:iconSpaceReserved="false"
+            app:key="@string/smart_timer_text"
+            app:pref_summaryHasText="Preset timer is %s minutes"
+            app:summary="@string/smart_timer_shake_text_summary"
+            app:title="@string/smart_timer_shake_text_title" />
+
+        <Preference
+            app:iconSpaceReserved="false"
+            app:key="@string/timer_music"
+            app:summary="@string/timer_music_summary"
+            app:title="@string/timer_music_title" />
+
+        <Preference
+            app:iconSpaceReserved="false"
+            app:key="@string/timer_music_clear"
+            app:summary="@string/timer_music_clear_summary"
+            app:title="@string/timer_music_clear_title" />
+
+    </PreferenceCategory>
+
+
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:title="Smart Mute">
+
+        <SwitchPreference
+            app:defaultValue="false"
+            app:iconSpaceReserved="false"
+            app:key="@string/smart_mute"
+            app:summary="@string/smart_mute_summary"
+            app:title="@string/smart_mute_title" />
+
+        <SeekBarPreference
+            android:defaultValue="1"
+            android:dependency="@string/smart_mute"
+            android:key="@string/smart_mute_delay"
+            android:max="5"
+            android:summary="@string/smart_mute_delay_summary"
+            android:title="@string/smart_mute_delay_title"
+            app:adjustable="true"
+            app:iconSpaceReserved="false"
+            app:min="0"
+            app:seekBarIncrement="1"
+            app:showSeekBarValue="true" />
+    </PreferenceCategory>
+
+
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:title="Smart Cancel">
+
+        <SwitchPreference
+            app:defaultValue="false"
+            app:iconSpaceReserved="false"
+            app:key="@string/smart_alarm_cancel_switch"
+            app:summary="@string/smart_alarm_cancel_switch_summary"
+            app:title="@string/smart_alarm_cancel_switch_title" />
+        <ListPreference
+            app:dependency="@string/smart_alarm_cancel_switch"
+            app:entries="@array/smart_alarm_cancel_entries"
+            app:entryValues="@array/smart_alarm_cancel_values"
+            app:iconSpaceReserved="false"
+            app:key="@string/smart_alarm_cancel"
+            app:summary="@string/smart_alarm_cancel_summary"
+            app:title="@string/smart_alarm_cancel_title" />
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:dependency="@string/smart_alarm_cancel_switch"
+            android:key="@string/smart_alarm_no_choice"
+            android:summary="@string/smart_alarm_no_choice_description"
+            android:title="@string/smart_alarm_no_choice_title"
+            app:iconSpaceReserved="false" />
+
+
+        <SwitchPreference
+            app:defaultValue="false"
+            app:iconSpaceReserved="false"
+            app:key="@string/smart_voice_cancel"
+            app:summary="@string/smart_voice_cancel_summary"
+            app:title="@string/smart_voice_cancel_title" />
+
+    </PreferenceCategory>
+
+
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:title="Smart Suggestions">
+        <SwitchPreference
+            app:defaultValue="false"
+            app:iconSpaceReserved="false"
+            app:key="@string/show_suggestions"
+            app:summary="@string/show_suggestions_summary"
+            app:title="@string/show_suggestions_title" />
+
+        <Preference
+            app:iconSpaceReserved="false"
+            app:key="@string/clear_suggestions"
+            app:summary="@string/clear_suggestions_summary"
+            app:title="@string/clear_suggestions_title" />
+
+
+    </PreferenceCategory>
 
 
 </PreferenceScreen>

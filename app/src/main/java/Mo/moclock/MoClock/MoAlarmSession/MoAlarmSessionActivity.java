@@ -80,6 +80,8 @@ public class MoAlarmSessionActivity extends AppCompatActivity implements Gesture
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_mo_alarm_session);
         getWindow().addFlags(
                 WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
                         WindowManager.LayoutParams.FLAG_FULLSCREEN|
@@ -90,9 +92,8 @@ public class MoAlarmSessionActivity extends AppCompatActivity implements Gesture
                         WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION|
                         WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
         );
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mo_alarm_session);
-
+        getWindow().setNavigationBarColor(getColor(R.color.MoBlack));
+        getWindow().setStatusBarColor(getColor(R.color.MoBlack));
         hideSystemUI();
         init();
     }

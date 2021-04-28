@@ -5,10 +5,17 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import Mo.moclock.MoClock.MoAlarmClockManager;
 import Mo.moclock.MoClock.MoTimer.MoTimer;
 
 public class MoAlarmSessionBroadCast extends BroadcastReceiver {
+
+    public static List<Activity> activityList = new ArrayList<>();
+
+
     @Override
     public void onReceive(Context context, Intent intent) {
         String action = intent.getAction();
@@ -16,6 +23,7 @@ public class MoAlarmSessionBroadCast extends BroadcastReceiver {
         if(action == null)
             return;
 
+        boolean closeAllActivities = true;
         switch (action) {
             case MoNotificationAlarmSession.STOP_ACTION:
                 MoNotificationAlarmSession.alarmSituation();
@@ -35,6 +43,7 @@ public class MoAlarmSessionBroadCast extends BroadcastReceiver {
                 fullScreenIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
                         | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 context.startActivity(fullScreenIntent);
+                closeAllActivities = false;
                 break;
             case MoNotificationTimerSession.STOP_ACTION_ID:
                 if (!MoNotificationTimerSession.enabled)
@@ -51,5 +60,17 @@ public class MoAlarmSessionBroadCast extends BroadcastReceiver {
                 MoTimer.universalTimer.reset(context);
                 break;
         }
+
+
+        if (closeAllActivities) {
+            closeAllActivities();
+        }
+    }
+
+    public static void closeAllActivities() {
+        for (Activity a : activityList) {
+            a.finish();
+        }
+        activityList = new ArrayList<>();
     }
 }

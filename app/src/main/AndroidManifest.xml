@@ -28,8 +28,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MoTapActivity"></activity>
-        <activity android:name=".MoObjectDetectorActivity" />
+        <activity android:name=".MoTapActivity" android:excludeFromRecents="true" android:screenOrientation="portrait"/>
+        <activity android:name=".MoObjectDetectorActivity" android:excludeFromRecents="true" android:screenOrientation="portrait" />
         <activity
             android:name=".MoSettingsActivity"
             android:label="@string/title_activity_mo_settings" />

@@ -19,6 +19,9 @@ import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.preference.PreferenceManager;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import Mo.moclock.MoDate.MoDate;
 import Mo.moclock.MoId.MoId;
 import Mo.moclock.MoMusic.MoMusicPlayer;

@@ -60,7 +60,8 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-light"
                 android:text="2019/03/02"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:textStyle="bold"/>
         </LinearLayout>
 
         <TextView

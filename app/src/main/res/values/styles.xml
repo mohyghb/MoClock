@@ -15,6 +15,11 @@
         <item name="android:windowActivityTransitions">true</item>
 
         <item name="materialCardViewStyle">@style/CardView.MoclockStyle</item>
+        <item name="imageButtonStyle">@style/MoImageButton_Style_Light</item>
+    </style>
+
+    <style name="MoImageButton_Style_Light" parent="Widget.AppCompat.ImageButton">
+        <item name="android:tint">@color/MoBlack</item>
     </style>
 
     <style name="CardView.MoclockStyle" parent="Widget.MaterialComponents.CardView">
@@ -70,16 +75,23 @@
 
     <style name="AlarmClockStyle" parent="Widget.AppCompat.TextView">
         <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:textSize">45sp</item>
+        <item name="android:textColor">@color/textTimeColor</item>
     </style>
 
     <style name="AlarmClockStyle.worldClock" parent="Widget.AppCompat.TextView">
-        <item name="android:textSize">45sp</item>
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">40sp</item>
+        <item name="android:textColor">@color/textTimeColor</item>
     </style>
 
     <style name="AlarmClockDateStyle" parent="Widget.AppCompat.TextView">
         <item name="fontFamily">sans-serif-medium</item>
         <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/textTimeColor</item>
     </style>
 
     <style name="StopWatchTimerStyle" parent="Widget.AppCompat.TextView">
@@ -87,6 +99,7 @@
         <item name="android:textSize">65sp</item>
         <item name="android:maxLength">2</item>
         <item name="android:text">00</item>
+        <item name="android:textColor">@color/textTimeColor</item>
     </style>
 
     <style name="StopWatchTimerStyle.Timer" parent="Widget.AppCompat.TextView">

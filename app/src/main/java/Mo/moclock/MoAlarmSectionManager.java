@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.preference.PreferenceManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.moofficial.moessentials.MoEssentials.MoUI.MoFragment.MoOnBackPressed;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSelectable.MoSelectable;
@@ -109,6 +110,7 @@ public class MoAlarmSectionManager implements MoAlarmClockRecyclerAdapter.MoOnAc
                 .setLayoutManagerType(MoRecyclerView.STAGGERED_GRID_LAYOUT_MANAGER)
                 .setDynamicallyCalculateSpanCount(true)
                 .show();
+        this.recyclerView.setOverScrollMode(RecyclerView.OVER_SCROLL_NEVER);
         this.recyclerAdapter.notifyEmptyState();
         setSubtitle();
 

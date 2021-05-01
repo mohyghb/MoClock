@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.moofficial.moessentials.MoEssentials.MoDate.MoDate;
 import com.moofficial.moessentials.MoEssentials.MoLog.MoLog;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoFragment.MoOnBackPressed;
@@ -112,6 +114,7 @@ public class MoWorldClockSectionManager implements MoOnBackPressed, MainActivity
                 .setLayoutManagerType(MoRecyclerView.STAGGERED_GRID_LAYOUT_MANAGER)
                 .setDynamicallyCalculateSpanCount(true)
                 .show();
+        this.recyclerView.setOverScrollMode(RecyclerView.OVER_SCROLL_NEVER);
         this.adapter.setEmptyView(this.emptyView)
                 .setRecyclerView(this.recyclerView)
                 .setEmptyViewCallback((showEmpty) -> {
@@ -131,7 +134,7 @@ public class MoWorldClockSectionManager implements MoOnBackPressed, MainActivity
                 .hideLeft()
                 .setMiddleIcon(R.drawable.ic_baseline_delete_outline_24)
                 .setMiddleOnClickListener((v) -> onDeleteClicked())
-                .setRightIcon(R.drawable.ic_add_black_30dp)
+                .setRightIcon(R.drawable.ic_add_black_24)
                 .setRightOnClickListener((v) -> MoAddWorldClockActivity.startActivityForResult(activity, MainActivity.ADD_WORLD_CLOCK_CODE));
     }
 

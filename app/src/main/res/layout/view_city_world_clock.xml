@@ -26,16 +26,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Vancouver"
-            android:fontFamily="sans-serif-condensed-medium"
-            android:textSize="22sp"
-            android:layout_marginStart="4dp"/>
+            android:layout_marginTop="8dp"
+            android:fontFamily="sans-serif-medium"
+            android:textAllCaps="true"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:letterSpacing=".1"
+            android:textColor="@color/textTimeColor"
+            android:layout_marginBottom="16dp"
+            android:layout_marginStart="2dp"/>
 
         <TextView
             android:id="@+id/time_world_clock"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
             android:text="12:06"
+            android:letterSpacing="0.05"
             style="@style/AlarmClockStyle.worldClock"/>
 
         <TextView
@@ -43,12 +49,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="2021/02/13"
-            android:layout_marginStart="6dp"
+            android:letterSpacing="0.1"
+            android:layout_marginStart="2dp"
             style="@style/AlarmClockDateStyle" />
-
-
-
-
 
 
 

@@ -19,5 +19,6 @@
         <item name="android:windowActivityTransitions">true</item>
 
         <item name="materialCardViewStyle">@style/CardView.MoclockStyle</item>
+        <item name="imageButtonStyle">@style/MoImageButton_Style_Light</item>
     </style>
 </resources>

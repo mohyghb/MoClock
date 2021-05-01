@@ -110,6 +110,7 @@ public class MoWorldClockSectionManager implements MoOnBackPressed, MainActivity
         this.adapter = new MoWorldClockRecyclerAdapter(activity, MoWorldClockManager.worldClocks);
         this.recyclerView = MoRecyclerUtils.get(cardRecyclerView.getRecyclerView(), adapter)
                 .setLayoutManagerType(MoRecyclerView.STAGGERED_GRID_LAYOUT_MANAGER)
+                .setDynamicallyCalculateSpanCount(true)
                 .show();
         this.adapter.setEmptyView(this.emptyView)
                 .setRecyclerView(this.recyclerView)

@@ -27,19 +27,22 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
         <activity android:name=".MoTapActivity" android:screenOrientation="portrait"/>
         <activity android:name=".MoObjectDetectorActivity" android:screenOrientation="portrait" />
         <activity
             android:name=".MoSettingsActivity"
             android:label="@string/title_activity_mo_settings" />
-        <activity android:name=".MoAddWorldClockActivity" />
+        <activity android:name=".MoAddWorldClockActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".MoClock.MoAlarmSession.MoAlarmSessionActivity"
             android:showForAllUsers="true"
             android:showOnLockScreen="true"
             android:screenOrientation="portrait"/>
         <activity android:name=".MoCreateAlarmActivity"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".MoClock.MoAlarmActivity" />
         <activity android:name=".MainActivity"

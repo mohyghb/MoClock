@@ -40,6 +40,8 @@
     <color name="MoWhite_v2">#FCFCFC</color>
     <color name="MoGrey">#F28E8E8E</color>
 
+    <color name="textTimeColor">#575757</color>
+
 
     <color name="MoDarkLight">@color/MoWhite</color>
 

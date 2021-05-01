@@ -33,4 +33,6 @@
     <color name="selected_item_color">@color/colorPrimary</color>
     <color name="selected_item_color_overlay">#0700897B</color>
 
+    <color name="textTimeColor">@color/MoWhite</color>
+
 </resources>

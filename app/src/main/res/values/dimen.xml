@@ -32,7 +32,7 @@
     <item name="mo_fade_init_value" format="float" type="dimen">0.3</item>
 
     <dimen name="cityView_horizontalMargin">24dp</dimen>
-    <dimen name="cityView_verticalMargin">40dp</dimen>
+    <dimen name="cityView_verticalMargin">30dp</dimen>
 
     <item name="toolbar_height_percentage" format="float" type="dimen">0.37</item>
 

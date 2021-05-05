@@ -192,6 +192,9 @@ public class MoAlarmSessionActivity extends AppCompatActivity implements Gesture
     @Override
     protected void onPause() {
         super.onPause();
+        if (moHotWordDetector != null) {
+            moHotWordDetector.onPause();
+        }
     }
 
     @Override

@@ -303,8 +303,6 @@ public class MoCreateAlarmActivity extends AppCompatActivity {
         c.setPathToMusic(this.music.isChecked());
         c.setRepeating(new MoRepeating(this.getPositionChips()));
         if (isEditMode()) {
-            // try to cancel the alarm if it exists
-            MoAlarmClockManager.getInstance().cancelAlarm(c, this);
             c.setActive(true);
             // just update/save the changes also activate since this might be earlier than others
             MoAlarmClockManager.getInstance().saveActivate(this);

@@ -35,7 +35,10 @@ import Mo.moclock.MoClock.MoAlarmClockRecyclerAdapter;
 import Mo.moclock.MoClock.MoClockSugestions.MoClockSuggestionManager;
 import Mo.moclock.MoClock.MoClockSugestions.MoPrioritySuggestion;
 import Mo.moclock.MoClock.MoEmptyAlarmException;
+import Mo.moclock.MoClock.MoSnooze.MoSnooze;
 import Mo.moclock.MoSensor.MoShakeListener;
+import Mo.moclock.MoVibration.MoVibration;
+import Mo.moclock.MoVibration.MoVibrationTypes;
 
 public class MoAlarmSectionManager implements MoAlarmClockRecyclerAdapter.MoOnActiveClockChanged, MoOnCanceledListener, MoOnBackPressed, MainActivity.SelectModeInterface {
     /**
@@ -190,6 +193,9 @@ public class MoAlarmSectionManager implements MoAlarmClockRecyclerAdapter.MoOnAc
                 clock.setDateField(Calendar.HOUR_OF_DAY, hour);
                 clock.setDateField(Calendar.MINUTE, minute);
             }
+            clock.setSnooze(new MoSnooze(activity,  s.getBoolean(activity.getString(R.string.snooze_general), true)));
+            clock.setVibration(new MoVibration(MoVibrationTypes.BASIC,  s.getBoolean(activity.getString(R.string.vibration_general), true)));
+            clock.setPathToMusic( s.getBoolean(activity.getString(R.string.music_general), true));
             MoAlarmClockManager.getInstance().addAlarm(clock, activity);
             updateAll();
         }

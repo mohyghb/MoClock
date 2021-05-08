@@ -67,7 +67,9 @@ public class MoSnooze implements MoSavable, MoLoadable {
 
     public void applySnooze(MoDate date,Context context){
         date.add(Calendar.MINUTE,interval.waitTime);
-        interval.repeats--;
+        if (interval.repeats != INFINITE_SNOOZE) {
+            interval.repeats--;
+        }
         Toast.makeText(context,"Alarm snoozed for " + interval.waitTime +
                 " minutes from now",Toast.LENGTH_LONG).show();
     }

@@ -79,7 +79,7 @@ public class MoAlarmClockManager implements Iterable<MoAlarmClock>, MoSavable, M
             // if there is a clock inside the list
             // that has the same date and time
             // we need to just turn that on
-            turnOn(c);
+            turnOn(c, context);
         } else {
             this.clockList.add(c);
         }
@@ -126,11 +126,17 @@ public class MoAlarmClockManager implements Iterable<MoAlarmClock>, MoSavable, M
         return this.clockList.isEmpty();
     }
 
-    private void turnOn(MoAlarmClock c) {
+    private void turnOn(MoAlarmClock c, Context context) {
         for (MoAlarmClock clock : this.clockList) {
             if (clock.equals(c)) {
-                clockList.remove(clock);
-                clockList.add(c);
+                // just giving updating the old alarm
+                clock.setActive(true);
+                clock.setDateTime(c.getDateTime());
+                clock.setTitle(c.getTitle());
+                clock.setSnooze(c.getSnooze());
+                clock.setVibration(c.getVibration());
+                clock.setPathToMusic(c.hasMusic());
+                clock.setRepeating(c.getRepeating());
                 break;
             }
         }

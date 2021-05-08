@@ -31,7 +31,7 @@
 
     <string name="add_alarm">add alarm</string>
     <string name="new_alarm">New Alarm</string>
-    <string name="add_city">add time zone</string>
+    <string name="add_city">add city</string>
     <string name="search_city_name">Search a city…</string>
 
     <string name="all">Select all</string>
@@ -41,7 +41,7 @@
     <string name="title_activity_mo_settings">Settings</string>
 
     <string name="empty_alarms_hint">You currently have no alarms. Press Add Alarm to make a new alarm.</string>
-    <string name="empty_world_clock_hint">You currently have no world clocks. Press Add Time Zone to add a new time zone.</string>
+    <string name="empty_world_clock_hint">You currently have no cities added. Press Add City to add a new time zone.</string>
 
     <string name="error_already_added">You have already added this item.</string>
 
@@ -213,8 +213,8 @@
 
     <string name="smart_voice_cancel">smart_voice_cancel_pref</string>
     <string name="smart_voice_cancel_title">Smart Voice Cancel (BETA)</string>
-    <string name="smart_voice_cancel_summary">Cancel your alarm by simply saying stop. Note that currently, this only works if your alarm is not ringing.
-        That means if your alarm does not have a music (by turning it off when making the alarm) or by using smart mute so the music stops playing as soon as you move the device.</string>
+    <string name="smart_voice_cancel_summary">Cancel your alarm by simply saying stop. Note that this will bypass the Smart Cancel feature,
+        meaning that if you say stop, the alarm will stop immediately.</string>
 
 
 

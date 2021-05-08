@@ -1,12 +1,16 @@
 package Mo.moclock.MoClock.MoClockSugestions;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+
+import androidx.preference.PreferenceManager;
 
 import java.util.Calendar;
 import java.util.Objects;
 
 import Mo.moclock.MoClock.MoAlarmClockManager;
 import Mo.moclock.MoDate.MoDate;
+import Mo.moclock.R;
 
 public class MoPrioritySuggestion {
 
@@ -49,7 +53,15 @@ public class MoPrioritySuggestion {
     public void createAlarm(Context context){
         MoDate date = new MoDate();
         injectDate(date);
-        MoAlarmClockManager.getInstance().createAlarm(context,"",date,true,true,true);
+        SharedPreferences s = PreferenceManager.getDefaultSharedPreferences(context);
+        MoAlarmClockManager.getInstance().createAlarm(
+                context,
+                "",
+                date,
+                s.getBoolean(context.getString(R.string.snooze_general), true),
+                s.getBoolean(context.getString(R.string.vibration_general), true),
+                s.getBoolean(context.getString(R.string.music_general), true)
+        );
     }
 
     /**

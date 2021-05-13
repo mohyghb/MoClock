@@ -1,5 +1,6 @@
 package Mo.moclock.MoClock.MoWorldClock;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.moofficial.moessentials.MoEssentials.MoUI.MoInflatorView.MoInflaterView;
@@ -33,6 +35,7 @@ public class MoWorldClockRecyclerAdapter extends MoSelectableAdapter<MoWorldCloc
         return new MoWorldClockViewHolder(v);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull MoWorldClockViewHolder holder, int position) {
         MoWorldClock worldClock = dataSet.get(position).update();
@@ -51,7 +54,7 @@ public class MoWorldClockRecyclerAdapter extends MoSelectableAdapter<MoWorldCloc
                 onSelect(position);
             }
         });
-        MoSelectableUtils.applySelectedDrawable(context, R.drawable.drawable_selected_delete_outline, holder.linearLayout, dataSet.get(position));
+        MoSelectableUtils.applySelectedDrawable(context, R.drawable.drawable_selected_delete_outline, holder.constraintLayout, dataSet.get(position));
     }
 
     @Override
@@ -63,7 +66,7 @@ public class MoWorldClockRecyclerAdapter extends MoSelectableAdapter<MoWorldCloc
             holder.time.setText(dataSet.get(position).update().getMoDate().getReadableTime());
         } else {
             // selecting, so just update the color
-            MoSelectableUtils.applySelectedDrawable(context, R.drawable.drawable_selected_delete_outline, holder.linearLayout, dataSet.get(position));
+            MoSelectableUtils.applySelectedDrawable(context, R.drawable.drawable_selected_delete_outline, holder.constraintLayout, dataSet.get(position));
         }
     }
 
@@ -71,7 +74,7 @@ public class MoWorldClockRecyclerAdapter extends MoSelectableAdapter<MoWorldCloc
 
         private TextView name, date, time;
         private CardView cardView;
-        private LinearLayout linearLayout;
+        private LinearLayout constraintLayout;
 
         public MoWorldClockViewHolder(@NonNull View v) {
             super(v);
@@ -79,7 +82,7 @@ public class MoWorldClockRecyclerAdapter extends MoSelectableAdapter<MoWorldCloc
             this.date = v.findViewById(R.id.date_world_clock);
             this.time = v.findViewById(R.id.time_world_clock);
             this.cardView = v.findViewById(R.id.card_cityView);
-            this.linearLayout = v.findViewById(R.id.layout_cityView_linear);
+            this.constraintLayout = v.findViewById(R.id.layout_cityView_linear);
         }
     }
 

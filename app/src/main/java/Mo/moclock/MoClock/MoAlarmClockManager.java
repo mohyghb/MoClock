@@ -316,10 +316,12 @@ public class MoAlarmClockManager implements Iterable<MoAlarmClock>, MoSavable, M
      */
     public void activateNextAlarm(Context c) {
         this.loadIfNotLoaded(c);
-        try {
-            this.activateAlarm(this.getNextAlarm(), c);
-        } catch (MoEmptyAlarmException e) {
-            // no more clocks
+        for (MoAlarmClock clock : clockList) {
+            if (clock.isActive()) {
+                this.activateAlarm(clock, c);
+            } else {
+                this.cancelPendingIntent(clock, c);
+            }
         }
     }
 
@@ -367,6 +369,13 @@ public class MoAlarmClockManager implements Iterable<MoAlarmClock>, MoSavable, M
         loadIfNotLoaded(context);
         this.cancelAlarm(this.getAlarm(id), context);
         saveActivate(context);
+    }
+
+    public void cancelPendingIntent(MoAlarmClock c, Context context) {
+        AlarmManager alarmMgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(context, MoAlarmReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, c.getId(), intent, 0);
+        alarmMgr.cancel(pendingIntent);
     }
 
 

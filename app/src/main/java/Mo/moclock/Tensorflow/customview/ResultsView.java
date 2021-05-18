@@ -16,6 +16,7 @@ limitations under the License.
 package Mo.moclock.Tensorflow.customview;
 
 import java.util.List;
+
 import Mo.moclock.Tensorflow.tflite.Classifier.Recognition;
 
 public interface ResultsView {

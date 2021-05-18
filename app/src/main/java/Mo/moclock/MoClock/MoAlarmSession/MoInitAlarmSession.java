@@ -1,16 +1,11 @@
 package Mo.moclock.MoClock.MoAlarmSession;
 
-import android.annotation.SuppressLint;
-import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.Intent;
-import android.view.WindowManager;
 
 import androidx.core.content.ContextCompat;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.PriorityQueue;
 import java.util.Queue;
 
 import Mo.moclock.MoClock.MoAlarmClock;

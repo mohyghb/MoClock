@@ -32,7 +32,6 @@ import android.os.SystemClock;
 import android.util.Size;
 import android.util.TypedValue;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -47,7 +46,6 @@ import java.util.List;
 
 import Mo.moclock.MoClock.MoAlarmSession.MoAlarmSessionBroadCast;
 import Mo.moclock.MoClock.MoSmartCancel.MoSmartCancel;
-import Mo.moclock.MoTapActivity;
 import Mo.moclock.R;
 import Mo.moclock.Tensorflow.customview.OverlayView;
 import Mo.moclock.Tensorflow.customview.OverlayView.DrawCallback;

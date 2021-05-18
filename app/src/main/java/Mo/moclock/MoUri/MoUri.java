@@ -5,10 +5,6 @@ import android.net.Uri;
 
 import androidx.preference.PreferenceManager;
 
-import java.io.File;
-
-import Mo.moclock.R;
-
 public class MoUri {
 
     public static Uri get(Context c,int sharedPrefString){

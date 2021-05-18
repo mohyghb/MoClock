@@ -1,18 +1,12 @@
 package Mo.moclock.MoGoogleSearch.Google;
 
 
-
-
-
-
 import android.os.AsyncTask;
 
-import Mo.moclock.MoGoogleSearch.Google.AnswerBox.AnswerBoxObject;
+import java.io.IOException;
+
 import Mo.moclock.MoGoogleSearch.Html.MoHtml;
 import Mo.moclock.MoGoogleSearch.MoGoogle.MoAnswerBoxManager;
-
-
-import java.io.IOException;
 
 
 // a class that can scrape data from google smart answers

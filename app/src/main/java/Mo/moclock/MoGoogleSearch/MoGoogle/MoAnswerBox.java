@@ -1,12 +1,12 @@
 package Mo.moclock.MoGoogleSearch.MoGoogle;
 
 
+import java.util.ArrayList;
+
 import Mo.moclock.MoGoogleSearch.MoComplexData.MoComplexNode;
 import Mo.moclock.MoGoogleSearch.MoDisplay.MoDisplayable;
 import Mo.moclock.MoGoogleSearch.MoEnhancedScraper.MoEnhancedScraper;
 import Mo.moclock.MoGoogleSearch.MoGoogle.MoAnswerBoxes.MoQuickAnswerBox;
-
-import java.util.ArrayList;
 
 public abstract class MoAnswerBox implements MoDisplayable {
 

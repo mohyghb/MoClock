@@ -1,7 +1,6 @@
 package Mo.moclock.MoClock.MoStopWatch;
 
 import android.content.Context;
-import android.transition.TransitionManager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;

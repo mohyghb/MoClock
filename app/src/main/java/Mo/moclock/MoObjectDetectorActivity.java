@@ -1,10 +1,5 @@
 package Mo.moclock;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.app.ActivityCompat;
-
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -29,10 +24,14 @@ import android.view.Surface;
 import android.view.TextureView;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
+
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
-
 
 import Mo.moclock.MoTensorFlowLite.MoImageClassifier;
 

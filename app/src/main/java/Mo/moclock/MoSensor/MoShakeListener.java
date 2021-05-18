@@ -7,15 +7,10 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Build;
-import android.os.Parcel;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
-import android.util.Log;
-import android.widget.Toast;
 
 import androidx.preference.PreferenceManager;
-
-import java.util.concurrent.ThreadPoolExecutor;
 
 import Mo.moclock.R;
 

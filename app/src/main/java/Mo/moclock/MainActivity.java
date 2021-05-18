@@ -1,21 +1,19 @@
 package Mo.moclock;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import Mo.moclock.MoAnimation.MoAnimation;
-import Mo.moclock.MoClock.MoAlarmClock;
 import Mo.moclock.MoClock.MoAlarmClockManager;
 import Mo.moclock.MoClock.MoStopWatch.MoStopWatch;
 import Mo.moclock.MoClock.MoTimer.MoTimer;
 import Mo.moclock.MoClock.MoTimer.MoTimerPresetPackage.MoTimerPreset;
-
 import Mo.moclock.MoSection.MoSectionManager;
 import Mo.moclock.MoSensor.MoShakeListener;
 import Mo.moclock.MoSharedPref.MoSharedPref;

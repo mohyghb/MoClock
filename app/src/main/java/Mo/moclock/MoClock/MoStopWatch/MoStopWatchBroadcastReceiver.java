@@ -3,13 +3,10 @@ package Mo.moclock.MoClock.MoStopWatch;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.os.CountDownTimer;
-import android.os.Handler;
 
 import java.util.TimerTask;
 
 import Mo.moclock.MainActivity;
-import Mo.moclock.MoClock.MoTimer.MoTimer;
 import Mo.moclock.MoSection.MoSectionManager;
 
 public class MoStopWatchBroadcastReceiver extends BroadcastReceiver {

@@ -1,12 +1,10 @@
 package Mo.moclock.MoClock.MoWorldClock;
 
 import android.content.Context;
-import android.os.Parcelable;
 
 import com.moofficial.moessentials.MoEssentials.MoFileManager.MoFileManager;
 import com.moofficial.moessentials.MoEssentials.MoFileManager.MoFileManagerUtils;
 import com.moofficial.moessentials.MoEssentials.MoFileManager.MoIO.MoFile;
-import com.moofficial.moessentials.MoEssentials.MoLog.MoLog;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,7 +13,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-import Mo.moclock.MainActivity;
 import Mo.moclock.MoClock.MoWorldClock.MoCities.MoCityCoordinate;
 
 public class MoWorldClockManager {

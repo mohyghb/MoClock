@@ -3,15 +3,11 @@ package Mo.moclock.MoClock.MoSmartCancel;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.view.animation.AccelerateInterpolator;
 
 import androidx.preference.PreferenceManager;
 
-import java.util.Calendar;
 import java.util.Random;
 
-import Mo.moclock.MoClock.MoAlarmClock;
-import Mo.moclock.MoClock.MoAlarmClockManager;
 import Mo.moclock.R;
 
 public abstract class MoSmartCancel {

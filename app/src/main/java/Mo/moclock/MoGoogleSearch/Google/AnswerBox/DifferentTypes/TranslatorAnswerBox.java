@@ -1,7 +1,8 @@
 package Mo.moclock.MoGoogleSearch.Google.AnswerBox.DifferentTypes;
 
-import Mo.moclock.MoGoogleSearch.Google.AnswerBox.AnswerBox;
 import java.util.ArrayList;
+
+import Mo.moclock.MoGoogleSearch.Google.AnswerBox.AnswerBox;
 
 public class TranslatorAnswerBox extends AnswerBox {
 

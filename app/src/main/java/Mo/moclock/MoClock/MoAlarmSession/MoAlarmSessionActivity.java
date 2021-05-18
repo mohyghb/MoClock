@@ -1,32 +1,12 @@
 package Mo.moclock.MoClock.MoAlarmSession;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.view.GestureDetectorCompat;
-import androidx.preference.PreferenceManager;
-
 import android.app.Activity;
-import android.app.KeyguardManager;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.PixelFormat;
 import android.graphics.drawable.AnimationDrawable;
-import android.hardware.Sensor;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
-import android.media.RingtoneManager;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.os.Handler;
-import android.os.PowerManager;
-import android.util.Log;
 import android.view.GestureDetector;
-import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -35,8 +15,13 @@ import android.widget.ImageView;
 import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.Toast;
-import java.util.Objects;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.preference.PreferenceManager;
+
+import java.util.Objects;
 
 import Mo.moclock.MainActivity;
 import Mo.moclock.MoClock.MoAlarmClockManager;
@@ -44,7 +29,6 @@ import Mo.moclock.MoClock.MoSmartCancel.MoObjectDetectionAlarmCancel;
 import Mo.moclock.MoClock.MoSmartCancel.MoSmartCancel;
 import Mo.moclock.MoClock.MoSmartCancel.MoTapCancelAlarm;
 import Mo.moclock.MoClock.MoTimer.MoTimer;
-
 import Mo.moclock.MoHotWordDetection.MoHotWordDetector;
 import Mo.moclock.MoSensor.MoMovementListener;
 import Mo.moclock.R;

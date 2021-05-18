@@ -5,7 +5,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -13,7 +12,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.view.Menu;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -22,33 +20,27 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.app.ActivityCompat;
 import androidx.loader.content.CursorLoader;
 import androidx.preference.Preference;
-//import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.SwitchPreference;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.takisoft.preferencex.EditTextPreference;
 import com.takisoft.preferencex.PreferenceFragmentCompat;
 
 import java.util.Objects;
 
-import Mo.moclock.MoClock.MoClockSugestions.MoClockSuggestion;
 import Mo.moclock.MoClock.MoClockSugestions.MoClockSuggestionManager;
 import Mo.moclock.MoIntents.MoIntents;
-import Mo.moclock.MoMusic.MoMusicPlayer;
 import Mo.moclock.MoPreference.MoPreference;
 import Mo.moclock.MoPreference.MoPreferenceManager;
 import Mo.moclock.MoSharedPref.MoSharedPref;
 import Mo.moclock.MoTheme.MoTheme;
 
-import static android.Manifest.permission.CAMERA;
-import static android.Manifest.permission.RECORD_AUDIO;
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.Manifest.permission.RECORD_AUDIO;
+
+//import androidx.preference.PreferenceFragmentCompat;
 
 public class MoSettingsActivity extends AppCompatActivity {
 

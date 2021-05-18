@@ -1,9 +1,7 @@
 package Mo.moclock.MoClock.MoAlarmSession;
 
-import android.app.KeyguardManager;
 import android.content.Context;
 import android.os.PowerManager;
-import android.util.Log;
 
 public class MoAlarmWakeLock {
 

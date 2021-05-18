@@ -10,17 +10,12 @@ import android.content.SharedPreferences;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.CountDownTimer;
-import android.os.Handler;
 import android.os.IBinder;
-import android.widget.RemoteViews;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.preference.PreferenceManager;
-
-import java.util.Observable;
-import java.util.Observer;
 
 import Mo.moclock.MoDate.MoDate;
 import Mo.moclock.MoId.MoId;

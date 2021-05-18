@@ -1,9 +1,6 @@
 package Mo.moclock.MoTensorFlowLite;
 
 import android.app.Activity;
-import android.graphics.Bitmap;
-import android.graphics.RectF;
-import android.os.Trace;
 
 import org.tensorflow.lite.Interpreter;
 import org.tensorflow.lite.support.common.FileUtil;
@@ -12,10 +9,7 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.MappedByteBuffer;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class MoImageClassifier  {
 

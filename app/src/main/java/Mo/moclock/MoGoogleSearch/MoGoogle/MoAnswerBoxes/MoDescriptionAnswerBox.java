@@ -1,8 +1,8 @@
 package Mo.moclock.MoGoogleSearch.MoGoogle.MoAnswerBoxes;
 
-import Mo.moclock.MoGoogleSearch.MoGoogle.MoAnswerBox;
-
 import java.util.ArrayList;
+
+import Mo.moclock.MoGoogleSearch.MoGoogle.MoAnswerBox;
 
 public class MoDescriptionAnswerBox extends MoAnswerBox {
 

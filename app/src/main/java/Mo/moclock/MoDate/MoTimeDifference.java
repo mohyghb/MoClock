@@ -1,7 +1,5 @@
 package Mo.moclock.MoDate;
 
-import java.util.Calendar;
-
 public class MoTimeDifference {
 
     private static final String NO_DIFF = "";

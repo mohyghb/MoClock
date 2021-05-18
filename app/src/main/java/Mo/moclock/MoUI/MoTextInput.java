@@ -6,9 +6,6 @@ import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputEditText;
 
-import java.util.Objects;
-
-import Mo.moclock.MoClock.MoTimer.MoTimer;
 import Mo.moclock.MoColor.MoColor;
 
 public class MoTextInput {

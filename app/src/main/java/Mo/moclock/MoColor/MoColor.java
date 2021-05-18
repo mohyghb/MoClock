@@ -3,7 +3,6 @@ package Mo.moclock.MoColor;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Color;
-import android.util.SparseArray;
 
 import androidx.appcompat.app.AppCompatDelegate;
 

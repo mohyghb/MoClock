@@ -1,10 +1,10 @@
 package Mo.moclock.MoGoogleSearch.Google.AnswerBox.DifferentTypes;
 
 
+import java.util.ArrayList;
+
 import Mo.moclock.MoGoogleSearch.Google.AnswerBox.AnswerBox;
 import Mo.moclock.MoGoogleSearch.Google.MoConstants;
-
-import java.util.ArrayList;
 
 
 public class WeatherAnswerBox extends AnswerBox {

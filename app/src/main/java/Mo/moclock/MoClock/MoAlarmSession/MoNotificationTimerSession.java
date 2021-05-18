@@ -1,6 +1,5 @@
 package Mo.moclock.MoClock.MoAlarmSession;
 
-import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;

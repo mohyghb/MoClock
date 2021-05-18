@@ -1,7 +1,5 @@
 package Mo.moclock.MoList;
 
-import androidx.annotation.IntegerRes;
-
 import java.util.Arrays;
 import java.util.List;
 

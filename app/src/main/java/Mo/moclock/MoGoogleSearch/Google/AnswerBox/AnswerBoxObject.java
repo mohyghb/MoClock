@@ -1,13 +1,17 @@
 package Mo.moclock.MoGoogleSearch.Google.AnswerBox;
 
 
-
-
-
 import java.util.ArrayList;
 
-
-import Mo.moclock.MoGoogleSearch.Google.AnswerBox.DifferentTypes.*;
+import Mo.moclock.MoGoogleSearch.Google.AnswerBox.DifferentTypes.CalculatorAnswerBox;
+import Mo.moclock.MoGoogleSearch.Google.AnswerBox.DifferentTypes.CurrencyConverterAnswerBox;
+import Mo.moclock.MoGoogleSearch.Google.AnswerBox.DifferentTypes.ParagraphAnswerBox;
+import Mo.moclock.MoGoogleSearch.Google.AnswerBox.DifferentTypes.QuickAnswerBox;
+import Mo.moclock.MoGoogleSearch.Google.AnswerBox.DifferentTypes.QuickAnswerBox1;
+import Mo.moclock.MoGoogleSearch.Google.AnswerBox.DifferentTypes.TimeAnswerBox;
+import Mo.moclock.MoGoogleSearch.Google.AnswerBox.DifferentTypes.TrailerAnswerBox;
+import Mo.moclock.MoGoogleSearch.Google.AnswerBox.DifferentTypes.TranslatorAnswerBox;
+import Mo.moclock.MoGoogleSearch.Google.AnswerBox.DifferentTypes.WeatherAnswerBox;
 
 public class AnswerBoxObject extends AnswerBox {
 

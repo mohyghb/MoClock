@@ -6,11 +6,7 @@ import android.view.animation.Animation;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-
 import java.util.List;
-
-import Mo.moclock.MoAnimation.MoAnimation;
-import Mo.moclock.MoClock.MoAlarmSession.MoAlarmSessionActivity;
 
 
 public class MoListView <T>{

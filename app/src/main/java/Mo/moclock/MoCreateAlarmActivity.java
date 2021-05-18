@@ -1,8 +1,5 @@
 package Mo.moclock;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.preference.PreferenceManager;
-
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -15,6 +12,9 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
+
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.switchmaterial.SwitchMaterial;
@@ -26,10 +26,9 @@ import java.util.List;
 
 import Mo.moclock.MoClock.MoAlarmClock;
 import Mo.moclock.MoClock.MoAlarmClockManager;
-import Mo.moclock.MoClock.MoEmptyAlarmException;
 import Mo.moclock.MoClock.MoRepeating;
-import Mo.moclock.MoDate.MoDate;
 import Mo.moclock.MoClock.MoSnooze.MoSnooze;
+import Mo.moclock.MoDate.MoDate;
 import Mo.moclock.MoVibration.MoVibration;
 import Mo.moclock.MoVibration.MoVibrationTypes;
 

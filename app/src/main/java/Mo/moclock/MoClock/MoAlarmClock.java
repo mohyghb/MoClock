@@ -3,12 +3,9 @@ package Mo.moclock.MoClock;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Handler;
 import android.view.View;
-import android.webkit.ValueCallback;
 import android.widget.CheckBox;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
 
@@ -22,13 +19,13 @@ import java.util.Calendar;
 import java.util.Objects;
 
 import Mo.moclock.MoAnimation.MoAnimation;
+import Mo.moclock.MoClock.MoSnooze.MoSnooze;
 import Mo.moclock.MoColor.MoColor;
 import Mo.moclock.MoCreateAlarmActivity;
 import Mo.moclock.MoDate.MoDate;
 import Mo.moclock.MoId.MoId;
-import Mo.moclock.MoInflatorView.MoViewDisplayable;
 import Mo.moclock.MoInflatorView.MoInflaterView;
-import Mo.moclock.MoClock.MoSnooze.MoSnooze;
+import Mo.moclock.MoInflatorView.MoViewDisplayable;
 import Mo.moclock.MoUI.MoTextInput;
 import Mo.moclock.MoVibration.MoVibration;
 import Mo.moclock.MoVibration.MoVibrationTypes;

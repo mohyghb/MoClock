@@ -1,22 +1,11 @@
 package Mo.moclock.MoClock;
 
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
-import android.os.PowerManager;
-import android.util.Log;
-
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
-
-import java.util.Calendar;
 
 import Mo.moclock.MoClock.MoAlarmSession.MoAlarmWakeLock;
 import Mo.moclock.MoClock.MoAlarmSession.MoInitAlarmSession;
-import Mo.moclock.R;
 
 
 public class MoAlarmReceiver extends BroadcastReceiver {

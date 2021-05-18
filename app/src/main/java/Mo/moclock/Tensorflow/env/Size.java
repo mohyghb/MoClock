@@ -17,6 +17,7 @@ package Mo.moclock.Tensorflow.env;
 
 import android.graphics.Bitmap;
 import android.text.TextUtils;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;

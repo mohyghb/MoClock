@@ -1,9 +1,9 @@
 package Mo.moclock.MoGoogleSearch.MoGoogle.MoAnswerBoxes;
 
+import java.util.ArrayList;
+
 import Mo.moclock.MoGoogleSearch.MoGoogle.MoAnswerBox;
 import Mo.moclock.MoGoogleSearch.MoLogic.MoLogic;
-
-import java.util.ArrayList;
 
 public class MoLocalTimeConversionAnswerBox extends MoAnswerBox {
 

@@ -7,7 +7,6 @@ import androidx.annotation.NonNull;
 import androidx.core.app.JobIntentService;
 
 import Mo.moclock.MoClock.MoAlarmClockManager;
-import Mo.moclock.MoClock.MoEmptyAlarmException;
 
 
 public class AlarmBootService extends JobIntentService {

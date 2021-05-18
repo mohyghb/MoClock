@@ -4,8 +4,6 @@ import android.content.Context;
 
 import androidx.appcompat.app.AppCompatDelegate;
 
-
-
 import Mo.moclock.MoSharedPref.MoSharedPref;
 import Mo.moclock.R;
 

@@ -27,9 +27,11 @@ import android.graphics.RectF;
 import android.text.TextUtils;
 import android.util.Pair;
 import android.util.TypedValue;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+
 import Mo.moclock.Tensorflow.env.BorderedText;
 import Mo.moclock.Tensorflow.env.ImageUtils;
 import Mo.moclock.Tensorflow.env.Logger;

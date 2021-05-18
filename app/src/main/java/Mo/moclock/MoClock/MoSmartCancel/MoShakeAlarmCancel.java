@@ -1,7 +1,6 @@
 package Mo.moclock.MoClock.MoSmartCancel;
 
 import android.app.Activity;
-import android.content.Intent;
 
 public class MoShakeAlarmCancel extends MoSmartCancel{
 

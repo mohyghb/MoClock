@@ -1,7 +1,5 @@
 package Mo.moclock.MoGoogleSearch.MoGoogle;
 
-import java.util.List;
-
 public class MoHtmlHelper {
 
     public static final String TYPE_SEPARATOR = "<h2 class=\"bNg8Rb\">";

@@ -21,7 +21,9 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
+
 import java.util.List;
+
 import Mo.moclock.Tensorflow.tflite.Classifier.Recognition;
 
 public class RecognitionScoreView extends View implements ResultsView {

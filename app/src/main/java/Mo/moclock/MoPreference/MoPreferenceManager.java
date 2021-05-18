@@ -3,7 +3,6 @@ package Mo.moclock.MoPreference;
 import android.content.SharedPreferences;
 
 import java.util.HashMap;
-import java.util.HashSet;
 
 public class MoPreferenceManager {
 

@@ -6,10 +6,7 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.RingtoneManager;
 import android.net.Uri;
-import android.os.CountDownTimer;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 
 import static android.content.Context.AUDIO_SERVICE;

@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-
 import Mo.moclock.MoAnimation.MoAnimation;
 import Mo.moclock.MoDate.MoTimeUtils;
 import Mo.moclock.R;

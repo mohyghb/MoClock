@@ -8,7 +8,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
 import java.util.HashMap;
-import java.util.logging.LogRecord;
 
 import Mo.moclock.MoId.MoId;
 import Mo.moclock.R;

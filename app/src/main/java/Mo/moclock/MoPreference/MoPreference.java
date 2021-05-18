@@ -1,10 +1,6 @@
 package Mo.moclock.MoPreference;
 
-import android.content.Context;
-import android.util.AttributeSet;
-
 import androidx.preference.Preference;
-import androidx.preference.PreferenceManager;
 
 import Mo.moclock.MoString.MoString;
 

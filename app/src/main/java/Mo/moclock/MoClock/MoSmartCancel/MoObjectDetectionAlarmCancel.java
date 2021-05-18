@@ -3,12 +3,9 @@ package Mo.moclock.MoClock.MoSmartCancel;
 import android.app.Activity;
 import android.content.Intent;
 
-import java.util.List;
 import java.util.Random;
 import java.util.Vector;
 
-import Mo.moclock.MoObjectDetectorActivity;
-import Mo.moclock.MoTapActivity;
 import Mo.moclock.Tensorflow.DetectorActivity;
 
 public class MoObjectDetectionAlarmCancel extends MoSmartCancel {

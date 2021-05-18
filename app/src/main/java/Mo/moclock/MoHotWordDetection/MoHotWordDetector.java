@@ -1,16 +1,12 @@
 package Mo.moclock.MoHotWordDetection;
 
-import android.app.Activity;
 import android.content.Context;
-import android.os.Vibrator;
 
 import com.moofficial.moessentials.MoEssentials.MoLog.MoLog;
 
 import java.io.File;
 import java.io.IOException;
 
-
-import Mo.moclock.R;
 import edu.cmu.pocketsphinx.Assets;
 import edu.cmu.pocketsphinx.Hypothesis;
 import edu.cmu.pocketsphinx.RecognitionListener;
@@ -51,7 +47,7 @@ public abstract class MoHotWordDetector implements RecognitionListener {
      */
     private void setup() {
         // we assume that you have the recording permission already
-        //Float.parseFloat("1.e-" + 2 * sensitivity)
+        onDestroy();
         try {
             final Assets assets = new Assets(this.context);
             final File assetDir = assets.syncAssets();
@@ -63,12 +59,8 @@ public abstract class MoHotWordDetector implements RecognitionListener {
             mRecognizer.addKeyphraseSearch(WAKEWORD_SEARCH, this.hotWord);
             mRecognizer.addListener(this);
             mRecognizer.startListening(WAKEWORD_SEARCH);
-            System.out.println("=============== listening ==========================");
-           // Log.d(LOG_TAG, "... listening");
         } catch (IOException e) {
             e.printStackTrace();
-            //System.out.println(e);
-           // Log.e(LOG_TAG, e.toString());
         }
     }
 
@@ -83,7 +75,6 @@ public abstract class MoHotWordDetector implements RecognitionListener {
             mRecognizer.shutdown();
             mRecognizer = null;
             MoLog.print("on destroy was called ");
-            //MoLog.print( "PocketSphinx Recognizer was shutdown");
         }
     }
 
@@ -92,7 +83,6 @@ public abstract class MoHotWordDetector implements RecognitionListener {
             mRecognizer.removeListener(this);
             mRecognizer.cancel();
             mRecognizer.shutdown();
-            //MoLog.print( "PocketSphinx Recognizer was shutdown");
         }
     }
 
@@ -100,9 +90,6 @@ public abstract class MoHotWordDetector implements RecognitionListener {
     @Override
     public void onBeginningOfSpeech() {
         MoLog.print("Beginning Of Speech");
-//        if (getSupportActionBar() != null) {
-//            getSupportActionBar().setSubtitle("~ ~ ~");
-//        }
     }
 
     @Override

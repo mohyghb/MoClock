@@ -1,35 +1,16 @@
 package Mo.moclock;
 
 import android.app.Activity;
-import android.os.Parcelable;
-import android.transition.ChangeBounds;
-import android.transition.ChangeClipBounds;
-import android.transition.ChangeScroll;
-import android.transition.Fade;
-import android.transition.Slide;
-import android.transition.TransitionManager;
-import android.transition.TransitionSet;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
-
-
-import com.moofficial.moessentials.MoEssentials.MoUI.MoRecyclerView.MoRecyclerAdapters.MoRecyclerAdapter;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoRecyclerView.MoRecyclerUtils;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoRecyclerView.MoRecyclerView;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViews.MoNormal.MoCardRecyclerView;
 
-import Mo.moclock.MoClock.MoStopWatch.MoLap;
-import Mo.moclock.MoClock.MoStopWatch.MoLap_ListAdapter;
 import Mo.moclock.MoClock.MoStopWatch.MoStopWatch;
 import Mo.moclock.MoClock.MoStopWatch.MoStopWatchRecyclerAdapter;
-import Mo.moclock.MoListView.MoListView;
 import Mo.moclock.MoSection.MoSectionManager;
 
 public class MoStopWatchManager {

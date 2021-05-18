@@ -1,6 +1,5 @@
 package Mo.moclock.MoClock.MoWorldClock;
 
-import android.app.Activity;
 import android.content.Context;
 
 import com.moofficial.moessentials.MoEssentials.MoFileManager.MoIO.MoFile;
@@ -9,12 +8,10 @@ import com.moofficial.moessentials.MoEssentials.MoFileManager.MoIO.MoSavable;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSelectable.MoSelectableInterface.MoSelectableItem;
 
 import java.util.Calendar;
-import java.util.Objects;
 import java.util.TimeZone;
 
 import Mo.moclock.MoClock.MoWorldClock.MoCities.MoCityCoordinate;
 import Mo.moclock.MoDate.MoDate;
-import Mo.moclock.MoHotWordDetection.MoHotWordDetector;
 
 
 public class MoWorldClock implements MoSavable, MoLoadable, MoSelectableItem {

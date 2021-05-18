@@ -1,18 +1,13 @@
 package Mo.moclock.MoClock.MoStopWatch;
 
 import android.content.Context;
-import android.opengl.Visibility;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
-import androidx.annotation.NonNull;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import Mo.moclock.MoAnimation.MoAnimation;
-import Mo.moclock.MoClock.MoAlarmClock;
 
 public class MoLap_ListAdapter extends ArrayAdapter<MoLap> {
 

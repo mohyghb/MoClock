@@ -1,6 +1,5 @@
 package Mo.moclock;
 
-import android.app.Activity;
 import android.os.Handler;
 import android.transition.ChangeBounds;
 import android.transition.Fade;
@@ -12,18 +11,14 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.moofficial.moessentials.MoEssentials.MoDate.MoDate;
-import com.moofficial.moessentials.MoEssentials.MoLog.MoLog;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoFragment.MoOnBackPressed;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSelectable.MoSelectable;
-import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSelectable.MoSelectableInterface.MoOnEmptySelectionListener;
-import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSelectable.MoSelectableInterface.MoOnSelectFinishedListener;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoRecyclerView.MoRecyclerUtils;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoRecyclerView.MoRecyclerView;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViews.MoBars.MoToolBar;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViews.MoNormal.MoCardRecyclerView;
 
 import java.util.Calendar;
-import java.util.List;
 
 import Mo.moclock.MoClock.MoWorldClock.MoWorldClock;
 import Mo.moclock.MoClock.MoWorldClock.MoWorldClockManager;

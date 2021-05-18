@@ -1,14 +1,13 @@
 package Mo.moclock;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import Mo.moclock.MoClock.MoAlarmSession.MoAlarmSessionBroadCast;
 import Mo.moclock.MoClock.MoSmartCancel.MoSmartCancel;

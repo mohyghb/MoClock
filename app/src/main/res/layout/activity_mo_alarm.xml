@@ -5,7 +5,7 @@
     android:id="@+id/alarm_activity_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MoClock.MoAlarmActivity">
+    tools:context="com.moh.moclock.MoClock.MoAlarmActivity">
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/stop_alarm_button"

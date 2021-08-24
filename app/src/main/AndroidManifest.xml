@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="Mo.moclock">
+    package="com.moh.moclock">
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
@@ -29,23 +29,23 @@
         android:supportsRtl="true"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
-        <activity android:name=".MoTapActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".MoObjectDetectorActivity" android:screenOrientation="portrait" />
+        <activity android:name="com.moh.moclock.MoTapActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.moh.moclock.MoObjectDetectorActivity" android:screenOrientation="portrait" />
         <activity
-            android:name=".MoSettingsActivity"
+            android:name="com.moh.moclock.MoSettingsActivity"
             android:label="@string/title_activity_mo_settings" />
-        <activity android:name=".MoAddWorldClockActivity"
+        <activity android:name="com.moh.moclock.MoAddWorldClockActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".MoClock.MoAlarmSession.MoAlarmSessionActivity"
+            android:name="com.moh.moclock.MoClock.MoAlarmSession.MoAlarmSessionActivity"
             android:showForAllUsers="true"
             android:showOnLockScreen="true"
             android:screenOrientation="portrait"/>
-        <activity android:name=".MoCreateAlarmActivity"
+        <activity android:name="com.moh.moclock.MoCreateAlarmActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".MoClock.MoAlarmActivity" />
-        <activity android:name=".MainActivity"
+        <activity android:name="com.moh.moclock.MoClock.MoAlarmActivity" />
+        <activity android:name="com.moh.moclock.MainActivity"
             android:screenOrientation="portrait"
             android:alwaysRetainTaskState="true"
             android:configChanges="orientation|screenSize"
@@ -59,11 +59,11 @@
         </activity>
 
         <receiver
-            android:name=".MoClock.MoAlarmReceiver"
+            android:name="com.moh.moclock.MoClock.MoAlarmReceiver"
             android:enabled="true"
             android:exported="false" />
         <receiver
-            android:name=".MoClock.MoAlarmBoot.AlarmBootReceiver"
+            android:name="com.moh.moclock.MoClock.MoAlarmBoot.AlarmBootReceiver"
             android:enabled="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -72,24 +72,24 @@
         </receiver>
 
         <service
-            android:name=".MoClock.MoAlarmBoot.AlarmBootService"
+            android:name="com.moh.moclock.MoClock.MoAlarmBoot.AlarmBootService"
             android:permission="android.permission.BIND_JOB_SERVICE" />
         <service
-            android:name=".MoClock.MoTimer.MoTimer"
+            android:name="com.moh.moclock.MoClock.MoTimer.MoTimer"
             android:enabled="true"
             android:exported="true" />
 
-        <receiver android:name=".MoClock.MoTimer.MoTimerNotificationBroadCast" />
-        <receiver android:name=".MoClock.MoAlarmSession.MoAlarmSessionBroadCast" />
+        <receiver android:name="com.moh.moclock.MoClock.MoTimer.MoTimerNotificationBroadCast" />
+        <receiver android:name="com.moh.moclock.MoClock.MoAlarmSession.MoAlarmSessionBroadCast" />
 
-        <service android:name=".MoClock.MoStopWatch.MoStopWatchService" />
-        <service android:name=".MoClock.MoAlarmSession.MoNotificationAlarmSession" />
-        <service android:name=".MoClock.MoAlarmSession.MoNotificationTimerSession" />
+        <service android:name="com.moh.moclock.MoClock.MoStopWatch.MoStopWatchService" />
+        <service android:name="com.moh.moclock.MoClock.MoAlarmSession.MoNotificationAlarmSession" />
+        <service android:name="com.moh.moclock.MoClock.MoAlarmSession.MoNotificationTimerSession" />
 
-        <receiver android:name=".MoClock.MoStopWatch.MoStopWatchBroadcastReceiver" />
+        <receiver android:name="com.moh.moclock.MoClock.MoStopWatch.MoStopWatchBroadcastReceiver" />
 
         <activity
-            android:name=".Tensorflow.DetectorActivity"
+            android:name="com.moh.moclock.Tensorflow.DetectorActivity"
             android:label="@string/tfe_od_app_name"
             android:screenOrientation="portrait" />
     </application>

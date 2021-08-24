@@ -19,7 +19,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <Mo.moclock.Tensorflow.customview.AutoFitTextureView
+    <com.moh.moclock.Tensorflow.customview.AutoFitTextureView
         android:id="@+id/texture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Mo.moclock.Tensorflow.customview.OverlayView
+    <com.moh.moclock.Tensorflow.customview.OverlayView
         android:id="@+id/tracking_overlay"
         android:layout_width="0dp"
         android:layout_height="0dp"

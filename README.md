@@ -1,4 +1,4 @@
-# MoClock - Never Miss Time
+# [MoClock](https://play.google.com/store/apps/details?id=com.moh.moclock&hl=en&gl=US) - Never Miss Time
 An android alarm clock with a bunch of smart features and an elegant design!  
 
 <img src="https://user-images.githubusercontent.com/37986616/120904935-c2c7af00-c603-11eb-8c50-86ddb71c3999.jpeg" width="150">  <img src="https://user-images.githubusercontent.com/37986616/120904990-0b7f6800-c604-11eb-8303-695c57643d5b.jpeg" width="150">
